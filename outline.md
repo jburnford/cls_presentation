@@ -18,20 +18,20 @@ Thread through the whole talk: **coding agents make computational work cheap and
 
 Drafted 2026-11-13 in `sections/_2-jessica.qmd`. Sources and checked figures are in `research/jessica-source-material.md`. 🎬 marks a recorded clip of one of Jessica's visualizations (`images/jessica/`, made by `scripts/record_jessica_clips.py`).
 
-1. **Divider:** Jessica Jack.
-2. **Where I started.** The research question, the three datasets (knowledge graph, railway GIS, reserve surrenders), and the fact that Jessica had never written code before 9 January 2026.
-3. **How fast.** ★ Timeline from summer 2025 to the June 2026 working paper. Ten days from the first prompt to a public interactive map.
-4. **What is skills flattening?** A `.def` box. $30 CAD a month, one laptop, a mid-tier model, and what was built with them.
-5. **The old way: days per map.** GIS limited the questions; the three constraints (translation, scale, code).
-6. **The new way: minutes per map.** ★ Describe → generate → react → next prompt; days → minutes.
-7. **Visualization as method.** 🎬 One-Hour Railway Corridor, 1890–1920: "railway time rather than driving time."
-8. **What the network showed.** 🎬 Network graph, geographic → network view: junctions like Nokomis and Biggar.
-9. **One question, four tries.** ★ Pie, waffle and treemap rejected: no geography.
-10. **The fourth try: a map.** 🎬 Economic Hierarchy, tiers switched on in turn; 79% of farm-village workers not in farming.
-11. **Testing at scale, as a grad student.** 🎬 Railway timeline, 1882–1920; 429 settlements, 128 reserves, 760,234 census records.
-12. **Try it, then bring it to the team.** The ArcGIS package for colleagues, other people's labour joined, co-written work.
-13. **Recognizing failure.** 🎬 Time-warped cartogram, plus the unreadable heatmap.
-14. **A pattern is a question, not a finding.** The surrender overlay, then the test: +77% odds per 1,000 settlers. Hands over to Jacob in the notes.
+1. **Divider** with a four-part agenda: 1 Starting point · 2 Method · 3 Results · 4 Checking. The same labels sit at the top of every slide, as in Jacob's section.
+2. **Where I started: three datasets, no coding.** The knowledge graph, railway GIS and reserve surrenders; never written code before 9 January 2026.
+3. **Ten days from first prompt to public map.** ★ Timeline from summer 2025 to the June 2026 working paper.
+4. **Skills flattening: what one person can now build.** A `.def` box; $30 CAD a month, one laptop, a mid-tier model, and what was built with them.
+5. **Before: each new version of a map took days.** GIS limited the questions; the three constraints (translation, scale, code).
+6. **Now: each new version takes minutes.** ★ Describe → generate → react → next prompt.
+7. **Seeing distance as railway time changed my question.** 🎬 One-Hour Railway Corridor, 1890–1920.
+8. **A network view showed the railway junctions.** 🎬 Network graph, geographic → network view.
+9. **I try ideas alone, then share them with colleagues.** The ArcGIS package, other people's labour joined, co-written work.
+10. **Three chart types failed: they hid geography.** ★ Pie, waffle and treemap.
+11. **A map showed four commercial tiers of settlement.** 🎬 Economic Hierarchy; 79% of farm-village workers not in farming (17,138 of 21,708).
+12. **One student can now analyze the whole province.** 🎬 Railway timeline, 1882–1920; 429 settlements, 128 reserves, 760,234 census records.
+13. **Two visualizations did what I asked and still failed.** 🎬 Time-warped cartogram, plus the unreadable heatmap.
+14. **A pattern in a map needs a statistical test.** The surrender overlay, a definition of reserve surrender, then the test: OR 1.77 per 1,000 settlers (128 reserves). Hands over to Jacob in the notes.
 
 ## 3. Jacob: knowledge graphs, GraphRAG, and agentic search (15 min, 15 slides)
 

@@ -11,24 +11,47 @@
 .reveal .jj-fail .jj-name { font-size: 0.5em; color: #9a958a; text-align: center; margin-top: 0.2em; }
 .reveal .jj-fail .jj-x { position: absolute; left: 0.3em; right: 0.3em; top: 40%; text-align: center; font: 600 22px/1.3 system-ui, sans-serif; color: #f3ead3; background: rgba(192, 103, 79, 0.92); border-radius: 3px; padding: 0.25em 0.4em; }
 .reveal .jj-when { display: inline-block; min-width: 6.2em; color: #c9a227; font-family: Georgia, serif; }
-.reveal .jj-days { color: #e08a74; text-decoration: line-through; }
-.reveal .jj-mins { color: #9fcf8c; }
+.reveal .jj-days { color: #8a857a; text-decoration: line-through; }
+.reveal .jj-map { position: absolute; top: -1.15em; left: 0; display: flex; gap: 0.35em; font: 600 13px/1 system-ui, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.reveal .jj-map span { color: #6f6a60; border: 1px solid #3a3b40; border-radius: 3px; padding: 0.3em 0.55em; }
+.reveal .jj-map span.on { color: #15161a; background: #c9a227; border-color: #c9a227; }
+.reveal .jj-agenda { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5em; margin-top: 1.2em; font-size: 0.6em; }
+.reveal .jj-agenda div { background: #1d1e23; border: 1px solid #3a3b40; border-top: 3px solid #c9a227; border-radius: 4px; padding: 0.5em 0.7em; }
+.reveal .jj-agenda b { display: block; color: #c9a227; font-family: Georgia, serif; font-size: 1.4em; font-weight: 400; }
+.reveal .jj-agenda span { color: #d9d3c4; }
 .reveal .jj-chips span { white-space: nowrap; }
+.reveal .jj-side .stat .num { font-size: 1.9em; }
+.reveal .jj-side .stat .lbl { font-size: 0.88em; line-height: 1.35; }
+.reveal .jj-side .def { font-size: 0.95em; }
+.reveal section[id^="jessica-"] .caption { display: block; line-height: 1.35; }
 .reveal .jj-img { display: block; width: 100%; height: auto; border: 1px solid #3a3b40; border-radius: 4px; margin: 0; }
 </style>
 ```
 
 ## {#jessica-divider}
 
-[Jessica Jack<span class="gold">Getting started, and visualization as method</span>]{.divider-name}
+[Jessica Jack<span class="gold">Getting started, and visualization as a research method</span>]{.divider-name}
+
+```{=html}
+<div class="jj-agenda">
+  <div><b>1</b><span>Starting point: no coding experience</span></div>
+  <div><b>2</b><span>Method: build a visualization, look, change it, repeat</span></div>
+  <div><b>3</b><span>Results: what the visualizations showed</span></div>
+  <div><b>4</b><span>Checking: failures, and testing what I saw</span></div>
+</div>
+```
 
 ::: notes
-0. I'm a PhD student in History at USask, supervised by Jim. My research asks how Saskatchewan's network of settlements turned Indigenous land into private property between 1880 and 1930. This section is about how I got started, and how making visualizations became my research method.
+0. I'm a PhD student in History at USask, supervised by Jim. My research asks how Saskatchewan's network of settlements turned Indigenous land into private property between 1880 and 1930. This section is about how I got started, and how making visualizations became my research method. Read the four parts out loud. The same four labels sit at the top of every slide in this section.
 :::
 
-## Where I started {#jessica-start}
+## Where I started: three datasets, no coding {#jessica-start}
 
-How did Saskatchewan's urban settler network relate to the dispossession of Indigenous peoples from their land, 1880–1921? Answering that took **three datasets that had never spoken to each other**:
+```{=html}
+<div class="jj-map"><span class="on">1 Starting point</span><span>2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
+
+My question: how did Saskatchewan's settlements relate to First Nations losing their land, 1880–1921? That needed **three datasets that had never been joined**:
 
 ::: {.cards}
 ::: {.card .accent}
@@ -68,7 +91,11 @@ The three datasets were in different formats, at different scales, and built for
 Sources: working paper (Jack 2026, *Working Papers in Critical Search* 003, doi:10.5281/zenodo.20706174), "The Constraints" and "Code and Data Availability." Before January 9 I had not coded, apart from some basic HTML.
 :::
 
-## How fast {#jessica-timeline .motion}
+## Ten days from first prompt to public map {#jessica-timeline .motion}
+
+```{=html}
+<div class="jj-map"><span class="on">1 Starting point</span><span>2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
 
 ```{=html}
 <div class="motion-card rise" data-at="400"><span class="jj-when">Summer 2025</span> Three months in archives: a spreadsheet of 409 settlements</div>
@@ -86,7 +113,11 @@ Sources: working paper (Jack 2026, *Working Papers in Critical Search* 003, doi:
 Dates come from the git histories. The `KnowledgeGraph` repository's first commit, and the `ClaudeCode` folder, are both from 9 January 2026. `Sask_Railway_Visualizations` was first committed and published on 19 January 2026. `economic_hierarchy.html` was added on 16 March 2026, the 25th HTML visualization in that repository. The CHA presentation and the working paper date (15 June 2026) are from my CV and the paper.
 :::
 
-## What is skills flattening? {#jessica-flattening}
+## Skills flattening: what one person can now build {#jessica-flattening}
+
+```{=html}
+<div class="jj-map"><span class="on">1 Starting point</span><span>2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
 
 ::: {.def}
 [Skills flattening]{.def-term}
@@ -124,12 +155,16 @@ Sources: the working paper's "Computational Resources" section (Pro subscription
 The mid-tier model mattered: Sonnet is more prone to easy but incorrect solutions, so I had to check outputs closely. Usage limits made me plan each session deliberately. That rigour became part of the method.
 :::
 
-## The old way: days per map {#jessica-old}
+## Before: each new version of a map took days {#jessica-old}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span class="on">2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
 
 > GIS software could map the data, but this software limited the kinds of questions I could ask.
 
 ::: {.cards}
-::: {.card .warn}
+::: {.card}
 [Constraint 1]{.kicker}
 
 #### Translation
@@ -137,7 +172,7 @@ The mid-tier model mattered: Sonnet is more prone to easy but incorrect solution
 Three datasets in different formats, scales and purposes. Joining them needed a data engineer, or a lot of my time.
 :::
 
-::: {.card .warn}
+::: {.card}
 [Constraint 2]{.kicker}
 
 #### Scale
@@ -145,7 +180,7 @@ Three datasets in different formats, scales and purposes. Joining them needed a 
 429 municipalities, half a province, 50 years, on an MA timeline. Case studies were possible; the bigger picture was not.
 :::
 
-::: {.card .warn}
+::: {.card}
 [Constraint 3]{.kicker}
 
 #### Code
@@ -160,7 +195,11 @@ Learning to program mid-degree would have pulled my energy away from the histori
 Quote and the three constraints: working paper, "The Constraints."
 :::
 
-## The new way: minutes per map {#jessica-loop .motion}
+## Now: each new version takes minutes {#jessica-loop .motion}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span class="on">2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
 
 ```{=html}
 <div class="flow">
@@ -170,10 +209,10 @@ Quote and the three constraints: working paper, "The Constraints."
   <div class="arrow" data-at="1800">→</div>
   <div class="node rise" data-at="2100"><b>React</b><span>what works, what's missing, what's unexpected</span></div>
   <div class="arrow" data-at="2700">→</div>
-  <div class="node after rise" data-at="3000"><b>Next prompt</b><span>the reaction drives the next question</span></div>
+  <div class="node rise" data-at="3000"><b>Next prompt</b><span>the reaction drives the next question</span></div>
 </div>
 <div class="loopback" data-at="3800">↺ again, and again: within one session, not across weeks</div>
-<p class="motion-caption rise" data-at="4800" style="font-size:1.1em;font-family:Georgia,serif;">Each version took <span class="jj-days">days</span> <span class="mk" data-at="5600">minutes</span></p>
+<p class="motion-caption rise" data-at="4800" style="font-size:1.1em;font-family:Georgia,serif;">Each new version: <span class="jj-days">days</span> <span class="mk" data-at="5600">minutes</span></p>
 <blockquote class="rise" data-at="6600">Being able to test an idea within a session rather than across weeks changed which ideas were worth testing.</blockquote>
 ```
 
@@ -183,7 +222,11 @@ Quote and the three constraints: working paper, "The Constraints."
 Loop wording and quote: working paper, abstract and "The Process."
 :::
 
-## Visualization as method {#jessica-corridor}
+## Seeing distance as railway time changed my question {#jessica-corridor}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span class="on">2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
 
 :::: {.columns}
 ::: {.column width="64%"}
@@ -217,7 +260,11 @@ One hour means 40 km at 40 km/h, a proxy for branch-line speeds, which varied.
 Quote: working paper, "The Process." Clip recorded from the local `Sask_Railway_Visualizations` repository by `scripts/record_jessica_clips.py`.
 :::
 
-## What the network showed {#jessica-network}
+## A network view showed the railway junctions {#jessica-network}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span class="on">2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
 
 :::: {.columns}
 ::: {.column width="64%"}
@@ -232,9 +279,9 @@ Quote: working paper, "The Process." Clip recorded from the local `Sask_Railway_
 
 ::: {.column width="36%"}
 ::: {.jj-side}
-I couldn't find anything on how the railway shaped settlement density, so we built a view that **removes geography** and arranges settlements by their connections.
+This view **removes geography** and places settlements by their rail connections.
 
-Eight multi-railway junctions stood out: the cities, but also small places like **Nokomis** and **Biggar**.
+Eight towns served by several railways stood out: the cities, and small places like **Nokomis** and **Biggar**.
 
 [The patterns became questions worth investigating because they became visible.]{.gold}
 :::
@@ -247,7 +294,53 @@ Eight multi-railway junctions stood out: the cities, but also small places like 
 Junctions and quote: working paper, "What the Process Made Possible." Multi-railway junctions are listed in the `Sask_Railway_Visualizations` README (Saskatoon, Regina, Moose Jaw, Prince Albert, Yorkton, Weyburn, Nokomis, Biggar).
 :::
 
-## One question, four tries {#jessica-fails .motion}
+## I try ideas alone, then share them with colleagues {#jessica-team}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span class="on">2 Method</span><span>3 Results</span><span>4 Checking</span></div>
+```
+
+> Good AI-assisted historical research isn't a shortcut around other people's labour. It's a way of putting that labour into conversation.
+
+::: {.cards}
+::: {.card .accent}
+[August 2026]{.kicker}
+
+#### Back to ArcGIS, for colleagues
+
+I exported my code-built map's layers so colleagues could rebuild it in ArcGIS.
+
+[10,890 appointments · 34,356 sentencing records]{.fact}
+:::
+
+::: {.card}
+[Many hands]{.kicker}
+
+#### Other people's work, joined
+
+Census enumerators, elevator inspectors, postal clerks, railway historians, and 600+ local history contributors.
+:::
+
+::: {.card}
+[2026]{.kicker}
+
+#### Written up together
+
+An Active History series with Chloë Farr and Jacob Polay; an OCR benchmark with Jim, Jacob, Mark Humphries and Lianne Leddy.
+:::
+:::
+
+::: notes
+7–8. I try things alone, fast, and then bring them to the group to workshop. The tools also cut the other way: they let me hand work back in whatever form colleagues use.
+
+Sources: `Summer_JP_Work/ArcGIS_Colleague_Package/README.md` (built 6 August 2026; 10,890 JP appointment rows, 34,356 sentencing rows). Quote and contributors: "Not Just Farming," Active History, 14 October 2026. Working paper series: *Working Papers in Critical Search* 004 (OCR benchmark).
+:::
+
+## Three chart types failed: they hid geography {#jessica-fails .motion}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span>2 Method</span><span class="on">3 Results</span><span>4 Checking</span></div>
+```
 
 How were the 429 settlements spread across the four commercial tiers?
 
@@ -262,12 +355,16 @@ How were the 429 settlements spread across the four commercial tiers?
 ```
 
 ::: notes
-7–8. Animated, about 7 seconds. These are three real early attempts, shown in the working paper as Figures 6a–c. When the cost of trying something is low, the cost of failing is low too. Recognizing a failure takes historical judgement that the output can't supply.
+8–9. Animated, about 7 seconds. These are three real early attempts, shown in the working paper as Figures 6a–c. When the cost of trying something is low, the cost of failing is low too. Recognizing a failure takes historical judgement that the output can't supply.
 
 [TBD for Jessica: in the published paper, the pie and waffle image files are swapped, so Figures 6a and 6b carry each other's captions. They're labelled correctly here.]
 :::
 
-## The fourth try: a map {#jessica-hierarchy}
+## A map showed four commercial tiers of settlement {#jessica-hierarchy}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span>2 Method</span><span class="on">3 Results</span><span>4 Checking</span></div>
+```
 
 :::: {.columns}
 ::: {.column width="64%"}
@@ -287,7 +384,7 @@ Were these "urban municipalities" really urban, or just farms with a post office
 ::: {.stats}
 ::: {.stat}
 [79%]{.num}
-[of working residents in **farm villages** held jobs with nothing to do with farming]{.lbl}
+[of working residents in **farm villages** held non-farming jobs: 17,138 of 21,708 with a classifiable occupation, 1921 census]{.lbl}
 :::
 :::
 
@@ -297,12 +394,16 @@ Grain buyers, bank clerks, blacksmiths, station agents. The typology became a ce
 ::::
 
 ::: notes
-8–9. The clip turns on each tier in turn: 7 cities, 39 regional hubs, 27 service towns and 356 farm villages from the 1921 census. Then come 435 grain hamlets and 69 elevator sidings from grain elevator licensing records (1911–1930). Tiers cluster in unexpected places, which pointed to forces beyond local settler demand.
+9–10. The clip turns on each tier in turn: 7 cities, 39 regional hubs, 27 service towns and 356 farm villages from the 1921 census. Then come 435 grain hamlets and 69 elevator sidings from grain elevator licensing records (1911–1930). Tiers cluster in unexpected places, which pointed to forces beyond local settler demand.
 
 79%: 17,138 of 21,708 farm-village residents with a classifiable occupation (`KnowledgeGraph/analysis/NAMED_ROLES_SYNTHESIS.md`). "Agricultural" means a farming occupation title or a farming industry ("Own Farm," "Agriculture"). If someone asks about the "nine in ten" from the CHA talk: by job title alone it's nine in ten; counting farm labourers by the industry they worked in, it's four in five. Same as the Active History post, 14 October 2026.
 :::
 
-## Testing at scale, as a grad student {#jessica-scale}
+## One student can now analyze the whole province {#jessica-scale}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span>2 Method</span><span class="on">3 Results</span><span>4 Checking</span></div>
+```
 
 :::: {.columns}
 ::: {.column width="64%"}
@@ -342,50 +443,16 @@ Now one grad student can hold the whole province in view.
 ::::
 
 ::: notes
-9–10. The clip animates the network year by year: CPR from 1882, then QLSRSC, CNoR and GTPR. Seeing it as a sequence of events, not a fixed fact, raised new questions. When did each company's expansion speed up? Where and when did the infill happen?
+10–11. The clip animates the network year by year: CPR from 1882, then QLSRSC, CNoR and GTPR. Seeing it as a sequence of events, not a fixed fact, raised new questions. When did each company's expansion speed up? Where and when did the infill happen?
 
 Sources: 429 settlements and 128 reserves are nodes in the Neo4j knowledge graph. 760,234 rows are in `Census_Data/1921_Saskatchewan_Subset_no_names.csv`, and 220,260 Person nodes in Neo4j belong to the 429 settlements. Quote: working paper, "The Constraints."
 :::
 
-## Try it, then bring it to the team {#jessica-team}
+## Two visualizations did what I asked and still failed {#jessica-judgement}
 
-> Good AI-assisted historical research isn't a shortcut around other people's labour. It's a way of putting that labour into conversation.
-
-::: {.cards}
-::: {.card .accent}
-[August 2026]{.kicker}
-
-#### Back to ArcGIS, for colleagues
-
-My justice-of-the-peace map was code-built. I exported its layers so colleagues could rebuild and restyle it in ArcGIS.
-
-[10,890 appointments · 34,356 sentencing records]{.fact}
-:::
-
-::: {.card}
-[Many hands]{.kicker}
-
-#### Other people's work, joined
-
-Census enumerators, elevator inspectors, postal clerks, railway historians, and 600+ local history contributors.
-:::
-
-::: {.card}
-[2026]{.kicker}
-
-#### Written up together
-
-An Active History series with Chloë Farr and Jacob Polay; an OCR benchmark with Jim, Jacob, Mark Humphries and Lianne Leddy.
-:::
-:::
-
-::: notes
-10–11. I try things alone, fast, and then bring them to the group to workshop. The tools also cut the other way: they let me hand work back in whatever form colleagues use.
-
-Sources: `Summer_JP_Work/ArcGIS_Colleague_Package/README.md` (built 6 August 2026; 10,890 JP appointment rows, 34,356 sentencing rows). Quote and contributors: "Not Just Farming," Active History, 14 October 2026. Working paper series: *Working Papers in Critical Search* 004 (OCR benchmark).
-:::
-
-## Recognizing failure {#jessica-judgement}
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span>2 Method</span><span>3 Results</span><span class="on">4 Checking</span></div>
+```
 
 :::: {.columns}
 ::: {.column width="58%"}
@@ -418,7 +485,11 @@ Both did exactly what I asked. One was disorienting; the other was unreadable at
 Sources: working paper, "What the Failures Made Clear" (Figures 7 and 8). Cartogram clip recorded from `demo_cartogram.html`.
 :::
 
-## A pattern is a question, not a finding {#jessica-question}
+## A pattern in a map needs a statistical test {#jessica-question}
+
+```{=html}
+<div class="jj-map"><span>1 Starting point</span><span>2 Method</span><span>3 Results</span><span class="on">4 Checking</span></div>
+```
 
 :::: {.columns}
 ::: {.column width="46%"}
@@ -430,12 +501,17 @@ Sources: working paper, "What the Failures Made Clear" (Figures 7 and 8). Cartog
 
 ::: {.column width="54%"}
 ::: {.jj-side}
-The overlay showed surrendered parcels clustering near railway lines and within reach of the commercial network. That didn't make it a finding. It made it **a question worth testing**.
+::: {.def}
+[Reserve surrender]{.def-term}
+A legal process under the Indian Act by which a First Nation gave up part of its reserve land to the Crown, usually for sale to settlers, often under heavy pressure.
+:::
+
+Surrendered land clustered near railway lines. That was **a question to test**, not yet a finding.
 
 ::: {.stats}
 ::: {.stat}
 [+77%]{.num}
-[higher **odds** of surrender for each extra 1,000 rural settlers within 25 km of a reserve (128 reserves)]{.lbl}
+[odds of surrender per extra 1,000 rural settlers within 25 km. Logistic regression, 128 reserves: OR 1.77, 95% CI 1.44–2.17, p < 0.001]{.lbl}
 :::
 :::
 
@@ -448,6 +524,8 @@ The overlay showed surrendered parcels clustering near railway lines and within 
 12–13. This is where judgement matters most. The visualization made the question visible enough to pursue. Then it had to be tested properly.
 
 The test: logistic regression on all 128 reserves, surrendered ~ rural population within 25 km (per 1,000). Odds ratio 1.77, 95% CI 1.44–2.17, p < 0.001, AUC 0.835 (`Reserves_Urban_Spaces/analysis/06b_LOGISTIC_REGRESSION_SYNTHESIS.md`, model M1). Say "odds," not "probability."
+
+[TBD for Jessica: check the wording of the "reserve surrender" definition box; it was drafted for this audience, not quoted from your work.]
 
 Surrender data: Ashley Rabbitskin and Julian Rioux, Mapping Settler Colonialism (54 parcels, 42 reserves). Quote: working paper, Conclusion.
 

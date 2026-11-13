@@ -1,0 +1,11 @@
+---
+title: "Do better, not more"
+subtitle: "CLS [TBD: full name, date]"
+format:
+  html:
+    theme: cosmo
+---
+
+Jim Clifford, Jessica [TBD], and Jacob [TBD].
+
+**[Open the slides](slides.html?motion)**: arrow keys to move. On a phone or tablet, the slides open as a page you scroll.

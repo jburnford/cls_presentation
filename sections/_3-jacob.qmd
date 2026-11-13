@@ -1,0 +1,155 @@
+## {#jacob-divider}
+
+[Jacob [TBD: surname]<span class="gold">Knowledge graphs, GraphRAG and agentic search</span>]{.divider-name}
+
+::: notes
+0. [TBD: the project, especially the technical documentation use case.]
+:::
+
+## The problem
+
+[[TBD: the real corpus, and one real question that needs facts from many places in it.]]{.tbd}
+
+::: notes
+0–1. [TBD]
+:::
+
+## What is a knowledge graph?
+
+::: {.def}
+[Knowledge graph]{.def-term}
+Facts stored as things (nodes) and the relationships between them (edges), so they can be organized and queried exactly.
+:::
+
+[[TBD: a small real fragment from your graph.]]{.tbd}
+
+::: notes
+1–2. [TBD]
+:::
+
+## What is a vector database?
+
+::: {.defs}
+::: {.def}
+[Embedding]{.def-term}
+A passage of text turned into a list of numbers: a point in space, placed near passages with similar meaning.
+:::
+
+::: {.def}
+[Cosine similarity]{.def-term}
+How close two of those points are in direction. A search returns the passages nearest the question.
+:::
+:::
+
+[[TBD, animated: passages become points; a question finds its nearest neighbours.]]{.tbd}
+
+::: notes
+2–3. [TBD]
+:::
+
+## Where cosine similarity falls short
+
+[[TBD, animated: a real question that retrieves passages which sound similar but don't hold the fact, or that misses a fact two hops away.]]{.tbd}
+
+::: notes
+3–4. [TBD]
+:::
+
+## What is GraphRAG?
+
+::: {.def}
+[RAG: retrieval-augmented generation]{.def-term}
+Find relevant material first, then give it to a language model to answer from. GraphRAG retrieves from a knowledge graph as well as the text.
+:::
+
+```{=html}
+<div class="flow">
+  <div class="node"><b>Question</b><span>[TBD: example]</span></div>
+  <div class="arrow">→</div>
+  <div class="node blue"><b>Retrieve</b><span>from the graph and the text</span></div>
+  <div class="arrow">→</div>
+  <div class="node blue"><b>Model reads</b><span>only what was retrieved</span></div>
+  <div class="arrow">→</div>
+  <div class="node"><b>Answer</b><span>with sources</span></div>
+</div>
+```
+
+::: notes
+4–5. [TBD]
+:::
+
+## Why it doesn't always fulfil its promise
+
+[[TBD: the cost of building the graph, extraction errors, upkeep. From your experience.]]{.tbd}
+
+::: notes
+5–6. [TBD]
+:::
+
+## What changed: agentic search
+
+::: {.defs}
+::: {.def}
+[Agent]{.def-term}
+A model that works in steps: it uses tools, reads the results, and decides what to do next.
+:::
+
+::: {.def}
+[MCP: Model Context Protocol]{.def-term}
+A standard way to give a model tools, such as a search box or a database.
+:::
+:::
+
+[[TBD, animated loop: search by keyword → read → refine the query → search again → answer with sources.]]{.tbd}
+
+::: notes
+6–7. [TBD]
+:::
+
+## Semi-structured text is often enough
+
+[[TBD: models are now good enough at agentic search that you may not need a whole system. Example.]]{.tbd}
+
+::: notes
+7–8. [TBD]
+:::
+
+## When each one fits
+
+::: {.cards}
+::: {.card}
+[Small to medium corpora]{.kicker}
+
+#### Agentic search
+
+Over semi-structured text. [TBD]
+:::
+
+::: {.card}
+[Fuzzy recall]{.kicker}
+
+#### Vector search
+
+[TBD]
+:::
+
+::: {.card .accent}
+[Millions of documents]{.kicker}
+
+#### Knowledge graph / GraphRAG
+
+Exact relationships, reuse across projects. [TBD]
+:::
+:::
+
+::: notes
+8–9. [TBD]
+:::
+
+## Knowledge graphs still matter
+
+[[TBD: organization, exact queries, provenance, reuse.]]{.tbd}
+
+::: notes
+9–10. Hand over to Jim.
+:::

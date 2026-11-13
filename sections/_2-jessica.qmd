@@ -1,0 +1,92 @@
+## {#jessica-divider}
+
+[Jessica [TBD: surname]<span class="gold">Getting started, and visualization as method</span>]{.divider-name}
+
+::: notes
+0. [TBD: one-line description of the project.]
+:::
+
+## Where I started
+
+[[TBD: the project and its research question. Had never used a command line.]]{.tbd}
+
+::: notes
+0–1. [TBD]
+:::
+
+## How fast
+
+[[TBD, animated timeline: never used a command line → interactive visualizations on GitHub in under a month → what was reached in under six months? Confirm both milestones.]]{.tbd}
+
+::: notes
+1–2. [TBD]
+:::
+
+## What is skills flattening?
+
+::: {.def}
+[Skills flattening]{.def-term}
+The gap between knowing a computer *could* do a task and being able to make it do it has narrowed. You are no longer gated by other people's capacity.
+:::
+
+[[TBD: your example.]]{.tbd}
+
+::: notes
+2–3. [TBD]
+:::
+
+## The old way: days per map
+
+[[TBD: specific software dictated the output (ArcGIS for mapping, for example). Each version took days, so you made few versions.]]{.tbd}
+
+::: notes
+3–4. [TBD]
+:::
+
+## The new way: minutes per map
+
+[[TBD, animated loop: ask → build → look → notice a problem → change → rebuild, with a clock reading days → minutes.]]{.tbd}
+
+::: notes
+4–5. [TBD]
+:::
+
+## Visualization as method
+
+[[TBD: one case where a visualization showed something unexpected, including a problem in the data. Before and after screenshots.]]{.tbd}
+
+::: notes
+5–6. [TBD]
+:::
+
+## One visualization, four versions
+
+[[TBD, animated: successive versions, each annotated with what prompted the change. Screenshots or a live link.]]{.tbd}
+
+::: notes
+6–8. [TBD]
+:::
+
+## Testing at scale, as a grad student
+
+[[TBD: problems and outcomes can now be tested at a scale that used to need a funded team.]]{.tbd}
+
+::: notes
+8–9. [TBD]
+:::
+
+## Try it, then bring it to the team
+
+[[TBD: something you tried alone and then workshopped with the group, and what came of it.]]{.tbd}
+
+::: notes
+9–10. [TBD]
+:::
+
+## What still needed judgement
+
+[[TBD: where a person had to decide, check, or say no.]]{.tbd}
+
+::: notes
+10–11. This sets up Jim's close. Hand over to Jacob.
+:::

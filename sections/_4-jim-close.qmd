@@ -1,0 +1,63 @@
+## {#jim-divider}
+
+[Jim Clifford<span class="gold">Better, not more</span>]{.divider-name}
+
+::: notes
+0.
+:::
+
+## Two things combined
+
+[[TBD: skills flattening (Jessica) plus knowledge organization (Jacob). Researchers can now build and query their own structured sources.]]{.tbd}
+
+::: notes
+0–1. [TBD]
+:::
+
+## Breaking silos
+
+[[TBD: a few years ago, a task we knew a computer could do meant weeks of broken code and Stack Overflow, so projects were deferred.]]{.tbd}
+
+::: notes
+1–2. [TBD]
+:::
+
+## {#research-assistant}
+
+[A research assistant who has read everything but can't remember where it read it.]{.big}
+
+::: notes
+2–3. Useful, and the reason sources and checking still matter.
+:::
+
+## Deferred projects, now done
+
+[[TBD, animated before/after: something shelved, and what it became. Imperial Careers is a candidate.]]{.tbd}
+
+::: notes
+3–5. [TBD]
+:::
+
+## More vs better, revisited
+
+[[TBD, animated: return to the opening fork. Better means checked against the source, honest about coverage, decisions recorded with their evidence.]]{.tbd}
+
+::: notes
+5–7. [TBD]
+:::
+
+## The editor's view
+
+[[TBD: what a journal should ask of AI-assisted computational history. An open question, not an answer.]]{.tbd}
+
+::: notes
+7–9. [TBD]
+:::
+
+## Questions
+
+[[TBD: three names, QR code to the deck, a link to each project.]]{.tbd}
+
+::: notes
+9–10.
+:::

@@ -1,0 +1,63 @@
+## Computational history's long minority
+
+[[TBD: Jim's framing. Computational history had a trajectory similar to computational physics but never took off the same way. Why: the skills barrier, the time cost, being tied to particular software. One or two sourced examples; no unsourced numbers.]]{.tbd}
+
+::: notes
+0–2. [TBD]
+:::
+
+## More, or better? {#fork .motion}
+
+```{=html}
+<svg class="fork" viewBox="0 0 1100 460" role="img" aria-label="A path forks in two. Upper branch: more, meaning more documents, more maps, more output. Lower branch: better, meaning better questions, better-checked evidence, better arguments.">
+  <g data-at="300"><text class="stem" x="20" y="200">Computation that is now</text><text class="stem" x="20" y="237">cheap, fast and within reach</text></g>
+  <path class="draw" pathLength="1" data-at="1100" d="M20,260 L420,260" fill="none" stroke="#e9e4d8" stroke-width="3"/>
+  <path class="draw" pathLength="1" data-at="2200" d="M420,260 C530,260 540,70 670,70" fill="none" stroke="#9a958a" stroke-width="3"/>
+  <g data-at="3000"><text class="head more" x="695" y="86">More</text></g>
+  <g data-at="3400"><text class="item" x="697" y="126">more documents</text></g>
+  <g data-at="3700"><text class="item" x="697" y="156">more maps</text></g>
+  <g data-at="4000"><text class="item" x="697" y="186">more output</text></g>
+  <path class="draw" pathLength="1" data-at="4900" d="M420,260 C530,260 540,330 670,330" fill="none" stroke="#c9a227" stroke-width="3"/>
+  <g data-at="5700"><text class="head better" x="695" y="346">Better</text></g>
+  <g data-at="6100"><text class="item better" x="697" y="386">better questions</text></g>
+  <g data-at="6400"><text class="item better" x="697" y="416">better-checked evidence</text></g>
+  <g data-at="6700"><text class="item better" x="697" y="446">better arguments</text></g>
+</svg>
+<p class="motion-caption rise" data-at="7600">Both roads are now open. Which one will the discipline take?</p>
+```
+
+::: notes
+2–4. Animated, about 8 seconds. The branch labels are draft wording; replace with your own. Leave the question open: as a journal editor, you haven't nailed this down yet. We come back to this fork at the end.
+:::
+
+## What's coming
+
+::: {.cards}
+::: {.card .accent}
+[Jessica]{.kicker}
+
+#### Getting started
+
+Skills flattening, and visualization as method.
+:::
+
+::: {.card}
+[Jacob]{.kicker}
+
+#### Knowledge graphs and search
+
+GraphRAG, and why agentic search has become useful.
+:::
+
+::: {.card .accent}
+[Jim]{.kicker}
+
+#### Better, not more
+
+What "better" might mean, from an editor's chair.
+:::
+:::
+
+::: notes
+4–5. Hand over to Jessica.
+:::

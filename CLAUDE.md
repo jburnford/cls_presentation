@@ -76,11 +76,12 @@ format:
 | `outline.md` | Working slide plan; update it when the sections change |
 | `slides.scss` | Theme and component classes (copy the JHU file first, then cut what isn't used) |
 | `slides-motion.html` | The animation driver (below) |
-| `slides-title-qr.html` | QR code to the public URL on the title slide, clickable |
+| `slides-title-qr.html` | QR code to the public URL on the title slide, clickable. *Not added yet: copy it from JHU once the Pages URL is settled, then add it to `include-after-body`.* |
 | `workshop.js`, `workshop-responsive.html` | Touch-screen reading view: phones and tablets up to 1024 px get a scrolling page instead of tiny slides; `?present` forces slides |
+| `_quarto.yml`, `index.qmd` | Plain Quarto project rendering `index.qmd` and `slides.qmd` to `docs/`. The reveal.js libraries land in `docs/slides_files/`, which must be committed (`.gitignore` ignores only the root `/*_files/`) |
 | `images/`, `media/` | Screenshots, scans, maps (`world-land.svg` for SVG maps), video fallbacks |
-| `scripts/check_*.py` | Playwright checks: layout, overflow, reading view |
-| `scripts/export_slides.py` | PowerPoint (animated slides embedded as MP4) and a speaker-notes PDF |
+| `scripts/check_*.py` | Playwright checks: layout, overflow, reading view. *Not added yet: adapt the JHU scripts once there is real content.* |
+| `scripts/export_slides.py` | PowerPoint (animated slides embedded as MP4) and a speaker-notes PDF. *Not added yet.* |
 | `exports/` | Export output; git-ignored |
 | `docs/` | Rendered site; committed for Pages |
 

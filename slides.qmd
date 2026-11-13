@@ -1,0 +1,28 @@
+---
+title: "Do better, not more"
+subtitle: "[TBD: subtitle]"
+author:
+  - Jim Clifford
+  - Jessica [TBD]
+  - Jacob [TBD]
+format:
+  revealjs:
+    theme: [default, slides.scss]
+    slide-number: true
+    footer: "Do better, not more · CLS [TBD]"
+    width: 1280
+    height: 720
+    margin: 0.08
+    link-external-newwindow: true
+    transition: fade
+    background-transition: fade
+    include-after-body: [workshop-responsive.html, slides-motion.html]
+---
+
+{{< include sections/_1-jim-open.qmd >}}
+
+{{< include sections/_2-jessica.qmd >}}
+
+{{< include sections/_3-jacob.qmd >}}
+
+{{< include sections/_4-jim-close.qmd >}}

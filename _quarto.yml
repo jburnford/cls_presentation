@@ -1,0 +1,9 @@
+project:
+  type: default
+  output-dir: docs
+  render:
+    - index.qmd
+    - slides.qmd
+  resources:
+    - images/
+    - workshop.js

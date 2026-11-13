@@ -1,0 +1,17 @@
+# Quarto build
+/.quarto/
+/_site/
+/*_files/
+# Python
+__pycache__/
+*.pyc
+# Local only
+.DS_Store
+*.swp
+.claude/
+
+# rendered copy of the archived draft; not published
+docs/archive/
+
+# slide exports (large; regenerate with scripts/export_slides.py)
+/exports/

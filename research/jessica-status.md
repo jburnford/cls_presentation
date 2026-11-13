@@ -6,8 +6,8 @@ Last updated 2026-11-13, at the end of the first working session.
 
 - **Section 2 is drafted:** `sections/_2-jessica.qmd`, 14 slides, about 13 minutes. The slide-by-slide plan is in `outline.md` (section 2).
 - **Checked in Chrome at 1280×720:** no slide overflows, and every clip autoplays and ends on its final frame.
-- **Jessica has not reviewed the slides yet.** She opened the preview at the end of the session but hasn't given feedback.
-- **Not pushed.** These commits are on Jessica's machine only and need pushing once she approves:
+- **Jessica has not reviewed the slides yet.** They opened the preview at the end of the session but haven't given feedback yet.
+- **Not pushed.** These commits are on Jessica's machine only and need pushing once they approve:
   - `Add clips and figures for Jessica's section`
   - `Draft Jessica's section: from never coding to visualization as method`
   - `Fit Jessica's section to the CLS audience`

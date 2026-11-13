@@ -12,6 +12,7 @@ Last updated 2026-11-13, at the end of the first working session.
   - `Draft Jessica's section: from never coding to visualization as method`
   - `Fit Jessica's section to the CLS audience`
   - `Document the status of Jessica's section` (this file and the check scripts)
+  - `Set the talk title: Do Better Not More: Historians Working With LLMs`. This touches shared files (`slides.qmd`, `index.qmd`, `CLAUDE.md`, `outline.md`). The title was decided by the speakers on 13 November 2026. Tell Jim when pushing, because `docs/` shows the old title until he re-renders.
 
   Check with `git log origin/main..HEAD --oneline`, then `git pull --rebase && git push`.
 - **`docs/` was not re-rendered in a commit.** Jim publishes the rendered deck. Local renders (Quarto 1.9.38 here) change library hashes in `docs/` and add a line to `.gitignore`, so restore both before committing: `git checkout -- docs .gitignore && git clean -fd docs`.

@@ -24,6 +24,8 @@ From `CLS Presentation Rough Notes.docx`. The slide-by-slide plan is in [outline
 
 ### Three speakers, one deck
 
+**Who builds what.** Jim's agents build sections 1 and 4 (`_1-jim-open.qmd`, `_4-jim-close.qmd`). Jessica's and Jacob's agents build sections 2 and 3. Don't edit another speaker's section. If you change a shared file (`slides.qmd`, `slides.scss`, `slides-motion.html`, `CLAUDE.md`), do it in its own commit with a message that says what changed, because the other speakers' agents build on it.
+
 Each speaker edits their own section file, which keeps merge conflicts down. `slides.qmd` holds only the front matter and the includes:
 
 ```markdown

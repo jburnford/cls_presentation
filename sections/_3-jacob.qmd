@@ -1,76 +1,93 @@
 ## {#jacob-divider}
 
-[Jacob Polay<span class="gold">Knowledge graphs, GraphRAG and agentic search</span>]{.divider-name}
+```{=html}
+<style>
+/* Jacob's section only: a four-part progress map, so the room always knows where we are. */
+.reveal .jacob-map { position: absolute; top: -1.15em; left: 0; display: flex; gap: 0.35em; font: 600 13px/1 system-ui, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.reveal .jacob-map span { color: #6f6a60; border: 1px solid #3a3b40; border-radius: 3px; padding: 0.3em 0.55em; }
+.reveal .jacob-map span.on { color: #15161a; background: #c9a227; border-color: #c9a227; }
+.reveal .jacob-agenda { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5em; margin-top: 1.2em; font-size: 0.6em; }
+.reveal .jacob-agenda div { background: #1d1e23; border: 1px solid #3a3b40; border-top: 3px solid #c9a227; border-radius: 4px; padding: 0.5em 0.7em; }
+.reveal .jacob-agenda b { display: block; color: #c9a227; font-family: Georgia, serif; font-size: 1.4em; font-weight: 400; }
+.reveal .jacob-agenda span { color: #d9d3c4; }
+.reveal .jacob-method { font-size: 0.56em; color: #9a958a; margin-top: 0.3em; }
+.reveal .jacob-list { font-size: 0.62em; line-height: 1.45; }
+.reveal .jacob-list li { margin-bottom: 0.35em; }
+.reveal #jacob-cypher .motion-card { font-size: 0.72em; padding: 0.5em 0.8em; margin: 0.5em 0; }
+.reveal .motion-card.bad { border-left-color: #c0674f; }
+.reveal .motion-card.good { border-left-color: #79a868; }
+.reveal .motion-card .verdict-bad { color: #e08a74; font-weight: 600; }
+.reveal .motion-card .verdict-good { color: #9fcf8c; font-weight: 600; }
+</style>
+```
 
-::: notes
-0. Introduce myself in one sentence: historian of the early modern Atlantic who ended up building search tools because the archive was too big to read. This section is the technical one; every term gets defined as it comes up.
-:::
-
-## Too much text, not enough reading time {#jacob-problem}
-
-::: {.stats}
-::: {.stat}
-[~20,000]{.num}
-[printed documents in my MA corpus]{.lbl}
-:::
-::: {.stat}
-[~2 million]{.num}
-[pages, 1614 to 1810]{.lbl}
-:::
-::: {.stat}
-[250M+]{.num}
-[scholarly works listed in OpenAlex]{.lbl}
-:::
-:::
-
-- Keyword search finds only the words you already thought to type
-- Early modern spelling is unstable: [[TBD: three real variants of one commodity from the corpus]]{.tbd}
-- The question I care about needs facts scattered across thousands of documents: [[TBD: one real research question, e.g. on ginger imports]]{.tbd}
-
-::: notes
-0–1. Corpus figures are from the MA thesis, *Loud Yet Invisible*. The OpenAlex figure is the size of its open catalogue of scholarly works (various MCP connector listings give 240 to 270 million; say "over 250 million").
-
-The problem is not specific to history. Any collection big enough that no one has read all of it has it: logbooks, manuals, proposals, papers. The question for this section: how do we get a machine to help us find things in a collection this size, and what actually works now?
-:::
-
-## What is a knowledge graph? {#jacob-kg}
-
-::: {.def}
-[What is a knowledge graph?]{.def-term}
-A store of **things** (people, ships, places, goods) and the **relationships** between them, written as small statements: *this* is connected to *that*, in *this* way. The relationships are explicit, so you can follow them and count them.
-:::
+[Jacob Polay<span class="gold">Searching large document collections: knowledge graphs, GraphRAG and agentic search</span>]{.divider-name}
 
 ```{=html}
-<div class="flow">
-  <div class="node"><b>Person</b><span>a merchant</span></div>
-  <div class="arrow">→</div>
-  <div class="node blue"><b>Ship</b><span>owned by the merchant</span></div>
-  <div class="arrow">→</div>
-  <div class="node"><b>Commodity</b><span>carried by the ship</span></div>
-  <div class="arrow">→</div>
-  <div class="node blue"><b>Place</b><span>where it was grown, where it landed</span></div>
+<div class="jacob-agenda">
+  <div><b>1</b><span>The problem: too much text to read</span></div>
+  <div><b>2</b><span>Knowledge graphs and GraphRAG: what I built and measured</span></div>
+  <div><b>3</b><span>Agents: what worked, and why</span></div>
+  <div><b>4</b><span>Which approach fits which collection size</span></div>
 </div>
 ```
 
-[[TBD: replace the types above with one real fragment from the graph: a named merchant, ship, commodity and port, with the document ID.]]{.tbd .small}
-
 ::: notes
-1–2. A knowledge graph organizes material and gives access to it. Once facts are stored this way you can ask questions that keyword search cannot: which merchants are connected to a commodity through any ship, or which ports sit between a colony and an English harbour.
+0. One sentence on who I am: a historian of the early modern Atlantic who built search tools because the archive was too big to read. Read the four parts out loud. The same four labels sit at the top of every slide in this section.
 
-[TBD: talk through the real fragment and where it came from.]
+Everything in this section is from my MA thesis, *Loud Yet Invisible* (chapters 1 to 3), unless the notes say otherwise.
 :::
 
-## What is a vector database? {#jacob-vectors .motion}
+## Nobody can read everything in a large collection {#jacob-problem}
+
+```{=html}
+<div class="jacob-map"><span class="on">1 Problem</span><span>2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
+```
+
+::: {.stats}
+::: {.stat}
+[20,646]{.num}
+[documents in my corpus, 1614 to 1810]{.lbl}
+:::
+::: {.stat}
+[~2 million]{.num}
+[pages]{.lbl}
+:::
+::: {.stat}
+[1.22 billion]{.num}
+[words after OCR]{.lbl}
+:::
+:::
+
+- One place, four spellings: *Barbados, Barbadoes, Barbedos, Barbadoss*. Keyword search finds only the one you type.
+- A test question: **when did Jamaica's sugar exports first overtake Barbados's in the customs records?** Of 8 retrieval systems I built, 1 answered it correctly.
+
+[For scale: 3,169 works affiliated with the Canadian Light Source in OpenAlex; ~315 million works in OpenAlex overall.]{.jacob-method}
+
+::: notes
+0–1. Corpus figures: thesis chapter 3 (20,646 documents after deduplication; 1.22 billion words from OCR). Spelling variants: chapter 3, "The Corpus and the Task". The sugar question and the 1-of-8 result open chapter 3; the answer comes later in this section (slide 10), so don't give it away yet.
+
+OpenAlex figures checked on 13 November 2026 through the OpenAlex API: CLS is institution I83308685 with 3,169 works; the catalogue reported 314,998,968 works.
+
+Your collections have the same problem: papers, plus manuals, procedures and logbooks that nobody has read end to end. Question for the room: how do you find things in your own facility's documentation today?
+:::
+
+## Nearest in meaning is not the same as relevant {#jacob-vectors .motion}
+
+```{=html}
+<div class="jacob-map"><span class="on">1 Problem</span><span>2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
+```
 
 ::: {.columns}
 ::: {.column width="46%"}
-::: {.def}
-[What is an embedding?]{.def-term}
-A passage of text turned into a long list of numbers that stands for its meaning. Passages about similar things land near each other.
-:::
-::: {.def}
-[What is cosine similarity?]{.def-term}
-How closely two of those lists point the same way. The question is embedded too, and its nearest neighbours are handed to the model.
+::: {.jacob-list}
+Standard retrieval (RAG): chunk the documents, embed them, return the top *k* chunks by cosine similarity.
+
+In my test (1.46 million chunks):
+
+- Averaged **13.0 / 25**, second-lowest of 8 systems
+- Customs records rarely ranked highest by similarity, so it **could not answer any quantitative question**
+- Long narrative books can outrank the short letters and tables that hold the facts
 :::
 :::
 ::: {.column width="54%"}
@@ -78,351 +95,498 @@ How closely two of those lists point the same way. The question is embedded too,
 <svg class="motion-map" viewBox="0 0 420 290" role="img" aria-label="Schematic: passages as points in three clusters; a question lands in one cluster and its three nearest neighbours are highlighted">
 <text x="40" y="22">passages on topic A</text><text x="285" y="22">topic B</text><text x="165" y="195">topic C</text>
 <circle class="pt" cx="70" cy="60" r="7" data-at="300"/><circle class="pt" cx="110" cy="85" r="7" data-at="360"/><circle class="pt" cx="85" cy="120" r="7" data-at="420"/><circle class="pt" cx="140" cy="55" r="7" data-at="480"/><circle class="pt" cx="60" cy="150" r="7" data-at="540"/><circle class="pt" cx="300" cy="70" r="7" data-at="600"/><circle class="pt" cx="340" cy="100" r="7" data-at="660"/><circle class="pt" cx="320" cy="140" r="7" data-at="720"/><circle class="pt" cx="360" cy="60" r="7" data-at="780"/><circle class="pt" cx="200" cy="220" r="7" data-at="840"/><circle class="pt" cx="240" cy="250" r="7" data-at="900"/><circle class="pt" cx="170" cy="260" r="7" data-at="960"/><circle class="pt" cx="280" cy="230" r="7" data-at="1020"/>
-<path class="draw" pathLength="1" data-at="2600" d="M320,105 L340,100" stroke="#c9a227" stroke-width="2.5" fill="none"/><path class="draw" pathLength="1" data-at="2850" d="M320,105 L320,140" stroke="#c9a227" stroke-width="2.5" fill="none"/><path class="draw" pathLength="1" data-at="3100" d="M320,105 L300,70" stroke="#c9a227" stroke-width="2.5" fill="none"/><circle class="pt gold" cx="340" cy="100" r="8" data-at="3500"/><circle class="pt gold" cx="320" cy="140" r="8" data-at="3700"/><circle class="pt gold" cx="300" cy="70" r="8" data-at="3900"/>
 <g data-at="1900" class="rise"><rect x="311" y="96" width="18" height="18" transform="rotate(45 320 105)" fill="#f3ead3"/><text x="336" y="133" class="yr">your question</text></g>
+<path class="draw" pathLength="1" data-at="2600" d="M320,105 L340,100" stroke="#c9a227" stroke-width="2.5" fill="none"/><path class="draw" pathLength="1" data-at="2850" d="M320,105 L320,140" stroke="#c9a227" stroke-width="2.5" fill="none"/><path class="draw" pathLength="1" data-at="3100" d="M320,105 L300,70" stroke="#c9a227" stroke-width="2.5" fill="none"/>
+<circle class="pt gold" cx="340" cy="100" r="8" data-at="3500"/><circle class="pt gold" cx="320" cy="140" r="8" data-at="3700"/><circle class="pt gold" cx="300" cy="70" r="8" data-at="3900"/>
 </svg>
 <p class="caption">Schematic, not real data.</p>
-<p class="motion-caption rise" data-at="4400" style="font-size:0.6em;color:#f3ead3">Nearest in meaning, not necessarily the answer.</p>
+<p class="motion-caption rise" data-at="4400" style="font-size:0.6em;color:#f3ead3">Close in meaning. Not necessarily the answer.</p>
 ```
 :::
 :::
 
 ::: notes
-2–3. This is what most "chat with your documents" tools do under the hood. It is good at fuzzy recall: you do not need the exact words. Animated: passages appear as points, the question lands, and lines draw to its three nearest neighbours. Schematic, not real data; say so.
+1–2. This audience knows embeddings and cosine similarity, so don't define them. Say it in one breath and move to the evidence.
+
+Numbers from chapter 3: 1.46 million chunks embedded with Qwen3-Embedding-0.6B in ChromaDB; RAG-only averaged 13/25 across 30 questions. The thesis explains the failure: structured import records, embedded as text alongside narrative documents, rarely scored highest on cosine similarity, and a long treatise on Jamaica's plants can score closer to a sugar-export question than a planter's letter.
+
+The schematic is not data; say so. It shows the retrieval step: the question lands and lines go to its three nearest neighbours.
 :::
 
-## Where cosine similarity falls short {#jacob-cosine}
-
-::: {.cards}
-::: {.card .warn}
-[Similar is not useful]{.kicker}
-
-#### Mentions ≠ about
-
-A passage that mentions a commodity is not a passage about the trade in it.
-:::
-::: {.card .warn}
-[No aggregation]{.kicker}
-
-#### "How many?"
-
-There is no single passage whose meaning is a total.
-:::
-::: {.card .warn}
-[Lost context]{.kicker}
-
-#### Chunks forget
-
-Cutting text into chunks strips who wrote it, when, and about what.
-:::
-::: {.card .warn}
-[Two hops]{.kicker}
-
-#### Missed links
-
-A fact that needs two documents joined is in neither chunk on its own.
-:::
-:::
-
-[[TBD: one real query from the thesis where vector search returned passages that sounded right but didn't hold the fact.]]{.tbd .small}
-
-::: notes
-3–4. Vector databases have their place, and I still use them. But cosine similarity has real weaknesses when what you want is knowledge extraction.
-
-[TBD: walk through the real failure example.]
-
-Candidate for animation: a query, the top results appearing, and the ones that don't hold the fact struck out.
-:::
-
-## What is GraphRAG? {#jacob-graphrag .motion}
-
-::: {.def}
-[What is RAG?]{.def-term}
-*Retrieval-augmented generation*: before a language model answers, a search step fetches relevant text and hands it to the model, so the answer draws on your documents instead of only on what the model memorised. **GraphRAG** (Microsoft Research, 2024) has the model build a knowledge graph first, and retrieves from that.
-:::
+## My pipeline: 2 million pages to a searchable graph {#jacob-pipeline .motion}
 
 ```{=html}
-<div class="flow">
-  <div class="node rise" data-at="400"><b>Documents</b><span>every chunk read by an LLM</span></div>
-  <div class="arrow rise" data-at="725">→</div>
-  <div class="node blue rise" data-at="1050"><b>Extract</b><span>entities and relationships</span></div>
-  <div class="arrow rise" data-at="1375">→</div>
-  <div class="node rise" data-at="1700"><b>Graph</b><span>clustered into communities</span></div>
-  <div class="arrow rise" data-at="2025">→</div>
-  <div class="node blue rise" data-at="2350"><b>Summarise</b><span>an LLM writes up each community</span></div>
-  <div class="arrow rise" data-at="2675">→</div>
-  <div class="node rise" data-at="3000"><b>Answer</b><span>local and whole-collection questions</span></div>
-</div>
+<div class="jacob-map"><span>1 Problem</span><span class="on">2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
 ```
 
-::: notes
-4–5. The promise is the last box. Vector search can only ever show you the passages closest to your question. GraphRAG claims to let you ask about the whole collection: "what are the main themes here?" or "how is X connected to Y across all of it?"
-
-Animated: the stages appear in order. Let it run while you describe each one.
-:::
-
-## What I built {#jacob-pipeline .motion}
-
 ```{=html}
 <div class="flow">
-  <div class="node rise" data-at="400"><b>Page images</b><span>early modern print</span></div>
+  <div class="node rise" data-at="400"><b>Page images</b><span>20,646 documents, ~2M pages</span></div>
   <div class="arrow rise" data-at="725">→</div>
-  <div class="node blue rise" data-at="1050"><b>olmOCR</b><span>open model transcribes the pages</span></div>
+  <div class="node blue rise" data-at="1050"><b>olmOCR-2</b><span>open model; word error rate 0.075 on my test set</span></div>
   <div class="arrow rise" data-at="1375">→</div>
-  <div class="node rise" data-at="1700"><b>EarlyModernNER</b><span>people, places, goods</span></div>
+  <div class="node rise" data-at="1700"><b>EarlyModernNER</b><span>tags people, places, goods, organisations: 451,404 mentions</span></div>
   <div class="arrow rise" data-at="2025">→</div>
-  <div class="node blue rise" data-at="2350"><b>Knowledge graph</b><span>entities and links</span></div>
+  <div class="node blue rise" data-at="2350"><b>Knowledge graph</b><span>218,000 nodes, 692,000 edges</span></div>
   <div class="arrow rise" data-at="2675">→</div>
-  <div class="node rise" data-at="3000"><b>GraphRAG retrieval</b><span>Improved Scratchpad</span></div>
+  <div class="node rise" data-at="3000"><b>Retrieval</b><span>8 systems, 30 test questions</span></div>
   <div class="arrow rise" data-at="3325">→</div>
-  <div class="node after rise" data-at="3650"><b>Historian</b><span>reads the ranked sources</span></div>
+  <div class="node after rise" data-at="3650"><b>Historian</b><span>reads and checks the sources</span></div>
 </div>
 ```
 
+::: {.columns}
+::: {.column width="50%"}
 ::: {.def}
 [What is NER?]{.def-term}
-*Named entity recognition*: a model that tags the names of people, places and things in text. I trained a small one on early modern English instead of sending every page to a large language model.
+*Named entity recognition*: a model that tags names of people, places, goods and organisations in text, so they can become nodes in a graph.
 :::
-
-[[TBD: one headline result, with where it was measured: e.g. entities extracted, documents linked, or a query the pipeline answered that keyword search missed.]]{.tbd .small}
+:::
+::: {.column width="50%"}
+::: {.jacob-list}
+- Everything runs on open models
+- OCR: one NVIDIA 5070 Ti (~24 s per page), or 50,000 documents in under 48 hours on the Digital Research Alliance's Nibi cluster
+:::
+:::
+:::
 
 ::: notes
-5–7. One design choice to flag: a small fine-tuned model for extraction instead of a large language model reading every page. At two million pages, that is the difference between a feasible project and an impossible budget. It also makes extraction consistent and testable against a hand-checked sample.
+2–3. The stages appear in order. Each number is measured; say where it ran.
 
-[TBD: give the result and how the sample was chosen.]
+Sources: OCR results and throughput, chapter 1 (olmOCR-2 mean WER 0.075 ± 0.107 on the hand-transcribed gold standard; ~24 s per page on a 5070 Ti; under 48 hours for 50,000 documents on Nibi, including queue time). Entity count, chapter 3. Graph size, chapter 3 (Neo4j; first build).
 
-Note the last box. The output is a ranked set of sources for a person to read, not an answer.
+The last box is green because it is the check: a person reads the sources the system ranks.
 :::
 
-## Why it doesn't always fulfil its promise {#jacob-promise}
+## Existing entity taggers failed on early modern text, so I trained one {#jacob-ner .motion}
 
-::: {.cards}
-::: {.card .warn}
-[Cost]{.kicker}
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span class="on">2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
+```
 
-#### ~1,000×
-
-Microsoft measured full GraphRAG indexing at roughly a thousand times the cost of a vector index.
+::: {.columns}
+::: {.column width="60%"}
+```{=html}
+<svg class="motion-map" viewBox="0 0 560 270" role="img" aria-label="Bar chart of strict F1 scores: hmBERT 0.156, spaCy 0.198, GLiNER 0.405, Qwen3-4B base 0.490, Gemini 3 Pro 0.665, EarlyModernNER 0.775">
+<text x="0" y="14" style="fill:#9a958a">strict F1 (higher is better)</text>
+<g class="rise" data-at="400"><text x="0" y="48">hmBERT</text><rect x="170" y="35" width="56" height="20" fill="#7fa7d6"/><text x="232" y="50">0.156</text></g>
+<g class="rise" data-at="800"><text x="0" y="86">spaCy</text><rect x="170" y="73" width="71" height="20" fill="#7fa7d6"/><text x="247" y="88">0.198</text></g>
+<g class="rise" data-at="1200"><text x="0" y="124">GLiNER</text><rect x="170" y="111" width="146" height="20" fill="#7fa7d6"/><text x="322" y="126">0.405</text></g>
+<g class="rise" data-at="1600"><text x="0" y="162">Qwen3-4B (base)</text><rect x="170" y="149" width="176" height="20" fill="#7fa7d6"/><text x="352" y="164">0.490</text></g>
+<g class="rise" data-at="2000"><text x="0" y="200">Gemini 3 Pro</text><rect x="170" y="187" width="239" height="20" fill="#7fa7d6"/><text x="415" y="202">0.665</text></g>
+<g class="rise" data-at="2900"><text x="0" y="238" style="fill:#c9a227">EarlyModernNER</text><rect x="170" y="225" width="279" height="20" fill="#c9a227"/><text x="455" y="240" class="yr">0.775</text></g>
+</svg>
+```
+[Strict F1 on a hand-annotated 100-page gold standard; 15 models tested, 6 shown.]{.jacob-method}
 :::
-::: {.card .warn}
-[Errors compound]{.kicker}
+::: {.column width="40%"}
+::: {.jacob-list}
+EarlyModernNER vs Gemini 3 Pro:
 
-#### OCR → entity → edge
-
-Each stage inherits the last one's mistakes, and a misread line becomes a confident false link.
-:::
-::: {.card .warn}
-[Generated layers]{.kicker}
-
-#### Summaries of summaries
-
-Community summaries sit between you and the page.
-:::
-::: {.card .warn}
-[Upkeep]{.kicker}
-
-#### Static
-
-New documents mean re-extracting and re-summarising.
+- Slot error rate **0.331** vs 0.672
+- **0** entities given the wrong type
+- **26.7 s** per document vs 34.4 s
+- **6.5 GB** peak GPU memory: runs locally, no API fee (Gemini: $8.88 per 100 documents)
 :::
 :::
-
-> Treat it as a **search and ranking** tool, not an answer machine.
+:::
 
 ::: notes
-7–8. Cost figure: Microsoft Research's LazyGraphRAG post reports LazyGraphRAG indexing at the same cost as vector RAG and 0.1% of full GraphRAG, so full GraphRAG is about 1,000 times a vector index on their AP News benchmark.
+3–4. Source: thesis chapter 2. Gold standard: 100 pages of olmOCR-2 output, hand-annotated for four types (toponym, person, commodity, organisation). Strict F1 counts boundary errors as misses.
 
-[TBD: Jacob's own experience of each problem in the thesis pipeline.]
+How it was built: Qwen3-4B fine-tuned with LoRA, one specialist model per entity type run as a cascade, about 27,000 training entities reviewed by hand from a 25-million-token corpus, plus synthetic positive and negative examples. I tuned for precision over recall (strict precision 0.833), because a false entity creates a false historical pattern; a missed one only loses data.
 
-The reframe came from Jim: the system finds and ranks sources; it does not do the analysis.
+Honest limit: recall is still lower than Gemini's (0.767 vs 0.816 partial recall).
+
+Question for the room: would you choose precision or recall for your own extraction task?
 :::
 
-## What changed: agentic search {#jacob-agentic .motion}
+## A knowledge graph stores entities and typed relationships {#jacob-kg}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span class="on">2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
+```
 
 ::: {.def}
-[What is an agent?]{.def-term}
-A language model that can use tools (a search box, a file browser, a database) in a loop: it decides what to search, reads the results, and decides what to do next, until it has enough to answer.
+[What is a knowledge graph?]{.def-term}
+Entities are nodes; relationships are typed edges between them. Unlike a vector index, it can count, filter and join.
+:::
+
+```{=html}
+<div class="flow">
+  <div class="node"><b>Barbadoes · Barbedos · Barbadoss</b><span>spelling variants found by NER</span></div>
+  <div class="arrow">→</div>
+  <div class="node blue"><b>Barbados</b><span>one node, after disambiguation</span></div>
+</div>
+<div class="flow">
+  <div class="node"><b>muscovado · brown sugar · molasses</b><span>variant products</span></div>
+  <div class="arrow">→</div>
+  <div class="node blue"><b>sugar</b><span>linked by IS_VARIANT_OF</span></div>
+  <div class="arrow">→</div>
+  <div class="node"><b>Customs records</b><span>43,000 rows of imports, 1696 to 1755</span></div>
+</div>
+```
+
+::: {.stats}
+::: {.stat}
+[218,000]{.num}
+[nodes]{.lbl}
+:::
+::: {.stat}
+[692,000]{.num}
+[edges]{.lbl}
+:::
+::: {.stat}
+[1.74 million]{.num}
+[text chunks linked to the entities they mention (rebuilt graph)]{.lbl}
+:::
+:::
+
+::: notes
+4–5. Source: thesis chapter 3. Entities were merged ("disambiguated") and linked with Qwen3.5-35B-A3B; the import-records spreadsheet was loaded into the same Neo4j graph so the graph can answer quantitative trade questions. The commodity hierarchy uses IS_VARIANT_OF and DERIVED_FROM edges.
+
+The rebuilt graph (used by the best system later) links each entity to the exact chunk that mentions it, and chunks to sections and documents: 20,646 documents, 521,000 sections, 1.74 million chunks.
+
+For a facility the same structure fits: sample, measured at, beamline; beamline, uses, technique; technique, reported in, paper.
+:::
+
+## GraphRAG: the graph decides which documents to read {#jacob-graphrag .motion}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span class="on">2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
+```
+
+::: {.def}
+[What is GraphRAG?]{.def-term}
+*Retrieval-augmented generation* (RAG) fetches text and gives it to a language model before it answers. **GraphRAG** uses a knowledge graph to choose which documents to fetch, then searches within them.
 :::
 
 ```{=html}
 <div class="flow">
   <div class="node rise" data-at="400"><b>Question</b></div>
   <div class="arrow rise" data-at="725">→</div>
-  <div class="node blue rise" data-at="1050"><b>Search</b><span>keywords, chosen by the model</span></div>
+  <div class="node blue rise" data-at="1050"><b>Seed entities</b><span>matched against 250,000 entity snippets</span></div>
   <div class="arrow rise" data-at="1375">→</div>
-  <div class="node rise" data-at="1700"><b>Read</b><span>whole documents, not fragments</span></div>
+  <div class="node rise" data-at="1700"><b>Graph traversal</b><span>every document that mentions them</span></div>
   <div class="arrow rise" data-at="2025">→</div>
-  <div class="node blue rise" data-at="2350"><b>Refine</b><span>a new name or term to follow</span></div>
-  <div class="arrow rise" data-at="4000">→</div>
-  <div class="node after rise" data-at="4300"><b>Answer</b><span>with sources</span></div>
+  <div class="node blue rise" data-at="2350"><b>Vector search</b><span>top 2 chunks per document</span></div>
+  <div class="arrow rise" data-at="2675">→</div>
+  <div class="node rise" data-at="3000"><b>Language model</b><span>answers from the top 20 chunks</span></div>
 </div>
-<div class="loopback rise" data-at="2800">↺ Not enough yet: search again</div>
+<p class="motion-caption rise" data-at="3800" style="font-size:0.65em;color:#f3ead3">Better documents than plain RAG. But the model still only sees fragments.</p>
 ```
 
-[Classic retrieval: one pass. Agentic search: as many passes as the question needs.]{.motion-caption .rise data-at="5200" style="font-size:0.65em;color:#f3ead3"}
-
 ::: notes
-8–9. Classic retrieval does one pass: embed the question, fetch the top ten chunks. Agentic search lets the model drive. It runs a keyword search, reads what came back, notices a name it did not know, and searches again.
+5–6. This is the "True GraphRAG" system from chapter 3. Seed entities come from a separate index of 250,000 short entity-relationship snippets embedded with Qwen3-Embedding-8B. The graph finds every document mentioning those entities; vector search then picks the two most similar chunks per document; the top 20 go to the model.
 
-Best-known example: Claude Code. Its lead developer, Boris Cherny, has said early versions used a local vector database, and that letting the model search with plain text tools in a loop worked better and was simpler.
+Microsoft Research's 2024 GraphRAG is a different variant (it summarises graph communities); I tested graph-directed retrieval because it keeps answers tied to documents.
 
-Animated: search, read, refine, then the loop back, and only then the answer.
+The caption sets up the next two slides.
 :::
 
-## Semi-structured text is often enough {#jacob-semistructured}
+## Results: 8 retrieval systems, 30 questions {#jacob-results .motion}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span class="on">2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
+```
+
+```{=html}
+<svg class="motion-map" style="width:auto;height:430px" viewBox="0 0 640 300" role="img" aria-label="Bar chart of mean scores out of 25: KG plus RAG 11.94, RAG only 13.0, True GraphRAG 14.4, GraphRAG plus KG 15.53, GraphRAG plus KG plus vector 15.68, Self-RAG on GraphRAG 15.71, Self-RAG on RAG 16.06, Improved Scratchpad 17.90">
+<text x="0" y="12" style="fill:#9a958a">mean score out of 25 (higher is better)</text>
+<g class="rise" data-at="400"><text x="0" y="42" class="lbl-bad">KG + RAG</text><rect x="210" y="30" width="191" height="20" fill="#c0674f"/><text x="407" y="45" class="lbl-bad">11.94 (worse than RAG alone)</text></g>
+<g class="rise" data-at="850"><text x="0" y="74">RAG only</text><rect x="210" y="62" width="208" height="20" fill="#7fa7d6"/><text x="424" y="77">13.0</text></g>
+<g class="rise" data-at="1300"><text x="0" y="106">GraphRAG</text><rect x="210" y="94" width="230" height="20" fill="#7fa7d6"/><text x="446" y="109">14.4</text></g>
+<g class="rise" data-at="1750"><text x="0" y="138">GraphRAG + KG</text><rect x="210" y="126" width="248" height="20" fill="#7fa7d6"/><text x="464" y="141">15.53</text></g>
+<g class="rise" data-at="2200"><text x="0" y="170">GraphRAG + KG + vector</text><rect x="210" y="158" width="251" height="20" fill="#7fa7d6"/><text x="467" y="173">15.68</text></g>
+<g class="rise" data-at="2650"><text x="0" y="202">Self-RAG on GraphRAG</text><rect x="210" y="190" width="251" height="20" fill="#7fa7d6"/><text x="467" y="205">15.71</text></g>
+<g class="rise" data-at="3100"><text x="0" y="234">Self-RAG on RAG</text><rect x="210" y="222" width="257" height="20" fill="#7fa7d6"/><text x="473" y="237">16.06</text></g>
+<g class="rise" data-at="3900"><text x="0" y="266" style="fill:#c9a227">Improved Scratchpad</text><rect x="210" y="254" width="286" height="20" fill="#c9a227"/><text x="502" y="269" class="yr">17.90</text></g>
+</svg>
+```
+
+[Method: 30 questions in 5 difficulty tiers; I graded each answer on 5 criteria, up to 5 points each. Questions 1–17 were not strictly blind (a labelling bug kept each system on the same letter); Improved Scratchpad was scored on 23 questions. One grader, one corpus: read as a pilot, not a benchmark.]{.jacob-method}
+
+::: notes
+6–7. Source: thesis chapter 3, Evaluation. Criteria: groundedness, completeness, accuracy, synthesis, usefulness. Local model throughout: Qwen3.5-27B with an 8,192-token context.
+
+Two results to say out loud. First, in red: adding knowledge-graph facts to plain RAG made it worse, because vector search still chose the documents and the graph facts compounded its mistakes. Second: every graph-directed variant plateaued near 15.7.
+
+Be upfront about the method limits on the slide; this audience will ask. The grading bug and the 23-question subset are both in the thesis.
+:::
+
+## Why graph-directed retrieval plateaued near 15.7 {#jacob-plateau}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span class="on">2 Graphs</span><span>3 Agents</span><span>4 Scale</span></div>
+```
+
+::: {.cards}
+::: {.card .warn}
+[Extraction errors]{.kicker}
+
+#### Noisy graph
+
+Incomplete merging of entities by the language model left duplicates and false links.
+:::
+::: {.card .warn}
+[Coarse edges]{.kicker}
+
+#### Document, not passage
+
+The graph knew which document mentioned an entity, not where in it.
+:::
+::: {.card .warn}
+[Fragments]{.kicker}
+
+#### Never a whole document
+
+The model read 20 chunks, without the text around them.
+:::
+::: {.card .warn}
+[Synthesis]{.kicker}
+
+#### Misread evidence
+
+Answers blended contradictory sources and hallucinated material.
+:::
+:::
+
+> Better retrieval did not fix **how the model read the evidence**.
+
+::: notes
+7–8. Source: thesis chapter 3, "Graph Directed Retrieval" and "Self-Correction". Self-RAG (grading passages and rewriting queries) helped plain RAG most (+3 points) but added only 0.06 over the best graph variant: it could not supply evidence retrieval had missed.
+
+Also worth one sentence: graph construction is expensive in general. Microsoft Research reports its original GraphRAG indexing at roughly 1,000 times the cost of a vector index (LazyGraphRAG blog post, 2024).
+
+This sets up part 3: the fix was to change how the system reads.
+:::
+
+## What worked: an agent that takes notes on each source {#jacob-scratchpad .motion}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span>2 Graphs</span><span class="on">3 Agents</span><span>4 Scale</span></div>
+```
+
+::: {.def}
+[What is an agent?]{.def-term}
+A language model that calls tools (search, a file reader, a database) and decides its next step from what it finds.
+:::
+
+```{=html}
+<div class="flow">
+  <div class="node rise" data-at="400"><b>Split the question</b><span>into sub-questions</span></div>
+  <div class="arrow rise" data-at="700">→</div>
+  <div class="node blue rise" data-at="1000"><b>Retrieve 35 diverse chunks</b><span>penalise near-duplicates</span></div>
+  <div class="arrow rise" data-at="1300">→</div>
+  <div class="node rise" data-at="1600"><b>Read the neighbours</b><span>"turn the page"</span></div>
+  <div class="arrow rise" data-at="1900">→</div>
+  <div class="node blue rise" data-at="2200"><b>One note per source</b><span>facts, quotes, relevance</span></div>
+</div>
+<div class="flow">
+  <div class="node rise" data-at="2600"><b>Query the graph</b><span>agent writes a database query when numbers are needed</span></div>
+  <div class="arrow rise" data-at="2900">→</div>
+  <div class="node blue rise" data-at="3200"><b>Flag conflicts</b><span>between sources</span></div>
+  <div class="arrow rise" data-at="3500">→</div>
+  <div class="node rise" data-at="3800"><b>Answer</b><span>from the notes, in date order</span></div>
+  <div class="arrow rise" data-at="4100">→</div>
+  <div class="node after rise" data-at="4400"><b>Verify</b><span>flags claims with no note behind them</span></div>
+</div>
+```
+
+::: {.stats}
+::: {.stat}
+[17.90 / 25]{.num}
+[mean score; next best 16.06]{.lbl}
+:::
+::: {.stat}
+[63 of 70]{.num}
+[head-to-head wins]{.lbl}
+:::
+::: {.stat}
+[~10 vs 4.2]{.num}
+[unique documents per question vs other systems]{.lbl}
+:::
+::: {.stat}
+[593 s]{.num}
+[per question, 22.9 model calls: the cost]{.lbl}
+:::
+:::
+
+::: notes
+8–9. Source: thesis chapter 3, "Historical Processing" and "Evaluation". This is the Improved Scratchpad. The diversity step is a determinantal point process, which penalises redundant chunks. "Turn the page" expands each chunk to its neighbours. The agent decides whether the graph is needed and writes a Neo4j Cypher query itself.
+
+The design came from asking how a historian reads: take notes on each source separately, compare them, look for disagreements, then write. Standard iterative refinement failed here: after 35 rewrites the draft drifted and every answer hallucinated.
+
+The cost is real: about 7 times slower than the next system. For a research tool, a 10-minute answer that surfaces 10 sources is still faster than reading one.
+:::
+
+## The larger model asked the graph a narrower question {#jacob-cypher .motion}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span>2 Graphs</span><span class="on">3 Agents</span><span>4 Scale</span></div>
+```
+
+> How much ginger did the British Caribbean colonies export between 1696 and 1755, and how did volumes change over time?
+
+```{=html}
+<div class="motion-card bad rise" data-at="900"><b>Claude Opus 4.7</b> (frontier model, via API)<br>Wrote a more restrictive database query. Got back 1697 to 1714 only, and reported that the record stops there. <span class="verdict-bad">Incorrect: the graph holds 1696 to 1755.</span></div>
+<div class="motion-card good rise" data-at="2600"><b>Qwen3.6-35B-A3B</b> (open model, run locally)<br>Retrieved the full record: a peak of 1,639 tons in 1735, then a fall of over 90% to 79.9 tons in 1744. <span class="verdict-good">Correct, and checked against the graph.</span></div>
+<p class="motion-caption rise" data-at="4000" style="font-size:0.65em;color:#f3ead3">Retrieval and synthesis are separate steps, so we could see exactly which step failed.</p>
+```
+
+::: notes
+9–10. Source: thesis chapter 3, case study (question 1), and the model-swap test at the end of it. Same pipeline, only the language model changed.
+
+This is the slide for scientists: a controlled comparison with one variable. The larger, more expensive model was not better here; it wrote a narrower WHERE clause and so had less evidence. Both models were careful about the evidence they had. The architecture made the failure diagnosable instead of "the AI got it wrong".
+
+The same graph-query step is what answered the sugar question from slide 1: Jamaica first overtook Barbados in 1719, 5,087 tons to 4,369. Improved Scratchpad was the one system of eight that got it.
+:::
+
+## For thousands of documents, well-organised text is enough {#jacob-semistructured}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span>2 Graphs</span><span class="on">3 Agents</span><span>4 Scale</span></div>
+```
 
 ::: {.columns}
 ::: {.column width="52%"}
-- Folders that mean something
+What an agent needs:
+
+- Folders with meaningful names
 - Plain text or Markdown with consistent headings
-- A few lines of metadata at the top of each file: date, author, subject
+- A few lines of metadata at the top of each file: date, author, instrument
 - Filenames a person could guess
 :::
 ::: {.column width="48%"}
 ::: {.def}
 [What is semi-structured text?]{.def-term}
-Ordinary documents with a predictable shape: headings, labelled fields, consistent names. Not a database, but not a pile either.
+Ordinary documents with a predictable shape: headings, labelled fields, consistent names. Not a database.
 :::
+
+Examples: a facility's manuals, procedures and logbooks.
 :::
 :::
 
-> No pipeline. The agent searches, opens, reads and follows links. **Good documentation practice is now good AI practice.**
+> No index, no graph: the agent searches, opens files and reads around what it finds. **Good documentation practice is now good practice for AI search.**
 
 ::: notes
-9–10. Models have become good enough at agentic search that for many collections you no longer need a whole system. This is especially true for technical documentation: manuals, procedures, notes. If they are plain text, sensibly organised, a current model can search them very well with nothing more than text search and the ability to open files.
+10–11. The lesson from my best system generalises: what helped was reading around a hit and taking notes, not a more elaborate index. Current agents do exactly that with plain text tools.
 
-[TBD: one real example from your own work, e.g. thesis notes or the corpus metadata, searched this way.]
+Evidence from software: Boris Cherny, who leads Claude Code at Anthropic, has said early versions used a local vector database, and that agentic search with plain text tools worked better and was simpler.
+
+For collections in the thousands, organised text plus an agent is often enough. It rewards habits that already help people: clear names, consistent structure, dates.
+
+Question for the room: what format is your beamline documentation in now?
 :::
 
-## MCP: one plug for many sources {#jacob-mcp}
+## MCP and Linked Open Data connect an agent to data that already exists {#jacob-mcp}
 
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span>2 Graphs</span><span class="on">3 Agents</span><span>4 Scale</span></div>
+```
+
+::: {.defs}
 ::: {.def}
 [What is MCP?]{.def-term}
-The *Model Context Protocol*: an open standard for giving a model tools such as a search box, a database or a file store. Write a connector once and any MCP-capable assistant can use it. Released by Anthropic in late 2024; governed by the Linux Foundation's Agentic AI Foundation since December 2025.
+The *Model Context Protocol*: an open standard for connecting a language model to tools and data. A connector written once works with any assistant that supports it. Released by Anthropic in late 2024; governed by the Linux Foundation since December 2025.
+:::
+::: {.def}
+[What is Linked Open Data?]{.def-term}
+Open data in which every person, place, institution or paper has a **persistent identifier**. Datasets that share identifiers can be joined, even if they were built separately (Wikidata, OpenAlex, ORCID, ROR, DOIs).
+:::
 :::
 
 ```{=html}
 <div class="flow">
   <div class="node"><b>Your files</b></div>
   <div class="node"><b>A document archive</b></div>
-  <div class="node blue"><b>OpenAlex</b><span>scholarly works</span></div>
+  <div class="node blue"><b>OpenAlex</b><span>research papers</span></div>
   <div class="node blue"><b>Wikidata</b><span>people, places, things</span></div>
-  <div class="node after"><b>A knowledge graph</b><span>one tool among several</span></div>
+  <div class="node blue"><b>A knowledge graph</b><span>one tool among several</span></div>
 </div>
-<div class="loopback">↕ all reached by the same agent through MCP</div>
+<div class="loopback">↕ one agent reaches all of these through MCP</div>
 ```
 
+[The Canadian Light Source is ROR **001bvc968** and OpenAlex **I83308685**: any dataset using those identifiers joins to its 3,169 works.]{.jacob-method}
+
 ::: notes
-10–11. MCP is plumbing, but it matters. Before it, every connection between a model and a data source was custom work. Now there are ready-made connectors, including for OpenAlex and Wikidata.
+11–12. Identifiers checked through the OpenAlex API on 13 November 2026.
 
-This is where knowledge graphs come back in. The graph stops being the whole system and becomes one tool the agent can call when a question is about relationships.
+Before MCP, every link between a model and a data source was custom code. Now there are standard connectors, including ready-made ones for OpenAlex and Wikidata. The knowledge graph becomes one tool the agent calls when a question is about relationships.
+
+Link back to slide 6: in my corpus a language model had to decide that "Barbadoes" and "Barbados" are the same place. Shared identifiers turn that guess into a lookup.
 :::
 
-## Linked Open Data: someone already built the graph {#jacob-lod}
+## Demo: an agent searching CLS's own papers {#jacob-demo}
 
-::: {.def}
-[What is Linked Open Data?]{.def-term}
-Openly published data where every person, place, institution or paper has a **persistent identifier** that other datasets can point to. Following those links joins datasets that were built separately.
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span>2 Graphs</span><span>3 Agents</span><span class="on">4 Scale</span></div>
+```
+
+```{=html}
+<div class="flow">
+  <div class="node"><b>Question</b><span>[TBD: one question about CLS research]</span></div>
+  <div class="arrow">→</div>
+  <div class="node blue"><b>Agent</b><span>searches through an OpenAlex MCP connector</span></div>
+  <div class="arrow">→</div>
+  <div class="node"><b>OpenAlex</b><span>3,169 CLS-affiliated works</span></div>
+  <div class="arrow">→</div>
+  <div class="node after"><b>Answer</b><span>with DOIs the room can check</span></div>
+</div>
+```
+
+[[TBD: run the demo once, save the transcript and a screen recording as the fallback, and link both here.]]{.tbd .small}
+
+::: notes
+12–14. The one live demo allowed in the deck. Show the agent's searches as they happen, not just the answer, so the loop is visible. Every claim comes with a DOI; open one to show it checks out.
+
+If the network fails, play the saved recording.
+
+[TBD: choose the question. It must be answerable from OpenAlex metadata (titles, abstracts, authors, topics, citations).]
 :::
+
+## Which approach fits which collection size {#jacob-scale}
+
+```{=html}
+<div class="jacob-map"><span>1 Problem</span><span>2 Graphs</span><span>3 Agents</span><span class="on">4 Scale</span></div>
+```
 
 ::: {.cards}
 ::: {.card}
-[Things]{.kicker}
-
-#### Wikidata
-:::
-::: {.card}
-[Papers]{.kicker}
-
-#### OpenAlex, DOIs
-:::
-::: {.card}
-[People]{.kicker}
-
-#### ORCID
-:::
-::: {.card}
-[Institutions]{.kicker}
-
-#### ROR
-:::
-:::
-
-> Don't rebuild the world's graph. **Link to it.**
-
-::: notes
-11–12. If local records carry these identifiers, an agent can move from a local record to the paper, to its authors, to everything that cites it, without anyone building that graph locally.
-
-[TBD: one real case from the corpus where a place, person or ship could be matched to a Wikidata item.]
-:::
-
-## Searching millions of documents: what fits where {#jacob-scale}
-
-::: {.cards}
-::: {.card}
-[Hundreds to thousands]{.kicker}
+[Hundreds to thousands of documents]{.kicker}
 
 #### Agentic search
 
-Over well-organised, semi-structured text. No index needed.
+Over well-organised text. No index.
 
-[A project's notes; a set of manuals]{.fact}
+[A facility's manuals and logbooks]{.fact}
 :::
 ::: {.card .accent}
 [Hundreds of thousands to millions]{.kicker}
 
-#### An index the agent can call
+#### An index the agent calls
 
-Keyword, vector and graph indexes, reached through MCP. GraphRAG earns its cost here.
+Graph and vector indexes, reached as tools. Worth the build cost here.
 
-[My ~2 million pages]{.fact}
+[My 1.74 million chunks]{.fact}
 :::
 ::: {.card}
 [Hundreds of millions]{.kicker}
 
 #### Linked Open Data
 
-Use what exists, through MCP. Don't rebuild it.
+Connect to what exists through MCP. Do not rebuild it.
 
-[The published literature]{.fact}
+[The literature: ~315 million works]{.fact}
 :::
 :::
+
+> The software finds and ranks. **People read and judge.**
 
 ::: notes
-12–13. The answer to "how could we search millions of documents" depends on scale. For thousands, agentic search over decent text is often enough. Somewhere in the hundreds of thousands to millions an agent cannot read everything on every query, so you need an index, and that is where vectors and knowledge graphs still earn their keep. At the scale of the whole literature, connect to the open infrastructure that exists.
+14–15. Summary. For thousands of documents, agentic search over organised text is often enough. At millions, an agent cannot read everything per query, so you need an index; that is where graphs and vectors are worth their cost, as tools the agent calls. At the scale of the literature, connect to open infrastructure.
 
-Rule of thumb: indexes become tools the agent calls, not the system itself.
-:::
-
-## Knowledge graphs still matter {#jacob-close}
-
-::: {.cards}
-::: {.card .accent}
-[Organization]{.kicker}
-
-#### Structure you can inspect
-:::
-::: {.card .accent}
-[Exact queries]{.kicker}
-
-#### Count, filter, join
-:::
-::: {.card .accent}
-[Provenance]{.kicker}
-
-#### Every edge back to a page
-:::
-::: {.card .accent}
-[Reuse]{.kicker}
-
-#### Across projects, via open identifiers
-:::
-:::
-
-> The machine finds and ranks. **People read and judge.**
-
-::: notes
-13–15. Knowledge graphs are still useful, as infrastructure an agent can query rather than as a machine that hands you answers. Agentic search has made a lot of heavy pipeline work unnecessary, especially for smaller collections. The right job for all of this is discovery: finding and ranking what a person should read.
+Across all of it, the job is discovery: finding and ranking what a person should read. My best system was the one designed around how a historian reads, and it still ends with a person checking the sources.
 
 Hand back to Jim.
 :::

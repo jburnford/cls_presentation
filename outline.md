@@ -34,29 +34,25 @@ General and positive. The theme is skills flattening: no longer gated by other p
 11. **What still needed judgement.** Where did a human have to decide, check or say no? This sets up Jim's close.
 12. **Handoff to Jacob.**
 
-## 3. Jacob: knowledge graphs, GraphRAG, and agentic search (15 min, 14 slides)
+## 3. Jacob: knowledge graphs, GraphRAG, and agentic search (15 min, 15 slides)
 
-Drafted in `sections/_3-jacob.qmd`. More specific and technical; every term gets a `.def` box where it first appears. Minute ranges are in the speaker notes.
+Built in `sections/_3-jacob.qmd` for the confirmed audience (STEM scientists, many neurodivergent). Every number comes from Jacob's MA thesis (*Loud Yet Invisible*, chapters 1–3) or the OpenAlex API (checked 13 Nov 2026); sources are in the speaker notes. A four-part progress strip (Problem · Graphs · Agents · Scale) sits on every slide.
 
-1. **Divider:** Jacob; knowledge graphs, GraphRAG and agentic search.
-2. **Too much text, not enough reading time.** `.stats`: ~20,000 documents, ~2 million pages (MA corpus), 250M+ works in OpenAlex.
-   *Needs:* real spelling variants; one real research question.
-3. **What is a knowledge graph?** `.def` + a `.flow` of entity types (person → ship → commodity → place).
-   *Needs:* one real fragment from the graph, with document ID.
-4. **What is a vector database?** ★ `.def` boxes for *embedding* and *cosine similarity*; chunk → embed → nearest neighbours.
-5. **Where cosine similarity falls short.** ★ Four `.cards`: mentions ≠ about; no aggregation; chunks lose context; two-hop facts.
-   *Needs:* a real failure example from the thesis.
-6. **What is GraphRAG?** ★ `.def` for *RAG*; extract → graph → communities → summaries → answer.
-7. **What I built.** olmOCR → EarlyModernNER → knowledge graph → GraphRAG retrieval (Improved Scratchpad) → historian. `.def` for *NER*.
-   *Needs:* one headline result and how it was measured.
-8. **Why it doesn't always fulfil its promise.** Cost (~1,000× a vector index, Microsoft's LazyGraphRAG figures), compounding errors, generated summaries, upkeep. Reframe: search and ranking, not answers.
-   *Needs:* Jacob's own experience of each.
-9. **What changed: agentic search.** ★ `.def` for *agent*; search → read → refine loop.
-10. **Semi-structured text is often enough.** Good documentation practice is now good AI practice.
-11. **MCP: one plug for many sources.** `.def` for *MCP*; files, archive, OpenAlex, Wikidata, a knowledge graph as one tool among several.
-12. **Linked Open Data.** `.def`; Wikidata, OpenAlex/DOIs, ORCID, ROR. Don't rebuild the world's graph; link to it.
-13. **Searching millions: what fits where.** Three `.cards` by scale: agentic search (thousands); an index the agent calls through MCP (millions); Linked Open Data (hundreds of millions).
-14. **Knowledge graphs still matter**, then handoff to Jim. Organization, exact queries, provenance, reuse.
+1. **Divider** with a four-part agenda.
+2. **Nobody can read everything in a large collection.** 20,646 documents, ~2M pages, 1.22B words; Barbados in four spellings; the sugar test question (1 of 8 systems answered it).
+3. **Nearest in meaning is not the same as relevant.** ★ Schematic of nearest neighbours; plain RAG scored 13.0/25 and could not answer quantitative questions.
+4. **My pipeline.** ★ olmOCR-2 (WER 0.075) → EarlyModernNER (451,404 mentions) → graph (218k nodes, 692k edges) → 8 retrieval systems → historian.
+5. **Existing entity taggers failed, so I trained one.** ★ Bar chart, strict F1: spaCy 0.198 … Gemini 3 Pro 0.665, EarlyModernNER 0.775; SER 0.331 vs 0.672; 6.5 GB GPU.
+6. **A knowledge graph stores entities and typed relationships.** Real fragments: spelling variants merged to Barbados; muscovado/molasses IS_VARIANT_OF sugar; 43,000 customs rows.
+7. **GraphRAG: the graph decides which documents to read.** ★ The thesis's graph-directed pipeline.
+8. **Results: 8 systems, 30 questions.** ★ Bar chart; KG+RAG worse than RAG (red); Improved Scratchpad 17.90. Method limits stated on the slide.
+9. **Why graph-directed retrieval plateaued near 15.7.** Four failure cards.
+10. **What worked: an agent that takes notes on each source.** ★ Improved Scratchpad flow; 63 of 70 head-to-head wins; cost 593 s per question.
+11. **The larger model asked the graph a narrower question.** ★ Before/fix: Claude Opus 4.7 (red, partial record) vs local Qwen (green, full record).
+12. **For thousands of documents, well-organised text is enough.** Semi-structured text; a facility's manuals and logbooks.
+13. **MCP and Linked Open Data.** Two `.def` boxes; CLS's real ROR and OpenAlex identifiers.
+14. **Demo: an agent searching CLS's own papers** through an OpenAlex MCP connector. *Needs:* the question, a run, and a saved fallback recording.
+15. **Which approach fits which collection size**, then handoff to Jim.
 
 ## 4. Jim: closing (10 min, 6–8 slides)
 

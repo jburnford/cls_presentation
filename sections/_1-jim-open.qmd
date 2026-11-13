@@ -1,63 +1,120 @@
-## Computational history's long minority
-
-[[TBD: Jim's framing. Computational history had a trajectory similar to computational physics but never took off the same way. Why: the skills barrier, the time cost, being tied to particular software. One or two sourced examples; no unsourced numbers.]]{.tbd}
-
-::: notes
-0–2. [TBD]
-:::
-
-## More, or better? {#fork .motion}
+## Physics took up computing; history lagged {#jim-minority .motion}
 
 ```{=html}
-<svg class="fork" viewBox="0 0 1100 460" role="img" aria-label="A path forks in two. Upper branch: more, meaning more documents, more maps, more output. Lower branch: better, meaning better questions, better-checked evidence, better arguments.">
-  <g data-at="300"><text class="stem" x="20" y="200">Computation that is now</text><text class="stem" x="20" y="237">cheap, fast and within reach</text></g>
-  <path class="draw" pathLength="1" data-at="1100" d="M20,260 L420,260" fill="none" stroke="#e9e4d8" stroke-width="3"/>
-  <path class="draw" pathLength="1" data-at="2200" d="M420,260 C530,260 540,70 670,70" fill="none" stroke="#9a958a" stroke-width="3"/>
-  <g data-at="3000"><text class="head more" x="695" y="86">More</text></g>
-  <g data-at="3400"><text class="item" x="697" y="126">more documents</text></g>
-  <g data-at="3700"><text class="item" x="697" y="156">more maps</text></g>
-  <g data-at="4000"><text class="item" x="697" y="186">more output</text></g>
-  <path class="draw" pathLength="1" data-at="4900" d="M420,260 C530,260 540,330 670,330" fill="none" stroke="#c9a227" stroke-width="3"/>
-  <g data-at="5700"><text class="head better" x="695" y="346">Better</text></g>
-  <g data-at="6100"><text class="item better" x="697" y="386">better questions</text></g>
-  <g data-at="6400"><text class="item better" x="697" y="416">better-checked evidence</text></g>
-  <g data-at="6700"><text class="item better" x="697" y="446">better arguments</text></g>
+<svg class="tl" viewBox="0 0 1180 250" role="img" aria-label="Two timelines from 1945 to 2026. Physics: Monte Carlo runs on ENIAC in 1948, then a thick line: computation becomes ordinary practice. History: a thin line with points in 1968, 1974, 1979 and 2016, ending in a question mark at 2026.">
+  <text class="track" x="0" y="79" data-at="300">Physics</text>
+  <circle class="pt" cx="168" cy="70" r="7" data-at="700"/>
+  <text x="168" y="44" data-at="700"><tspan class="yr">1948</tspan> Monte Carlo runs on ENIAC</text>
+  <path class="draw" pathLength="1" data-at="1300" d="M168,70 L1150,70" fill="none" stroke="#7fa7d6" stroke-width="9"/>
+  <text class="note" x="1150" y="44" text-anchor="end" data-at="2300">computation becomes ordinary practice</text>
+  <text class="track" x="0" y="179" data-at="2900">History</text>
+  <path class="draw" pathLength="1" data-at="3200" d="M420,170 L1150,170" fill="none" stroke="#c9a227" stroke-width="2.5"/>
+  <circle class="pt gold" cx="420" cy="170" r="6" data-at="3500"/><text class="yr" x="420" y="200" text-anchor="middle" data-at="3500">1968</text>
+  <circle class="pt gold" cx="495" cy="170" r="6" data-at="4400"/><text class="yr" x="495" y="200" text-anchor="middle" data-at="4400">1974</text>
+  <circle class="pt gold" cx="558" cy="170" r="6" data-at="5300"/><text class="yr" x="558" y="200" text-anchor="middle" data-at="5300">1979</text>
+  <circle class="pt gold" cx="1024" cy="170" r="6" data-at="6200"/><text class="yr" x="1024" y="200" text-anchor="middle" data-at="6200">2016</text>
+  <g data-at="7200"><circle cx="1150" cy="170" r="15" fill="#15161a" stroke="#c9a227" stroke-width="2.5"/><text x="1150" y="177" text-anchor="middle" style="font:400 20px Georgia,serif;fill:#c9a227">?</text><text class="yr" x="1128" y="142" text-anchor="end">2026: coding agents</text></g>
+  <line x1="130" y1="235" x2="1150" y2="235" stroke="#3a3b40" stroke-width="1" data-at="300"/>
+  <g data-at="300"><text class="tick" x="193" y="250" text-anchor="middle">1950</text><text class="tick" x="508" y="250" text-anchor="middle">1975</text><text class="tick" x="822" y="250" text-anchor="middle">2000</text><text class="tick" x="1137" y="250" text-anchor="middle">2025</text></g>
 </svg>
-<p class="motion-caption rise" data-at="7600">Both roads are now open. Which one will the discipline take?</p>
+<div class="tl-cards">
+  <div class="rise" data-at="3500"><b>1968</b><q>The historian of tomorrow will be a programmer, or he will not exist.</q><span class="cite">Emmanuel Le Roy Ladurie, French historian of climate and peasants</span></div>
+  <div class="rise" data-at="4400"><b>1974–76</b><i>Time on the Cross</i> applies econometrics to American slavery. Historians and economists contest its numbers and its inferences.<span class="cite">Fogel &amp; Engerman; <i>Reckoning with Slavery</i>, 1976</span></div>
+  <div class="rise" data-at="5300"><b>1979</b>Stone detects a “revival of narrative”, a reaction against social-science history.<span class="cite">Lawrence Stone, <i>Past &amp; Present</i> 85</span></div>
+  <div class="rise" data-at="6200"><b>2016</b>Digital history is stuck in a “perpetual future tense”, always describing what it could do.<span class="cite">Cameron Blevins, <i>Debates in the Digital Humanities</i></span></div>
+</div>
+<p class="motion-caption rise" data-at="8000">Both fields had the machines from the start. Physics made computation part of its method; in history it stayed a minority practice.</p>
 ```
 
 ::: notes
-2–4. Animated, about 8 seconds. The branch labels are draft wording; replace with your own. Leave the question open: as a journal editor, you haven't nailed this down yet. We come back to this fork at the end.
+0–2. Animated, about 8 seconds. This is a room of physicists: the physics track is one sourced fact, and they know the rest better than we do. The first Monte Carlo calculations ran on ENIAC in April–May 1948 (Metropolis and Ulam published the method in *JASA* 44, 1949). History had its moment too. Le Roy Ladurie wrote the programmer line in “L’historien et l’ordinateur”, *Le Nouvel Observateur*, 8 May 1968, reprinted in *Le territoire de l’historien* (1973), pp. 11–14; the English is a translation, and wordings vary. Cliometrics, economic history done with statistics and computers, peaked with Fogel and Engerman’s *Time on the Cross* (1974). Gutman’s *Slavery and the Numbers Game* (1975) and *Reckoning with Slavery* (David, Gutman, Sutch, Temin, Wright and Stampp, 1976) contested its numbers and its inferences. Stone’s essay (*Past & Present* 85, 1979) framed narrative’s revival as a reaction against social-science history. Blevins (2016) asked why digital history still talks about potential. Your framing: why physics and not history? The skills barrier, the cost in time, and being tied to particular software. [Jim: add or swap one example from your own experience.]
 :::
 
-## What's coming
+## What arrives at *Historical Methods* now {#jim-slop}
+
+[I co-edit *Historical Methods*, a journal for quantitative and digital history. The cost of writing has collapsed, and it shows in what arrives.]{.lede}
+
+::: {.defs}
+::: {.def}
+[Slop]{.def-term}
+A fluent, generated paper with no research behind it.
+:::
+
+::: {.def}
+[Semi-slop]{.def-term}
+A real question or real data, with analysis and prose that nobody has checked.
+:::
+:::
+
+[[TBD: Jim, one concrete, anonymised example, or a count you can share, e.g. submissions per year then and now, or the share desk-rejected.]]{.tbd}
 
 ::: {.cards}
-::: {.card .accent}
-[Jessica]{.kicker}
+::: {.card .warn}
+[Science met this first]{.kicker}
 
-#### Getting started
+More than **10,000** retraction notices in 2023, a record; over **8,000** from Hindawi journals, much of it attributed to paper mills.
 
-Skills flattening, and visualization as method.
-:::
-
-::: {.card}
-[Jacob]{.kicker}
-
-#### Knowledge graphs and search
-
-GraphRAG, and why agentic search has become useful.
-:::
-
-::: {.card .accent}
-[Jim]{.kicker}
-
-#### Better, not more
-
-What "better" might mean, from an editor's chair.
+[Van Noorden, *Nature* 624 (2023): 479–481]{.cite-line}
 :::
 :::
 
 ::: notes
-4–5. Hand over to Jessica.
+1–2. This is the editor's view, and it is the reason for the title. Give one example from the desk if you can, anonymised. The definitions are draft wording; replace them with your own. The science parallel is for this room: paper mills produced sham papers at scale before LLMs did, and Hindawi's special issues were the weak point. The retraction figures are from Richard Van Noorden, "More than 10,000 research papers were retracted in 2023: a new record", *Nature* 624, 479–481 (2023). [Check the exact Hindawi figure against the article.]
+:::
+
+## Writing got cheap; readers did not multiply {#jim-market .motion}
+
+```{=html}
+<div class="market">
+  <div class="mcol">
+    <span class="kicker rise" data-at="300">What it costs to produce</span>
+    <div class="mrow rise" data-at="700"><b>Code</b><span><s data-at="1500" class="strike-on">weeks of broken code</s> an afternoon</span></div>
+    <div class="mrow rise" data-at="1900"><b>Prose</b><span><s data-at="2700" class="strike-on">months of drafting</s> minutes for a fluent draft</span></div>
+    <div class="mfoot fall rise" data-at="3300">↓ collapsed</div>
+  </div>
+  <div class="mcol">
+    <span class="kicker rise" data-at="4000">What it costs to use</span>
+    <div class="mrow rise" data-at="4400"><b>Readers</b><span>the same number, with the same hours</span></div>
+    <div class="mrow rise" data-at="4900"><b>Review</b><span>a referee still reads every page and checks every source</span></div>
+    <div class="mfoot flat rise" data-at="5500">→ unchanged</div>
+  </div>
+</div>
+<p class="motion-caption rise" data-at="6400">There is no market for a ton more written history. The speed is only worth having if it buys better work.</p>
+<p class="mq rise" data-at="7400">What does better look like? Two examples, then the evidence from one large project.</p>
+```
+
+::: notes
+2–4. Animated, about 7 seconds. This is the turn of the talk. Production has collapsed in cost: code (Jessica went from never using a command line to interactive maps in under a month) and prose (a fluent draft takes minutes). Demand has not moved: readers, referees and journal pages are the same as before. More history, at this point, mostly costs other people time. So the question for the rest of the hour is what the speed should be spent on. [Jim: the "weeks" and "months" are illustrative; say them in your own terms.]
+:::
+
+## What's coming {#jim-coming}
+
+::: {.cards}
+::: {.card .accent}
+[Jessica Jack]{.kicker}
+
+#### What became possible
+
+From no command line to interactive maps of Saskatchewan's railway towns. The speed spent on asking new questions.
+:::
+
+::: {.card}
+[Jacob Polay]{.kicker}
+
+#### From GraphRAG to agentic search
+
+The speed spent on finding and ranking sources, so that a person reads the right ones.
+:::
+
+::: {.card .accent}
+[Jim Clifford]{.kicker}
+
+#### Better, not more
+
+One large project, and what separates research from slop.
+:::
+:::
+
+::: notes
+4–5. Hand over to Jessica. Card wording is taken from their own material (Jessica's working paper title, Jacob's section); check that it still matches their final slides.
 :::

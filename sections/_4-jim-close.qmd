@@ -6,58 +6,127 @@
 0.
 :::
 
-## Two things combined
+## Where the work went {#jim-converge .motion}
 
-[[TBD: skills flattening (Jessica) plus knowledge organization (Jacob). Researchers can now build and query their own structured sources.]]{.tbd}
+```{=html}
+<div class="flow" style="font-size:0.95em;margin-top:1.2em">
+  <div class="node rise" data-at="300"><b>Jessica</b><span>a question → a map → a better question</span></div>
+  <div class="arrow rise" data-at="900">→</div>
+  <div class="node after wide rise" data-at="2400" style="border-top-width:4px"><b>The historian's judgement</b><span>reading, checking, deciding what counts</span></div>
+  <div class="arrow rise" data-at="1700">←</div>
+  <div class="node blue rise" data-at="1100"><b>Jacob</b><span>a corpus → a search → ranked sources</span></div>
+</div>
+<blockquote class="rise" data-at="3400" style="font-size:1.15em;margin-top:1.4em;padding:0.6em 0.9em">The analytical work migrated from programming to history.</blockquote>
+<p class="caption rise" data-at="3400">Jessica Jack, “What Became Possible”, <i>Working Papers in Critical Search</i> 003 (2026)</p>
+<p class="motion-caption rise" data-at="4400" style="font-size:0.85em;margin-top:1em">The agent writes the code. What's left is the part that was always the discipline.</p>
+```
 
 ::: notes
-0–1. [TBD]
+0–1. Animated, about 4 seconds. Two talks, one result: both pipelines end at a person reading sources and deciding. The quotation is from Jessica's working paper (doi:10.5281/zenodo.20706174). For this room: the same is true of a beamline. Software runs the analysis, and someone still decides what the data can support.
 :::
 
-## Breaking silos
+## Imperial Careers: 85 volumes, read in full {#jim-imperial .motion}
 
-[[TBD: a few years ago, a task we knew a computer could do meant weeks of broken code and Stack Overflow, so projects were deferred.]]{.tbd}
+```{=html}
+<div class="p2a">
+  <div class="rise" data-at="300"><img src="images/jim-col1913-pp561-562.webp" alt="Two facing pages of the Colonial Office List for 1913: dense columns of abbreviated biographies"><span class="lbl"><i>Colonial Office List</i>, 1913, pp. 561–562: about forty careers on two pages</span></div>
+  <div class="arrow rise" data-at="1100">→</div>
+  <div class="rise" data-at="3900"><img src="images/jim-atlas.png" alt="The Imperial Careers atlas: arcs between colonial postings across a dark world map"><span class="lbl">The Imperial Careers atlas: arcs join an official's recorded postings, in order</span></div>
+</div>
+<div class="stats" style="margin-top:0.5em">
+  <div class="stat rise" data-at="1500"><span class="num">85</span><span class="lbl">volumes OCR'd, 1867–1966, plus the <i>India Office List</i></span></div>
+  <div class="stat rise" data-at="2000"><span class="num">46,926</span><span class="lbl">person records across the two Lists</span></div>
+  <div class="stat rise" data-at="2500"><span class="num">305,164</span><span class="lbl">dated career events</span></div>
+  <div class="stat rise" data-at="3000"><span class="num">211,581</span><span class="lbl">events linked to a place in Wikidata</span></div>
+</div>
+<div class="ran rise" data-at="4700"><b>How it ran:</b> Claude Code helped write the pipeline; an open model (Qwen) read the entries. 30,496 <i>India Office List</i> biographies took <b>8.24 hours overnight</b> on a desktop GPU. On a hosted service, the same job is about <b>$22–45</b> in model charges.</div>
+```
 
 ::: notes
-1–2. [TBD]
+1–3. Animated, about 5 seconds. Gloss for this room: the *Colonial Office List* was an annual printed directory of the British colonial service, and its biographies compress a whole career into a paragraph. OCR (optical character recognition) turned the page images into text. Wikidata is an open, linked database in which each place or person has a stable identifier. Counts are from the 4 September 2026 build. Person counts are resolved within each List, so their sum includes people who served in both. The India Office run used Qwen3.6 served by vLLM on an NVIDIA DGX Spark. The hosted figure is worked from measured tokens: about $22 at OpenRouter's 8 October promotional price for Qwen3.8-27B, and about $45 at the regular price. Arcs connect recorded postings, not observed journeys. [Jim: say how long this project waited, and what made it possible now.]
 :::
 
-## {#research-assistant}
+## {#jim-atlas-video .video-slide background-color="#15161a"}
 
-[A research assistant who has read everything but can't remember where it read it.]{.big}
+```{=html}
+<video data-autoplay controls muted playsinline preload="metadata"
+       aria-label="Animated atlas of imperial career postings">
+  <source src="https://jimclifford.ca/col_matching/combined_mobility.mp4" type="video/mp4">
+  Your browser cannot play this video. Use the direct link below.
+</video>
+<p class="video-link"><a href="https://jimclifford.ca/col_matching/combined_mobility.mp4" target="_blank" rel="noopener">Open the video directly</a> · Imperial Careers, earlier atlas export</p>
+```
 
 ::: notes
-2–3. Useful, and the reason sources and checking still matter.
+3–4. A 56-second video; talk over it or cut it short. Each arc is one official moving between recorded postings across the Colonial and India Office services. This is an earlier export, and its caption counts are older than the September build on the previous slide. Download the MP4 beforehand in case the network fails.
 :::
 
-## Deferred projects, now done
+## From memory, 0 of 16 identifiers were right {#jim-recall .motion}
 
-[[TBD, animated before/after: something shelved, and what it became. Imperial Careers is a candidate.]]{.tbd}
+```{=html}
+<blockquote class="rise" data-at="300" style="margin-bottom:0.5em">A research assistant who has read everything, but can't remember where it read it.</blockquote>
+<div class="recall">
+  <span class="h">Named in the entry</span><span class="h">Identifier given</span><span class="h">Which is, in Wikidata</span><span class="h"></span>
+  <span class="grp rise" data-at="900">From memory · Gemini 3.8 Flash, no tools</span>
+  <span class="ent rise" data-at="1300">Richard James Wilkinson, colonial governor</span><span class="qid rise" data-at="1800">Q7326830</span><span class="is rise" data-at="2300">Thoth, the Egyptian deity</span><span class="rise" data-at="2700"><span class="bad">✗</span></span>
+  <span class="ent rise" data-at="3200">Charles Frederic Belcher, lawyer</span><span class="qid rise" data-at="3700">Q5077864</span><span class="is rise" data-at="4200">a reptile species <i>(his item is Q5077823: 41 away)</i></span><span class="rise" data-at="4600"><span class="bad">✗</span></span>
+  <span class="grp rise" data-at="5300">With retrieval · Claude Opus 5.5, web search</span>
+  <span class="ent rise" data-at="5700">King George V</span><span class="qid rise" data-at="6200"><s>Q269</s> → Q269412</span><span class="is rise" data-at="6700">first guess: Tashkent. It read the page, corrected itself, and left the note “Not Q269”</span><span class="rise" data-at="7200"><span class="good">✓</span></span>
+</div>
+<div class="stats rise" data-at="8000" style="margin-top:0.6em">
+  <div class="stat"><span class="num">0 of 16</span><span class="lbl">person identifiers right from memory, for 20 printed entries</span></div>
+  <div class="stat"><span class="num">16 of 16</span><span class="lbl">right with web retrieval, same entries</span></div>
+  <div class="stat"><span class="num">7 of 16</span><span class="lbl">wrong answers within a few thousand of the right number</span></div>
+</div>
+<p class="motion-caption rise" data-at="8800">It knew <i>who</i>. It did not know the number. This is how semi-slop gets made: fluent output nobody checked.</p>
+```
 
 ::: notes
-3–5. [TBD]
+4–6. Animated, about 9 seconds. The line is from our planning notes. The rows are a saved test from 7 October 2026: twenty long Colonial Office biographies, with the prompt "ground the people and places to Wikidata IDs". Gemini 3.8 Flash without tools gave 16 person identifiers, and none was right. It wrote the correct name and description every time; the numbers were near misses, typical of a number seen near a name and reconstructed wrongly. Among the places, it returned the Cape Colony as an Austrian goalkeeper and Joseph Chamberlain as a Swiss footballer. Claude Opus 5.5 with web search reported only identifiers it had read on a page: 16 of 16. The models, tools and coverage differ, so this is not a model ranking. It is the reason the project retrieves every identifier and checks it. For physicists: a value from memory without its provenance is a measurement without a calibration. Source: the JHU workshop repository, outputs/ground-test/ (gemini-scoring.md, opus-scoring.md).
 :::
 
-## More vs better, revisited
+## Slop, semi-slop and research: what differs {#jim-differs .motion}
 
-[[TBD, animated: return to the opening fork. Better means checked against the source, honest about coverage, decisions recorded with their evidence.]]{.tbd}
+```{=html}
+<div class="differs">
+  <span class="h"></span><span class="h">Slop</span><span class="h">Semi-slop</span><span class="h good-h">Research</span>
+  <span class="k rise" data-at="400">Sources</span><span class="rise" data-at="700">none, or invented</span><span class="rise" data-at="1000">real, but not read</span><span class="r rise" data-at="1300">read, cited, findable</span>
+  <span class="k rise" data-at="1900">Data</span><span class="rise" data-at="2200">none</span><span class="rise" data-at="2500">real, unchecked</span><span class="r rise" data-at="2800">sampled, checked, coverage stated</span>
+  <span class="k rise" data-at="3400">Who decided</span><span class="rise" data-at="3700">the model</span><span class="rise" data-at="4000">mostly the model</span><span class="r rise" data-at="4300">the historian, with reasons recorded</span>
+  <span class="k rise" data-at="4900">Rerun it?</span><span class="rise" data-at="5200">no</span><span class="rise" data-at="5500">rarely</span><span class="r rise" data-at="5800">code, data, prompts and model version shared</span>
+</div>
+<p class="motion-caption rise" data-at="6700">The tools are the same in all three columns. What differs is the checking, and that still takes a person's time.</p>
+```
 
 ::: notes
-5–7. [TBD]
+6–8. Animated, about 7 seconds. Draft wording: make it yours. The point for this room is that none of these rows is new to experimental science: provenance, sampling, calibration, who made the call, reproducibility. What is new is that history now needs them, because the writing no longer costs anything. Imperial Careers sits in the right-hand column: every merge of two records keeps its reason; person links cover 1,066 of 27,526 Colonial Office people (3.9%), and we say so; when the atlas put an official in the wrong Victoria, the fix went back into the pipeline and the affected records were rebuilt and checked. Close on the question you haven't settled as an editor: how a journal rewards the right-hand column when the left-hand one is free to produce.
 :::
 
-## The editor's view
+## Questions {#jim-questions}
 
-[[TBD: what a journal should ask of AI-assisted computational history. An open question, not an answer.]]{.tbd}
+::: {.people}
+::: {.person}
+[Jessica Jack]{.who}
 
-::: notes
-7–9. [TBD]
+[What Became Possible](https://working-papers-in-critical-search.github.io/paper-003-iterative-visualization/): the working paper, with live maps
 :::
 
-## Questions
+::: {.person}
+[Jacob Polay]{.who}
 
-[[TBD: three names, QR code to the deck, a link to each project.]]{.tbd}
+[TBD: Jacob's link]{.tbd}
+:::
+
+::: {.person}
+[Jim Clifford]{.who}
+
+[Imperial Careers atlas](https://jimclifford.ca/col_matching/)\
+[Working Papers in Critical Search](https://working-papers-in-critical-search.github.io/home/)
+:::
+:::
+
+[[TBD: QR code to this deck once GitHub Pages is on.]]{.tbd}
 
 ::: notes
-9–10.
+9–10. Take questions. Jacob should supply his own link.
 :::

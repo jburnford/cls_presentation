@@ -1,0 +1,181 @@
+# CLS presentation: how this deck is built
+
+This repository holds a slide presentation built the same way as the Johns Hopkins workshop deck (*Cleaning, Structuring and Grounding Historical Data*, 15 October 2026). That deck is the reference implementation:
+
+- GitHub: `jburnford/imperial-careers-workshop` (published at jimclifford.ca/imperial-careers-workshop)
+- Local copy: `/home/jic823/johnhopkins`
+
+When a pattern below is unclear, open the matching file there (`slides.qmd`, `slides.scss`, `slides-motion.html`, `workshop.js`, `scripts/`) and copy it. Don't invent a new system.
+
+## The talk (fill in)
+
+| | |
+|---|---|
+| Title | TBD |
+| Venue, date, time | TBD |
+| Length | TBD minutes, plus questions |
+| Audience | TBD (say their level with computational methods, and whether some are on Zoom) |
+| Core argument | TBD (one sentence) |
+| Data/sources | TBD |
+| Public URL | TBD (GitHub Pages from `docs/`) |
+
+## Stack
+
+- **Quarto + reveal.js.** The deck is `slides.qmd`, rendered to `docs/slides.html`. Speaker notes go in `::: notes` blocks in the same file.
+- **Slide size** 1280 × 720, `margin: 0.08`, `transition: fade`, slide numbers on, footer showing the public URL.
+- **Animations** are plain HTML/CSS/SVG driven by a small script (`slides-motion.html`). There are no animation libraries and no video for explainers. See *Animation system* below.
+- **Optional companion site.** For a workshop, `index.qmd` and step pages render into the same `docs/` as a Quarto website. For a plain talk, a single `slides.qmd` and a short `index.qmd` are enough.
+- **Hosting.** GitHub Pages serves `main` / `docs/`. `quarto render` deletes `docs/.nojekyll`, so recreate it every time.
+
+Front matter to start from:
+
+```yaml
+---
+title: "TBD"
+subtitle: "TBD"
+author: "Jim Clifford, University of Saskatchewan"
+date: "TBD"
+date-format: "D MMMM YYYY"
+format:
+  revealjs:
+    theme: [default, slides.scss]
+    slide-number: true
+    footer: "TBD public URL"
+    width: 1280
+    height: 720
+    margin: 0.08
+    link-external-newwindow: true
+    transition: fade
+    background-transition: fade
+    include-after-body: [workshop-responsive.html, slides-title-qr.html, slides-motion.html]
+---
+```
+
+## Layout
+
+| Path | What it is |
+|---|---|
+| `slides.qmd` | The deck, with speaker notes |
+| `slides.scss` | Theme and component classes (copy the JHU file first, then cut what isn't used) |
+| `slides-motion.html` | The animation driver (below) |
+| `slides-title-qr.html` | QR code to the public URL on the title slide, clickable |
+| `workshop.js`, `workshop-responsive.html` | Touch-screen reading view: phones and tablets up to 1024 px get a scrolling page instead of tiny slides; `?present` forces slides |
+| `images/`, `media/` | Screenshots, scans, maps (`world-land.svg` for SVG maps), video fallbacks |
+| `scripts/check_*.py` | Playwright checks: layout, overflow, reading view |
+| `scripts/export_slides.py` | PowerPoint (animated slides embedded as MP4) and a speaker-notes PDF |
+| `exports/` | Export output; git-ignored |
+| `docs/` | Rendered site; committed for Pages |
+
+`.gitignore`: `/.quarto/`, `/_site/`, `*_files/`, `__pycache__/`, `.claude/`, `/exports/`.
+
+## Look
+
+Dark theme, matched to the project's own visualisations. Keep these values:
+
+| Role | Colour |
+|---|---|
+| Background | `#15161a`; panels `#1d1e23`; rules `#3a3b40` |
+| Body text | `#e9e4d8`; headings `#f3ead3` in Georgia |
+| Accent (key term, highlight) | gold `#c9a227` |
+| Secondary | blue `#7fa7d6`; links `#9cc0ea` |
+| Before / error | `#c0674f` (`#e08a74` for text) |
+| After / fixed | `#79a868` (`#9fcf8c` for text) |
+| Muted | `#9a958a` |
+
+Root font size 34px. Headings and source quotations are set in a serif; UI labels in a system sans.
+
+Reusable components, all defined in the JHU `slides.scss`:
+
+- `.flow` > `.node` + `.arrow`: a pipeline drawn as boxes and arrows. `.node.blue`, `.before`, `.after` and `.wide` are variants; `.loopback` draws the return path.
+- `.def` with `.def-term`: **"What is X?" definition boxes.** Gloss every technical term where it first appears. `.defs` sets two of them side by side.
+- `.cards` > `.card`: parallel options (with `.kicker`, `h4`, `.fact`).
+- `.stats` > `.stat` (`.num`, `.lbl`): headline numbers.
+- `blockquote` for printed source text, `.source-meta` for provenance, and `.caption` under images.
+- Inline highlights: `.gold`, `.blue`, `.muted`, `.small`, `mark`.
+
+## Animation system
+
+Put `.motion` on a slide. Inside a raw HTML block, give each element `data-at="ms"`. The script adds `.on` to that element that many milliseconds after the slide opens, and the CSS animates the change.
+
+```markdown
+## Title {#slide-id .motion}
+
+```{=html}
+<div class="motion-card rise" data-at="400">…</div>
+<span class="mk" data-at="1200">highlighted phrase</span>
+<svg class="motion-map" viewBox="…"><path class="draw" pathLength="1" data-at="2000" d="…"/></svg>
+<p class="motion-caption rise" data-at="6000">One-line takeaway.</p>
+```
+```
+
+Effect classes:
+
+| Class | `.on` does |
+|---|---|
+| (none) | fades in |
+| `.rise` | fades in and rises 14px |
+| `.mk` | highlights text in place (gold background); `.mk.co` blue; `.mk.target` underline; `.mk.diff` red outline for a disagreement |
+| `.draw` (SVG `path`, `pathLength="1"`) | draws the line |
+| `.exit` | fades out |
+| `.strike` / `.win` | strikes out a rejected row / marks the chosen row green |
+
+Behaviour, all handled by `slides-motion.html` (copy it verbatim):
+
+- Every motion slide gets a **↻ Replay** button.
+- **Reduced motion** (for example, Windows with animations off) shows the final frame, and the button reads **▶ Play animation**. Opening the deck with `?motion` autoplays anyway, so link the deck as `slides.html?motion` from the site and presenter notes.
+- **Print/PDF and the phone reading view** show the final frame. Every animated slide must therefore read correctly as a static slide.
+
+Core CSS (the full set is in the JHU `slides.scss`, lines ~170–206 and 249–266):
+
+```scss
+.reveal section.motion [data-at] { opacity: 0; transition: opacity .6s ease, transform .6s ease; }
+.reveal section.motion .rise[data-at] { transform: translateY(14px); }
+.reveal section.motion [data-at].on { opacity: 1; transform: none; }
+.reveal section.motion .mk[data-at] { opacity: 1; border-radius: 3px; padding: 0 .1em; transition: background-color .5s, color .5s; }
+.reveal section.motion .mk[data-at].on { background: #c9a227; color: #15161a; }
+.reveal section.motion path.draw[data-at] { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.5s ease-in-out; }
+.reveal section.motion path.draw[data-at].on { stroke-dashoffset: 0; }
+.reveal section.motion.motion-reset [data-at] { transition: none !important; }
+```
+
+### When to animate
+
+Use motion when the slide shows a **sequence, a change of state, or a flow**: a printed clause becoming a record, a record landing on a map, an error and its fix, a pipeline stage passing work along. Don't animate a list just to have something move. JHU patterns worth reusing:
+
+- **Source → structure → map.** Raw OCR text on the left; phrases highlight (`.mk`) in step with points and arcs appearing on an SVG map on the right (*Two Lists, one career, mapped*).
+- **Rules vs reality.** Rows of input → output → verdict appear one at a time, then a score strip (*Real rules: mostly right, quietly wrong*).
+- **Before → fix.** A wrong value in the before colour, the evidence, then the corrected value in the after colour, with a log line (*Balmer's ditto*, *Which Victoria?*).
+- **Candidate filter.** A list of candidates; rejected rows `.strike`, the chosen row `.win` (*QLever*).
+
+Timing: about 8–15 seconds per slide; first element at 300–800 ms; steps 500–1,200 ms apart; a `.motion-caption` takeaway last. The final frame should hold while you talk.
+
+## Writing the slides
+
+- **Audience first.** Gloss jargon where it first appears (a `.def` box), and keep a glossary if there's a companion site.
+- **Fill the slide with substance.** Use a diagram, a real source excerpt or a worked example, not three lines of big text. Equally, one idea per slide; move detail to speaker notes or supporting pages.
+- **Real material only.** Use real scans, real OCR and real pipeline output. Cite the file or record ID in the notes. Never invent a number, date, name or identifier; every figure must trace to a file.
+- **Honest rates.** Say how a sample was selected, and never present a hand-picked set as a rate. Give measured cost and throughput (where it ran, how long it took, what it cost).
+- **Errors are shown as completed corrections.** Show the found error, the source check, the fix, the rebuilt result and the check across affected records. Label old screenshots as *before*.
+- **Speaker notes on every slide.** Start with the minute range (`4–5.`), then what to say, where each number comes from, and one question for the room if there is one.
+- **Interaction.** Use QR codes and clickable URLs for anything the audience opens. Keep at most one network-dependent demo, with a saved fallback.
+- **Video.** For a background video slide, use `<video data-autoplay controls muted playsinline poster=…>` with an MP4 and a WebM fallback and a direct link. Don't also set the poster as a reveal background image.
+
+## Build, check, export
+
+```bash
+quarto render
+touch docs/.nojekyll
+python3 scripts/check_workshop_responsive.py   # phone/tablet/desktop, overflow, reading view
+python3 scripts/check_workshop_browser.py      # presentation layout
+python3 scripts/export_slides.py               # exports/*.pptx and *-notes.pdf
+```
+
+Copy the check and export scripts from the JHU repo and update their paths, file names and slide IDs. They need `playwright`, `python-pptx`, `lxml` and `ffmpeg`. Ask Jim to install any missing packages himself (`python3 -m pip install --break-system-packages …`).
+
+**Before saying a slide is done:** render it and take Playwright screenshots at 1280 × 720 of each changed slide, including the final frame of any motion slide. Look at them for overflow, overlap and readability from the back of a room. Then commit.
+
+## Working with Jim
+
+- Propose the cut-down version first. When things sprawl, go back to the core argument.
+- Commit in small steps, with messages that say what changed for the audience (e.g. "Open with the printed page"). Jim reviews the rendered deck before anything is published.
+- Push only when asked.

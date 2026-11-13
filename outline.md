@@ -34,25 +34,29 @@ General and positive. The theme is skills flattening: no longer gated by other p
 11. **What still needed judgement.** Where did a human have to decide, check or say no? This sets up Jim's close.
 12. **Handoff to Jacob.**
 
-## 3. Jacob: knowledge graphs, GraphRAG, and agentic search (10–15 min, 10–15 slides)
+## 3. Jacob: knowledge graphs, GraphRAG, and agentic search (15 min, 14 slides)
 
-More specific and technical. Gloss every term where it first appears.
+Drafted in `sections/_3-jacob.qmd`. More specific and technical; every term gets a `.def` box where it first appears. Minute ranges are in the speaker notes.
 
-1. **Divider:** Jacob, plus the project, especially the technical documentation use case.
-2. **The problem.** A large body of text, and a question that needs facts from many places in it.
-   *Needs:* the real corpus and a real example question.
-3. **What is a knowledge graph?** A `.def` box, then a small real fragment: entities as nodes, relationships as edges. Knowledge graphs organize material and give access to it.
-4. **What is a vector database?** ★ Text becomes points in space; a question finds its nearest neighbours by cosine similarity. `.def` boxes for *embedding* and *cosine similarity*.
-5. **Where cosine similarity falls short.** ★ A question that retrieves passages which *sound* similar but don't hold the fact, or which misses a fact that needs two hops to reach.
-   *Needs:* a real example of the failure.
-6. **What is GraphRAG?** ★ A flow: question → retrieve from the graph and the text → hand to the model → answer. A `.def` box for *RAG* (retrieval-augmented generation).
-7. **Why it doesn't always fulfil its promise.** The cost of building the graph, extraction errors, and the upkeep.
-   *Needs:* Jacob's experience.
-8. **What changed: agentic search.** ★ A loop: the model searches by keyword → reads → refines the query → searches again → answers with sources. A `.def` box for *agent* and *MCP* (a standard way to give a model tools such as a search box or a database).
-9. **Semi-structured text is often enough.** Models are now good enough at agentic search that you may not need a whole system.
-10. **When each one fits.** A three-column `.cards` slide: agentic search over semi-structured text (small to medium corpora); vector search (fuzzy recall); knowledge graph or GraphRAG (millions of documents, exact relationships, reuse across projects).
-11. **Knowledge graphs still matter.** Why: organization, exact queries, provenance, reuse.
-12. **Handoff to Jim.**
+1. **Divider:** Jacob; knowledge graphs, GraphRAG and agentic search.
+2. **Too much text, not enough reading time.** `.stats`: ~20,000 documents, ~2 million pages (MA corpus), 250M+ works in OpenAlex.
+   *Needs:* real spelling variants; one real research question.
+3. **What is a knowledge graph?** `.def` + a `.flow` of entity types (person → ship → commodity → place).
+   *Needs:* one real fragment from the graph, with document ID.
+4. **What is a vector database?** ★ `.def` boxes for *embedding* and *cosine similarity*; chunk → embed → nearest neighbours.
+5. **Where cosine similarity falls short.** ★ Four `.cards`: mentions ≠ about; no aggregation; chunks lose context; two-hop facts.
+   *Needs:* a real failure example from the thesis.
+6. **What is GraphRAG?** ★ `.def` for *RAG*; extract → graph → communities → summaries → answer.
+7. **What I built.** olmOCR → EarlyModernNER → knowledge graph → GraphRAG retrieval (Improved Scratchpad) → historian. `.def` for *NER*.
+   *Needs:* one headline result and how it was measured.
+8. **Why it doesn't always fulfil its promise.** Cost (~1,000× a vector index, Microsoft's LazyGraphRAG figures), compounding errors, generated summaries, upkeep. Reframe: search and ranking, not answers.
+   *Needs:* Jacob's own experience of each.
+9. **What changed: agentic search.** ★ `.def` for *agent*; search → read → refine loop.
+10. **Semi-structured text is often enough.** Good documentation practice is now good AI practice.
+11. **MCP: one plug for many sources.** `.def` for *MCP*; files, archive, OpenAlex, Wikidata, a knowledge graph as one tool among several.
+12. **Linked Open Data.** `.def`; Wikidata, OpenAlex/DOIs, ORCID, ROR. Don't rebuild the world's graph; link to it.
+13. **Searching millions: what fits where.** Three `.cards` by scale: agentic search (thousands); an index the agent calls through MCP (millions); Linked Open Data (hundreds of millions).
+14. **Knowledge graphs still matter**, then handoff to Jim. Organization, exact queries, provenance, reuse.
 
 ## 4. Jim: closing (10 min, 6–8 slides)
 

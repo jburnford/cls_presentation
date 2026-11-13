@@ -1,155 +1,428 @@
 ## {#jacob-divider}
 
-[Jacob [TBD: surname]<span class="gold">Knowledge graphs, GraphRAG and agentic search</span>]{.divider-name}
+[Jacob Polay<span class="gold">Knowledge graphs, GraphRAG and agentic search</span>]{.divider-name}
 
 ::: notes
-0. [TBD: the project, especially the technical documentation use case.]
+0. Introduce myself in one sentence: historian of the early modern Atlantic who ended up building search tools because the archive was too big to read. This section is the technical one; every term gets defined as it comes up.
 :::
 
-## The problem
+## Too much text, not enough reading time {#jacob-problem}
 
-[[TBD: the real corpus, and one real question that needs facts from many places in it.]]{.tbd}
+::: {.stats}
+::: {.stat}
+[~20,000]{.num}
+[printed documents in my MA corpus]{.lbl}
+:::
+::: {.stat}
+[~2 million]{.num}
+[pages, 1614 to 1810]{.lbl}
+:::
+::: {.stat}
+[250M+]{.num}
+[scholarly works listed in OpenAlex]{.lbl}
+:::
+:::
+
+- Keyword search finds only the words you already thought to type
+- Early modern spelling is unstable: [[TBD: three real variants of one commodity from the corpus]]{.tbd}
+- The question I care about needs facts scattered across thousands of documents: [[TBD: one real research question, e.g. on ginger imports]]{.tbd}
 
 ::: notes
-0–1. [TBD]
+0–1. Corpus figures are from the MA thesis, *Loud Yet Invisible*. The OpenAlex figure is the size of its open catalogue of scholarly works (various MCP connector listings give 240 to 270 million; say "over 250 million").
+
+The problem is not specific to history. Any collection big enough that no one has read all of it has it: logbooks, manuals, proposals, papers. The question for this section: how do we get a machine to help us find things in a collection this size, and what actually works now?
 :::
 
-## What is a knowledge graph?
+## What is a knowledge graph? {#jacob-kg}
 
 ::: {.def}
-[Knowledge graph]{.def-term}
-Facts stored as things (nodes) and the relationships between them (edges), so they can be organized and queried exactly.
-:::
-
-[[TBD: a small real fragment from your graph.]]{.tbd}
-
-::: notes
-1–2. [TBD]
-:::
-
-## What is a vector database?
-
-::: {.defs}
-::: {.def}
-[Embedding]{.def-term}
-A passage of text turned into a list of numbers: a point in space, placed near passages with similar meaning.
-:::
-
-::: {.def}
-[Cosine similarity]{.def-term}
-How close two of those points are in direction. A search returns the passages nearest the question.
-:::
-:::
-
-[[TBD, animated: passages become points; a question finds its nearest neighbours.]]{.tbd}
-
-::: notes
-2–3. [TBD]
-:::
-
-## Where cosine similarity falls short
-
-[[TBD, animated: a real question that retrieves passages which sound similar but don't hold the fact, or that misses a fact two hops away.]]{.tbd}
-
-::: notes
-3–4. [TBD]
-:::
-
-## What is GraphRAG?
-
-::: {.def}
-[RAG: retrieval-augmented generation]{.def-term}
-Find relevant material first, then give it to a language model to answer from. GraphRAG retrieves from a knowledge graph as well as the text.
+[What is a knowledge graph?]{.def-term}
+A store of **things** (people, ships, places, goods) and the **relationships** between them, written as small statements: *this* is connected to *that*, in *this* way. The relationships are explicit, so you can follow them and count them.
 :::
 
 ```{=html}
 <div class="flow">
-  <div class="node"><b>Question</b><span>[TBD: example]</span></div>
+  <div class="node"><b>Person</b><span>a merchant</span></div>
   <div class="arrow">→</div>
-  <div class="node blue"><b>Retrieve</b><span>from the graph and the text</span></div>
+  <div class="node blue"><b>Ship</b><span>owned by the merchant</span></div>
   <div class="arrow">→</div>
-  <div class="node blue"><b>Model reads</b><span>only what was retrieved</span></div>
+  <div class="node"><b>Commodity</b><span>carried by the ship</span></div>
   <div class="arrow">→</div>
-  <div class="node"><b>Answer</b><span>with sources</span></div>
+  <div class="node blue"><b>Place</b><span>where it was grown, where it landed</span></div>
+</div>
+```
+
+[[TBD: replace the types above with one real fragment from the graph: a named merchant, ship, commodity and port, with the document ID.]]{.tbd .small}
+
+::: notes
+1–2. A knowledge graph organizes material and gives access to it. Once facts are stored this way you can ask questions that keyword search cannot: which merchants are connected to a commodity through any ship, or which ports sit between a colony and an English harbour.
+
+[TBD: talk through the real fragment and where it came from.]
+:::
+
+## What is a vector database? {#jacob-vectors .motion}
+
+::: {.columns}
+::: {.column width="46%"}
+::: {.def}
+[What is an embedding?]{.def-term}
+A passage of text turned into a long list of numbers that stands for its meaning. Passages about similar things land near each other.
+:::
+::: {.def}
+[What is cosine similarity?]{.def-term}
+How closely two of those lists point the same way. The question is embedded too, and its nearest neighbours are handed to the model.
+:::
+:::
+::: {.column width="54%"}
+```{=html}
+<svg class="motion-map" viewBox="0 0 420 290" role="img" aria-label="Schematic: passages as points in three clusters; a question lands in one cluster and its three nearest neighbours are highlighted">
+<text x="40" y="22">passages on topic A</text><text x="285" y="22">topic B</text><text x="165" y="195">topic C</text>
+<circle class="pt" cx="70" cy="60" r="7" data-at="300"/><circle class="pt" cx="110" cy="85" r="7" data-at="360"/><circle class="pt" cx="85" cy="120" r="7" data-at="420"/><circle class="pt" cx="140" cy="55" r="7" data-at="480"/><circle class="pt" cx="60" cy="150" r="7" data-at="540"/><circle class="pt" cx="300" cy="70" r="7" data-at="600"/><circle class="pt" cx="340" cy="100" r="7" data-at="660"/><circle class="pt" cx="320" cy="140" r="7" data-at="720"/><circle class="pt" cx="360" cy="60" r="7" data-at="780"/><circle class="pt" cx="200" cy="220" r="7" data-at="840"/><circle class="pt" cx="240" cy="250" r="7" data-at="900"/><circle class="pt" cx="170" cy="260" r="7" data-at="960"/><circle class="pt" cx="280" cy="230" r="7" data-at="1020"/>
+<path class="draw" pathLength="1" data-at="2600" d="M320,105 L340,100" stroke="#c9a227" stroke-width="2.5" fill="none"/><path class="draw" pathLength="1" data-at="2850" d="M320,105 L320,140" stroke="#c9a227" stroke-width="2.5" fill="none"/><path class="draw" pathLength="1" data-at="3100" d="M320,105 L300,70" stroke="#c9a227" stroke-width="2.5" fill="none"/><circle class="pt gold" cx="340" cy="100" r="8" data-at="3500"/><circle class="pt gold" cx="320" cy="140" r="8" data-at="3700"/><circle class="pt gold" cx="300" cy="70" r="8" data-at="3900"/>
+<g data-at="1900" class="rise"><rect x="311" y="96" width="18" height="18" transform="rotate(45 320 105)" fill="#f3ead3"/><text x="336" y="133" class="yr">your question</text></g>
+</svg>
+<p class="caption">Schematic, not real data.</p>
+<p class="motion-caption rise" data-at="4400" style="font-size:0.6em;color:#f3ead3">Nearest in meaning, not necessarily the answer.</p>
+```
+:::
+:::
+
+::: notes
+2–3. This is what most "chat with your documents" tools do under the hood. It is good at fuzzy recall: you do not need the exact words. Animated: passages appear as points, the question lands, and lines draw to its three nearest neighbours. Schematic, not real data; say so.
+:::
+
+## Where cosine similarity falls short {#jacob-cosine}
+
+::: {.cards}
+::: {.card .warn}
+[Similar is not useful]{.kicker}
+
+#### Mentions ≠ about
+
+A passage that mentions a commodity is not a passage about the trade in it.
+:::
+::: {.card .warn}
+[No aggregation]{.kicker}
+
+#### "How many?"
+
+There is no single passage whose meaning is a total.
+:::
+::: {.card .warn}
+[Lost context]{.kicker}
+
+#### Chunks forget
+
+Cutting text into chunks strips who wrote it, when, and about what.
+:::
+::: {.card .warn}
+[Two hops]{.kicker}
+
+#### Missed links
+
+A fact that needs two documents joined is in neither chunk on its own.
+:::
+:::
+
+[[TBD: one real query from the thesis where vector search returned passages that sounded right but didn't hold the fact.]]{.tbd .small}
+
+::: notes
+3–4. Vector databases have their place, and I still use them. But cosine similarity has real weaknesses when what you want is knowledge extraction.
+
+[TBD: walk through the real failure example.]
+
+Candidate for animation: a query, the top results appearing, and the ones that don't hold the fact struck out.
+:::
+
+## What is GraphRAG? {#jacob-graphrag .motion}
+
+::: {.def}
+[What is RAG?]{.def-term}
+*Retrieval-augmented generation*: before a language model answers, a search step fetches relevant text and hands it to the model, so the answer draws on your documents instead of only on what the model memorised. **GraphRAG** (Microsoft Research, 2024) has the model build a knowledge graph first, and retrieves from that.
+:::
+
+```{=html}
+<div class="flow">
+  <div class="node rise" data-at="400"><b>Documents</b><span>every chunk read by an LLM</span></div>
+  <div class="arrow rise" data-at="725">→</div>
+  <div class="node blue rise" data-at="1050"><b>Extract</b><span>entities and relationships</span></div>
+  <div class="arrow rise" data-at="1375">→</div>
+  <div class="node rise" data-at="1700"><b>Graph</b><span>clustered into communities</span></div>
+  <div class="arrow rise" data-at="2025">→</div>
+  <div class="node blue rise" data-at="2350"><b>Summarise</b><span>an LLM writes up each community</span></div>
+  <div class="arrow rise" data-at="2675">→</div>
+  <div class="node rise" data-at="3000"><b>Answer</b><span>local and whole-collection questions</span></div>
 </div>
 ```
 
 ::: notes
-4–5. [TBD]
+4–5. The promise is the last box. Vector search can only ever show you the passages closest to your question. GraphRAG claims to let you ask about the whole collection: "what are the main themes here?" or "how is X connected to Y across all of it?"
+
+Animated: the stages appear in order. Let it run while you describe each one.
 :::
 
-## Why it doesn't always fulfil its promise
+## What I built {#jacob-pipeline .motion}
 
-[[TBD: the cost of building the graph, extraction errors, upkeep. From your experience.]]{.tbd}
+```{=html}
+<div class="flow">
+  <div class="node rise" data-at="400"><b>Page images</b><span>early modern print</span></div>
+  <div class="arrow rise" data-at="725">→</div>
+  <div class="node blue rise" data-at="1050"><b>olmOCR</b><span>open model transcribes the pages</span></div>
+  <div class="arrow rise" data-at="1375">→</div>
+  <div class="node rise" data-at="1700"><b>EarlyModernNER</b><span>people, places, goods</span></div>
+  <div class="arrow rise" data-at="2025">→</div>
+  <div class="node blue rise" data-at="2350"><b>Knowledge graph</b><span>entities and links</span></div>
+  <div class="arrow rise" data-at="2675">→</div>
+  <div class="node rise" data-at="3000"><b>GraphRAG retrieval</b><span>Improved Scratchpad</span></div>
+  <div class="arrow rise" data-at="3325">→</div>
+  <div class="node after rise" data-at="3650"><b>Historian</b><span>reads the ranked sources</span></div>
+</div>
+```
 
-::: notes
-5–6. [TBD]
-:::
-
-## What changed: agentic search
-
-::: {.defs}
 ::: {.def}
-[Agent]{.def-term}
-A model that works in steps: it uses tools, reads the results, and decides what to do next.
+[What is NER?]{.def-term}
+*Named entity recognition*: a model that tags the names of people, places and things in text. I trained a small one on early modern English instead of sending every page to a large language model.
 :::
+
+[[TBD: one headline result, with where it was measured: e.g. entities extracted, documents linked, or a query the pipeline answered that keyword search missed.]]{.tbd .small}
+
+::: notes
+5–7. One design choice to flag: a small fine-tuned model for extraction instead of a large language model reading every page. At two million pages, that is the difference between a feasible project and an impossible budget. It also makes extraction consistent and testable against a hand-checked sample.
+
+[TBD: give the result and how the sample was chosen.]
+
+Note the last box. The output is a ranked set of sources for a person to read, not an answer.
+:::
+
+## Why it doesn't always fulfil its promise {#jacob-promise}
+
+::: {.cards}
+::: {.card .warn}
+[Cost]{.kicker}
+
+#### ~1,000×
+
+Microsoft measured full GraphRAG indexing at roughly a thousand times the cost of a vector index.
+:::
+::: {.card .warn}
+[Errors compound]{.kicker}
+
+#### OCR → entity → edge
+
+Each stage inherits the last one's mistakes, and a misread line becomes a confident false link.
+:::
+::: {.card .warn}
+[Generated layers]{.kicker}
+
+#### Summaries of summaries
+
+Community summaries sit between you and the page.
+:::
+::: {.card .warn}
+[Upkeep]{.kicker}
+
+#### Static
+
+New documents mean re-extracting and re-summarising.
+:::
+:::
+
+> Treat it as a **search and ranking** tool, not an answer machine.
+
+::: notes
+7–8. Cost figure: Microsoft Research's LazyGraphRAG post reports LazyGraphRAG indexing at the same cost as vector RAG and 0.1% of full GraphRAG, so full GraphRAG is about 1,000 times a vector index on their AP News benchmark.
+
+[TBD: Jacob's own experience of each problem in the thesis pipeline.]
+
+The reframe came from Jim: the system finds and ranks sources; it does not do the analysis.
+:::
+
+## What changed: agentic search {#jacob-agentic .motion}
 
 ::: {.def}
-[MCP: Model Context Protocol]{.def-term}
-A standard way to give a model tools, such as a search box or a database.
-:::
+[What is an agent?]{.def-term}
+A language model that can use tools (a search box, a file browser, a database) in a loop: it decides what to search, reads the results, and decides what to do next, until it has enough to answer.
 :::
 
-[[TBD, animated loop: search by keyword → read → refine the query → search again → answer with sources.]]{.tbd}
+```{=html}
+<div class="flow">
+  <div class="node rise" data-at="400"><b>Question</b></div>
+  <div class="arrow rise" data-at="725">→</div>
+  <div class="node blue rise" data-at="1050"><b>Search</b><span>keywords, chosen by the model</span></div>
+  <div class="arrow rise" data-at="1375">→</div>
+  <div class="node rise" data-at="1700"><b>Read</b><span>whole documents, not fragments</span></div>
+  <div class="arrow rise" data-at="2025">→</div>
+  <div class="node blue rise" data-at="2350"><b>Refine</b><span>a new name or term to follow</span></div>
+  <div class="arrow rise" data-at="4000">→</div>
+  <div class="node after rise" data-at="4300"><b>Answer</b><span>with sources</span></div>
+</div>
+<div class="loopback rise" data-at="2800">↺ Not enough yet: search again</div>
+```
+
+[Classic retrieval: one pass. Agentic search: as many passes as the question needs.]{.motion-caption .rise data-at="5200" style="font-size:0.65em;color:#f3ead3"}
 
 ::: notes
-6–7. [TBD]
+8–9. Classic retrieval does one pass: embed the question, fetch the top ten chunks. Agentic search lets the model drive. It runs a keyword search, reads what came back, notices a name it did not know, and searches again.
+
+Best-known example: Claude Code. Its lead developer, Boris Cherny, has said early versions used a local vector database, and that letting the model search with plain text tools in a loop worked better and was simpler.
+
+Animated: search, read, refine, then the loop back, and only then the answer.
 :::
 
-## Semi-structured text is often enough
+## Semi-structured text is often enough {#jacob-semistructured}
 
-[[TBD: models are now good enough at agentic search that you may not need a whole system. Example.]]{.tbd}
+::: {.columns}
+::: {.column width="52%"}
+- Folders that mean something
+- Plain text or Markdown with consistent headings
+- A few lines of metadata at the top of each file: date, author, subject
+- Filenames a person could guess
+:::
+::: {.column width="48%"}
+::: {.def}
+[What is semi-structured text?]{.def-term}
+Ordinary documents with a predictable shape: headings, labelled fields, consistent names. Not a database, but not a pile either.
+:::
+:::
+:::
+
+> No pipeline. The agent searches, opens, reads and follows links. **Good documentation practice is now good AI practice.**
 
 ::: notes
-7–8. [TBD]
+9–10. Models have become good enough at agentic search that for many collections you no longer need a whole system. This is especially true for technical documentation: manuals, procedures, notes. If they are plain text, sensibly organised, a current model can search them very well with nothing more than text search and the ability to open files.
+
+[TBD: one real example from your own work, e.g. thesis notes or the corpus metadata, searched this way.]
 :::
 
-## When each one fits
+## MCP: one plug for many sources {#jacob-mcp}
+
+::: {.def}
+[What is MCP?]{.def-term}
+The *Model Context Protocol*: an open standard for giving a model tools such as a search box, a database or a file store. Write a connector once and any MCP-capable assistant can use it. Released by Anthropic in late 2024; governed by the Linux Foundation's Agentic AI Foundation since December 2025.
+:::
+
+```{=html}
+<div class="flow">
+  <div class="node"><b>Your files</b></div>
+  <div class="node"><b>A document archive</b></div>
+  <div class="node blue"><b>OpenAlex</b><span>scholarly works</span></div>
+  <div class="node blue"><b>Wikidata</b><span>people, places, things</span></div>
+  <div class="node after"><b>A knowledge graph</b><span>one tool among several</span></div>
+</div>
+<div class="loopback">↕ all reached by the same agent through MCP</div>
+```
+
+::: notes
+10–11. MCP is plumbing, but it matters. Before it, every connection between a model and a data source was custom work. Now there are ready-made connectors, including for OpenAlex and Wikidata.
+
+This is where knowledge graphs come back in. The graph stops being the whole system and becomes one tool the agent can call when a question is about relationships.
+:::
+
+## Linked Open Data: someone already built the graph {#jacob-lod}
+
+::: {.def}
+[What is Linked Open Data?]{.def-term}
+Openly published data where every person, place, institution or paper has a **persistent identifier** that other datasets can point to. Following those links joins datasets that were built separately.
+:::
 
 ::: {.cards}
 ::: {.card}
-[Small to medium corpora]{.kicker}
+[Things]{.kicker}
+
+#### Wikidata
+:::
+::: {.card}
+[Papers]{.kicker}
+
+#### OpenAlex, DOIs
+:::
+::: {.card}
+[People]{.kicker}
+
+#### ORCID
+:::
+::: {.card}
+[Institutions]{.kicker}
+
+#### ROR
+:::
+:::
+
+> Don't rebuild the world's graph. **Link to it.**
+
+::: notes
+11–12. If local records carry these identifiers, an agent can move from a local record to the paper, to its authors, to everything that cites it, without anyone building that graph locally.
+
+[TBD: one real case from the corpus where a place, person or ship could be matched to a Wikidata item.]
+:::
+
+## Searching millions of documents: what fits where {#jacob-scale}
+
+::: {.cards}
+::: {.card}
+[Hundreds to thousands]{.kicker}
 
 #### Agentic search
 
-Over semi-structured text. [TBD]
+Over well-organised, semi-structured text. No index needed.
+
+[A project's notes; a set of manuals]{.fact}
 :::
-
-::: {.card}
-[Fuzzy recall]{.kicker}
-
-#### Vector search
-
-[TBD]
-:::
-
 ::: {.card .accent}
-[Millions of documents]{.kicker}
+[Hundreds of thousands to millions]{.kicker}
 
-#### Knowledge graph / GraphRAG
+#### An index the agent can call
 
-Exact relationships, reuse across projects. [TBD]
+Keyword, vector and graph indexes, reached through MCP. GraphRAG earns its cost here.
+
+[My ~2 million pages]{.fact}
+:::
+::: {.card}
+[Hundreds of millions]{.kicker}
+
+#### Linked Open Data
+
+Use what exists, through MCP. Don't rebuild it.
+
+[The published literature]{.fact}
 :::
 :::
 
 ::: notes
-8–9. [TBD]
+12–13. The answer to "how could we search millions of documents" depends on scale. For thousands, agentic search over decent text is often enough. Somewhere in the hundreds of thousands to millions an agent cannot read everything on every query, so you need an index, and that is where vectors and knowledge graphs still earn their keep. At the scale of the whole literature, connect to the open infrastructure that exists.
+
+Rule of thumb: indexes become tools the agent calls, not the system itself.
 :::
 
-## Knowledge graphs still matter
+## Knowledge graphs still matter {#jacob-close}
 
-[[TBD: organization, exact queries, provenance, reuse.]]{.tbd}
+::: {.cards}
+::: {.card .accent}
+[Organization]{.kicker}
+
+#### Structure you can inspect
+:::
+::: {.card .accent}
+[Exact queries]{.kicker}
+
+#### Count, filter, join
+:::
+::: {.card .accent}
+[Provenance]{.kicker}
+
+#### Every edge back to a page
+:::
+::: {.card .accent}
+[Reuse]{.kicker}
+
+#### Across projects, via open identifiers
+:::
+:::
+
+> The machine finds and ranks. **People read and judge.**
 
 ::: notes
-9–10. Hand over to Jim.
+13–15. Knowledge graphs are still useful, as infrastructure an agent can query rather than as a machine that hands you answers. Agentic search has made a lot of heavy pipeline work unnecessary, especially for smaller collections. The right job for all of this is discovery: finding and ranking what a person should read.
+
+Hand back to Jim.
 :::

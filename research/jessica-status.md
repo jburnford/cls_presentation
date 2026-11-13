@@ -1,6 +1,6 @@
 # Jessica's section: status and how to pick it up again
 
-Last updated 2026-11-13, at the end of the first working session.
+Last updated 2026-11-13, at the end of the second working session.
 
 ## Where things stand
 
@@ -29,7 +29,21 @@ Last updated 2026-11-13, at the end of the first working session.
 - **Surrender result:** "+77% **odds**," not probability. Logistic regression on 128 reserves: OR 1.77, 95% CI 1.44–2.17, p < 0.001 (`Reserves_Urban_Spaces/analysis/06b_LOGISTIC_REGRESSION_SYNTHESIS.md`, model M1).
 - **Census:** 760,234 records is all of Saskatchewan in 1921; 220,260 people lived in the 429 settlements.
 - **Audience** (Jim's `CLAUDE.md`, "Writing for this audience"): mostly STEM scientists, many neurodivergent, in person. Use literal headings, red only for errors and green only for checked results, method and sample on the slide, and history terms glossed. Slides are signposted with a four-part map (1 Starting point · 2 Method · 3 Results · 4 Checking), as in Jacob's section.
-- **Scope:** Jessica works only on section 2. Don't edit the other speakers' sections or the shared files (`slides.qmd`, `slides.scss`, `slides-motion.html`, `CLAUDE.md`) without a heads-up.
+- **Scope:** Jessica works only on section 2's content. Don't edit the other speakers' sections or the shared files (`slides.qmd`, `slides.scss`, `slides-motion.html`, `CLAUDE.md`) without a heads-up.
+- **New visual style for the whole deck:** Jessica is designing it, and Jim and Jacob have agreed to use it. Everything is open to change: colours, fonts, background, layout and spacing, and how visualizations sit on the slide.
+
+## Next: the new visual style
+
+1. **Jessica's template.** Jessica is making example slides in PowerPoint (16:9). They're filling one with the text of the Economic Hierarchy slide (`#jessica-hierarchy`). When it arrives, read the `.pptx` for its exact colours, fonts, sizes and spacing, and render it to an image. Don't commit the `.pptx` unless asked.
+2. **Sample slides on a Claude Design canvas** (1280×720 artboards): the template, plus real deck slides restyled to match (title, speaker divider, a definition slide, a pipeline slide, a visualization slide). Jessica tweaks them there.
+3. **A Claude Design System artifact** recording the chosen look (colours, type, spacing, components), as the shared spec for Jim's and Jacob's agents.
+4. **Copy it into `slides.scss` and the "Look" section of `CLAUDE.md`**, in their own commits, with a heads-up to Jim and Jacob.
+
+Still to ask Jessica: what exactly is wrong with how the visualizations are shown now.
+
+## Talk subtitle: under discussion
+
+Jessica finds "Working" in *Historians Working With LLMs* bland and wants a word for a more engaged process. Ruled out: "Grappling" (implies animosity) and "Experimenting" ("we're researching, not testing"). Candidates: **Researching With** (recommended), **Reading With**, Doing History With, Thinking With, Inquiring With. No decision yet. A change touches `slides.qmd` and `CLAUDE.md`, so it gets its own commit and a heads-up.
 
 ## Open items
 

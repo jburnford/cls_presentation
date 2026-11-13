@@ -7,17 +7,33 @@ This repository holds a slide presentation built the same way as the Johns Hopki
 
 When a pattern below is unclear, open the matching file there (`slides.qmd`, `slides.scss`, `slides-motion.html`, `workshop.js`, `scripts/`) and copy it. Don't invent a new system.
 
-## The talk (fill in)
+## The talk
+
+From `CLS Presentation Rough Notes.docx`. The slide-by-slide plan is in [outline.md](outline.md).
 
 | | |
 |---|---|
-| Title | TBD |
-| Venue, date, time | TBD |
-| Length | TBD minutes, plus questions |
-| Audience | TBD (say their level with computational methods, and whether some are on Zoom) |
-| Core argument | TBD (one sentence) |
-| Data/sources | TBD |
+| Working title | *Do better, not more* |
+| Venue, date, time | CLS: TBD (full name, date, room, Zoom?) |
+| Length | about 35–45 minutes, plus questions |
+| Speakers, in order | Jim opens (5 min) → Jessica, general (10–15 min, 10–15 slides) → Jacob, specific and technical (10–15 min, 10–15 slides) → Jim closes (10 min) |
+| Audience | TBD: confirm; probably historians, mostly not computational |
+| Core argument | Coding agents flatten the skills barrier and make iteration fast, so computational history may finally grow as computational physics did. The question is how to use that to do *better* history, not just *more*. |
+| Material | The speakers' own projects: Jessica's interactive visualizations, Jacob's knowledge graph and GraphRAG work, Jim's projects and editorial experience |
 | Public URL | TBD (GitHub Pages from `docs/`) |
+
+### Three speakers, one deck
+
+Each speaker edits their own section file, which keeps merge conflicts down. `slides.qmd` holds only the front matter and the includes:
+
+```markdown
+{{< include sections/_1-jim-open.qmd >}}
+{{< include sections/_2-jessica.qmd >}}
+{{< include sections/_3-jacob.qmd >}}
+{{< include sections/_4-jim-close.qmd >}}
+```
+
+The leading underscore stops Quarto rendering a section as a page of its own. At the start of each section, put a divider slide with the speaker's name, so the room and Zoom know who is speaking. Speaker notes stay with each speaker's slides. Each speaker's minute ranges start at 0 for their own section.
 
 ## Stack
 
@@ -55,7 +71,9 @@ format:
 
 | Path | What it is |
 |---|---|
-| `slides.qmd` | The deck, with speaker notes |
+| `slides.qmd` | Front matter and includes only |
+| `sections/_*.qmd` | One file per speaker section, with speaker notes |
+| `outline.md` | Working slide plan; update it when the sections change |
 | `slides.scss` | Theme and component classes (copy the JHU file first, then cut what isn't used) |
 | `slides-motion.html` | The animation driver (below) |
 | `slides-title-qr.html` | QR code to the public URL on the title slide, clickable |
@@ -174,8 +192,10 @@ Copy the check and export scripts from the JHU repo and update their paths, file
 
 **Before saying a slide is done:** render it and take Playwright screenshots at 1280 × 720 of each changed slide, including the final frame of any motion slide. Look at them for overflow, overlap and readability from the back of a room. Then commit.
 
-## Working with Jim
+## Working on this deck
 
-- Propose the cut-down version first. When things sprawl, go back to the core argument.
-- Commit in small steps, with messages that say what changed for the audience (e.g. "Open with the printed page"). Jim reviews the rendered deck before anything is published.
+- Three people push to this repository. Pull before you start. Touch only the section you were asked to work on; the shared files (`slides.scss`, `slides-motion.html`, front matter) need a heads-up to the others.
+- Use the speakers' own words and facts. Where the notes are thin, leave a visible `[TBD: …]` on the slide rather than inventing a detail.
+- Propose the cut-down version first. When things sprawl, go back to the core argument: better, not more.
+- Commit in small steps, with messages that say what changed for the audience (e.g. "Open with the printed page"). Each speaker reviews their own rendered section; Jim reviews the whole deck before anything is published.
 - Push only when asked.

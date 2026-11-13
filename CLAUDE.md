@@ -14,13 +14,26 @@ From `CLS Presentation Rough Notes.docx`. The slide-by-slide plan is in [outline
 | | |
 |---|---|
 | Working title | *Do better, not more* |
-| Venue, date, time | CLS: TBD (full name, date, room, Zoom?) |
+| Venue, date, time | Canadian Light Source (CLS), Saskatoon. **In person.** Date and room TBD |
 | Length | about 35–45 minutes, plus questions |
 | Speakers, in order | Jim opens (5 min) → Jessica, general (10–15 min, 10–15 slides) → Jacob, specific and technical (10–15 min, 10–15 slides) → Jim closes (10 min) |
-| Audience | TBD: confirm; probably historians, mostly not computational |
+| Audience | **Mostly STEM scientists, many of them neurodivergent.** Not historians. See *Writing for this audience* below |
 | Core argument | Coding agents flatten the skills barrier and make iteration fast, so computational history may finally grow as computational physics did. The question is how to use that to do *better* history, not just *more*. |
 | Material | The speakers' own projects: Jessica's interactive visualizations, Jacob's knowledge graph and GraphRAG work, Jim's projects and editorial experience |
 | Public URL | TBD (GitHub Pages from `docs/`) |
+
+### Writing for this audience
+
+Confirmed by Jacob, 13 November 2026. Every section should be built for this room.
+
+- **They are scientists.** Don't define what they already know (vectors, cosine similarity, databases, statistics); gloss the history and the humanities methods instead. They will trust measured results with a stated method and sample far more than claims, so lead with evidence.
+- **Connect to their work.** Use examples a facility like CLS recognizes: technical documentation, beamline manuals and logbooks, their own published papers. Historical sources are the worked examples, not the frame.
+- **Predictable structure.** Each section opens by saying what it covers, and the same signposting appears throughout, so nobody has to guess where they are.
+- **Literal headings.** A heading states the slide's point in plain words. No idioms, puns or metaphors to decode.
+- **One idea per slide, low text density.** Detail goes in the speaker notes.
+- **Calm motion.** Short fades and draws only; nothing flashing, fast or looping. Every animated slide still reads as a static slide (already required below).
+- **Consistent colour meaning.** Red (`#c0674f`) always means an error or failure, green (`#79a868`) always means checked or fixed. Never use them decoratively.
+- **Let people follow at their own pace.** A QR code to the deck early on (see `slides-title-qr.html`).
 
 ### Three speakers, one deck
 
@@ -35,7 +48,7 @@ Each speaker edits their own section file, which keeps merge conflicts down. `sl
 {{< include sections/_4-jim-close.qmd >}}
 ```
 
-The leading underscore stops Quarto rendering a section as a page of its own. At the start of each section, put a divider slide with the speaker's name, so the room and Zoom know who is speaking. Speaker notes stay with each speaker's slides. Each speaker's minute ranges start at 0 for their own section.
+The leading underscore stops Quarto rendering a section as a page of its own. At the start of each section, put a divider slide with the speaker's name, so the room knows who is speaking. Speaker notes stay with each speaker's slides. Each speaker's minute ranges start at 0 for their own section.
 
 ## Stack
 

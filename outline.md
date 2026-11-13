@@ -73,7 +73,7 @@ Drafted in `sections/_3-jacob.qmd`. More specific and technical; every term gets
 
 ## Open questions
 
-- What does CLS stand for? Date, room, and whether there's a Zoom audience.
-- Who is the audience? That decides how much glossing Jacob's section needs.
+- ~~What does CLS stand for?~~ Canadian Light Source, in person. Date and room still TBD.
+- ~~Who is the audience?~~ Mostly STEM scientists, many neurodivergent. See *Writing for this audience* in `CLAUDE.md`.
 - One deck, or each speaker presenting from their own machine? (One deck is recommended: a single URL and no switching.)
 - Will there be live demos? Keep at most one, with a saved fallback.

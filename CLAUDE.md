@@ -2,10 +2,10 @@
 
 This repository holds a slide presentation built the same way as the Johns Hopkins workshop deck (*Cleaning, Structuring and Grounding Historical Data*, 15 October 2026). That deck is the reference implementation:
 
-- GitHub: `jburnford/imperial-careers-workshop` (published at jimclifford.ca/imperial-careers-workshop)
-- Local copy: `/home/jic823/johnhopkins`
+- Source: <https://github.com/jburnford/imperial-careers-workshop>
+- Live deck: <https://jimclifford.ca/imperial-careers-workshop/slides.html?motion>
 
-When a pattern below is unclear, open the matching file there (`slides.qmd`, `slides.scss`, `slides-motion.html`, `workshop.js`, `scripts/`) and copy it. Don't invent a new system.
+When a pattern below is unclear, open the matching file in that repository and copy it: [`slides.qmd`](https://github.com/jburnford/imperial-careers-workshop/blob/main/slides.qmd), [`slides.scss`](https://github.com/jburnford/imperial-careers-workshop/blob/main/slides.scss), [`slides-motion.html`](https://github.com/jburnford/imperial-careers-workshop/blob/main/slides-motion.html), [`workshop.js`](https://github.com/jburnford/imperial-careers-workshop/blob/main/workshop.js), [`scripts/`](https://github.com/jburnford/imperial-careers-workshop/tree/main/scripts). Don't invent a new system.
 
 ## The talk
 
@@ -74,9 +74,9 @@ format:
 | `slides.qmd` | Front matter and includes only |
 | `sections/_*.qmd` | One file per speaker section, with speaker notes |
 | `outline.md` | Working slide plan; update it when the sections change |
-| `slides.scss` | Theme and component classes (copy the JHU file first, then cut what isn't used) |
+| `slides.scss` | Theme and component classes, copied from the JHU deck; cut what isn't used |
 | `slides-motion.html` | The animation driver (below) |
-| `slides-title-qr.html` | QR code to the public URL on the title slide, clickable. *Not added yet: copy it from JHU once the Pages URL is settled, then add it to `include-after-body`.* |
+| `slides-title-qr.html` | QR code to the public URL on the title slide, clickable. *Not added yet: copy [the JHU version](https://github.com/jburnford/imperial-careers-workshop/blob/main/slides-title-qr.html) once the Pages URL is settled, then add it to `include-after-body`.* |
 | `workshop.js`, `workshop-responsive.html` | Touch-screen reading view: phones and tablets up to 1024 px get a scrolling page instead of tiny slides; `?present` forces slides |
 | `_quarto.yml`, `index.qmd` | Plain Quarto project rendering `index.qmd` and `slides.qmd` to `docs/`. The reveal.js libraries land in `docs/slides_files/`, which must be committed (`.gitignore` ignores only the root `/*_files/`) |
 | `images/`, `media/` | Screenshots, scans, maps (`world-land.svg` for SVG maps), video fallbacks |
@@ -103,7 +103,7 @@ Dark theme, matched to the project's own visualisations. Keep these values:
 
 Root font size 34px. Headings and source quotations are set in a serif; UI labels in a system sans.
 
-Reusable components, all defined in the JHU `slides.scss`:
+Reusable components, all defined in this repo's `slides.scss` (copied from the JHU deck):
 
 - `.flow` > `.node` + `.arrow`: a pipeline drawn as boxes and arrows. `.node.blue`, `.before`, `.after` and `.wide` are variants; `.loopback` draws the return path.
 - `.def` with `.def-term`: **"What is X?" definition boxes.** Gloss every technical term where it first appears. `.defs` sets two of them side by side.
@@ -144,7 +144,7 @@ Behaviour, all handled by `slides-motion.html` (copy it verbatim):
 - **Reduced motion** (for example, Windows with animations off) shows the final frame, and the button reads **▶ Play animation**. Opening the deck with `?motion` autoplays anyway, so link the deck as `slides.html?motion` from the site and presenter notes.
 - **Print/PDF and the phone reading view** show the final frame. Every animated slide must therefore read correctly as a static slide.
 
-Core CSS (the full set is in the JHU `slides.scss`, lines ~170–206 and 249–266):
+Core CSS (the full set is in this repo's `slides.scss`):
 
 ```scss
 .reveal section.motion [data-at] { opacity: 0; transition: opacity .6s ease, transform .6s ease; }
@@ -159,7 +159,7 @@ Core CSS (the full set is in the JHU `slides.scss`, lines ~170–206 and 249–2
 
 ### When to animate
 
-Use motion when the slide shows a **sequence, a change of state, or a flow**: a printed clause becoming a record, a record landing on a map, an error and its fix, a pipeline stage passing work along. Don't animate a list just to have something move. JHU patterns worth reusing:
+Use motion when the slide shows a **sequence, a change of state, or a flow**: a printed clause becoming a record, a record landing on a map, an error and its fix, a pipeline stage passing work along. Don't animate a list just to have something move. Patterns from the [JHU deck](https://jimclifford.ca/imperial-careers-workshop/slides.html?motion) worth reusing:
 
 - **Source → structure → map.** Raw OCR text on the left; phrases highlight (`.mk`) in step with points and arcs appearing on an SVG map on the right (*Two Lists, one career, mapped*).
 - **Rules vs reality.** Rows of input → output → verdict appear one at a time, then a score strip (*Real rules: mostly right, quietly wrong*).
@@ -189,7 +189,7 @@ python3 scripts/check_workshop_browser.py      # presentation layout
 python3 scripts/export_slides.py               # exports/*.pptx and *-notes.pdf
 ```
 
-Copy the check and export scripts from the JHU repo and update their paths, file names and slide IDs. They need `playwright`, `python-pptx`, `lxml` and `ffmpeg`. Ask Jim to install any missing packages himself (`python3 -m pip install --break-system-packages …`).
+Copy the check and export scripts from the JHU repository's [`scripts/`](https://github.com/jburnford/imperial-careers-workshop/tree/main/scripts) and update their paths, file names and slide IDs. They need `playwright`, `python-pptx`, `lxml` and `ffmpeg`. Ask Jim to install any missing packages himself (`python3 -m pip install --break-system-packages …`).
 
 **Before saying a slide is done:** render it and take Playwright screenshots at 1280 × 720 of each changed slide, including the final frame of any motion slide. Look at them for overflow, overlap and readability from the back of a room. Then commit.
 

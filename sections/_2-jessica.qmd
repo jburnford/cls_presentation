@@ -1,92 +1,455 @@
+```{=html}
+<style>
+/* Jessica's section only: clip frames and figure labels. Prefixed .jj- so nothing leaks into other sections. */
+.reveal .jj-clip { display: block; width: 100%; height: auto; border: 1px solid #3a3b40; border-radius: 4px; background: #15161a; }
+.reveal .jj-side { font-size: 0.62em; line-height: 1.4; }
+.reveal .jj-side p { margin: 0 0 0.6em; }
+.reveal .jj-side blockquote { font-size: 1em; margin: 0 0 0.6em; }
+.reveal .jj-fails { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6em; margin: 0.3em 0 0.2em; }
+.reveal .jj-fail { position: relative; background: #1d1e23; border: 1px solid #3a3b40; border-radius: 4px; padding: 0.3em; }
+.reveal .jj-fail img { display: block; width: 100%; height: 250px; object-fit: contain; margin: 0; }
+.reveal .jj-fail .jj-name { font-size: 0.5em; color: #9a958a; text-align: center; margin-top: 0.2em; }
+.reveal .jj-fail .jj-x { position: absolute; left: 0.3em; right: 0.3em; top: 40%; text-align: center; font: 600 22px/1.3 system-ui, sans-serif; color: #f3ead3; background: rgba(192, 103, 79, 0.92); border-radius: 3px; padding: 0.25em 0.4em; }
+.reveal .jj-when { display: inline-block; min-width: 6.2em; color: #c9a227; font-family: Georgia, serif; }
+.reveal .jj-days { color: #e08a74; text-decoration: line-through; }
+.reveal .jj-mins { color: #9fcf8c; }
+.reveal .jj-chips span { white-space: nowrap; }
+.reveal .jj-img { display: block; width: 100%; height: auto; border: 1px solid #3a3b40; border-radius: 4px; margin: 0; }
+</style>
+```
+
 ## {#jessica-divider}
 
-[Jessica [TBD: surname]<span class="gold">Getting started, and visualization as method</span>]{.divider-name}
+[Jessica Jack<span class="gold">Getting started, and visualization as method</span>]{.divider-name}
 
 ::: notes
-0. [TBD: one-line description of the project.]
+0. I'm a PhD student in History at USask, supervised by Jim. My research asks how Saskatchewan's network of settlements turned Indigenous land into private property between 1880 and 1930. This section is about how I got started, and how making visualizations became my research method.
 :::
 
-## Where I started
+## Where I started {#jessica-start}
 
-[[TBD: the project and its research question. Had never used a command line.]]{.tbd}
+How did Saskatchewan's urban settler network relate to the dispossession of Indigenous peoples from their land, 1880–1921? Answering that took **three datasets that had never spoken to each other**:
+
+::: {.cards}
+::: {.card .accent}
+[Compiled by hand, summer 2025]{.kicker}
+
+#### A knowledge graph
+
+409 of the 429 urban municipalities in the 1921 census, built from more than 200 community-written local histories.
+:::
+
+::: {.card}
+[GEORIA project, U of Toronto]{.kicker}
+
+#### Railway GIS
+
+Historical Canadian Railroads: every line, with its company and construction date.
+:::
+
+::: {.card}
+[Mapping Settler Colonialism]{.kicker}
+
+#### Reserve surrenders
+
+54 surrendered parcels on 42 reserves, compiled by Ashley Rabbitskin and Julian Rioux.
+:::
+:::
+
+[Before 9 January 2026, I had never written code.]{.gold style="font-family: Georgia, serif; font-size: 1.05em;"}
 
 ::: notes
-0–1. [TBD]
+0–1. My background is anthropology: a BA, then an MA in medical anthropology. I came to history through mapping on the Sakitawak Traditional Land Use Study in 2024, where Ben Hoy taught me historical GIS software.
+
+I spent summer 2025 in archives and local history collections documenting when and how each settlement was established. I didn't realize at the time that the spreadsheet I was building was a knowledge graph. Jacob will come back to that.
+
+The three datasets were in different formats, at different scales, and built for different purposes. The interesting questions needed all three together. Getting them to talk to each other needed data engineering skills I didn't have.
+
+Sources: working paper (Jack 2026, *Working Papers in Critical Search* 003, doi:10.5281/zenodo.20706174), "The Constraints" and "Code and Data Availability." Before January 9 I had not coded, apart from some basic HTML.
 :::
 
-## How fast
+## How fast {#jessica-timeline .motion}
 
-[[TBD, animated timeline: never used a command line → interactive visualizations on GitHub in under a month → what was reached in under six months? Confirm both milestones.]]{.tbd}
+```{=html}
+<div class="motion-card rise" data-at="400"><span class="jj-when">Summer 2025</span> Three months in archives: a spreadsheet of 409 settlements</div>
+<div class="motion-card alt rise" data-at="1400"><span class="jj-when">9 Jan 2026</span> First session: <i>"I have my knowledge graph and the Historical Canadian Railroads GIS data, and I want to understand how they connect. Can you help me see that?"</i></div>
+<div class="motion-card rise" data-at="2800"><span class="jj-when">19 Jan</span> Interactive maps <b>public on GitHub</b></div>
+<div class="motion-card rise" data-at="3800"><span class="jj-when">16 Mar</span> 25th visualization: the Economic Hierarchy map</div>
+<div class="motion-card rise" data-at="4800"><span class="jj-when">1 Jun</span> Canadian Historical Association: "Unmaking the Prairies" (with Jim)</div>
+<div class="motion-card rise" data-at="5700"><span class="jj-when">15 Jun</span> Working paper: <i>What Became Possible</i></div>
+<p class="motion-caption rise" data-at="6900"><span class="gold">Ten days</span> from my first prompt to a public, interactive map.</p>
+```
 
 ::: notes
-1–2. [TBD]
+1–2. Animated, about 7 seconds. The first prompt is quoted word for word from the working paper.
+
+Dates come from the git histories. The `KnowledgeGraph` repository's first commit, and the `ClaudeCode` folder, are both from 9 January 2026. `Sask_Railway_Visualizations` was first committed and published on 19 January 2026. `economic_hierarchy.html` was added on 16 March 2026, the 25th HTML visualization in that repository. The CHA presentation and the working paper date (15 June 2026) are from my CV and the paper.
 :::
 
-## What is skills flattening?
+## What is skills flattening? {#jessica-flattening}
 
 ::: {.def}
 [Skills flattening]{.def-term}
-The gap between knowing a computer *could* do a task and being able to make it do it has narrowed. You are no longer gated by other people's capacity.
+The gap between knowing a computer *could* do a task and being able to make it do it has narrowed. I could work in plain English with a coding agent, so I was no longer waiting on someone else's time or skills.
 :::
 
-[[TBD: your example.]]{.tbd}
-
-::: notes
-2–3. [TBD]
+::: {.stats}
+::: {.stat}
+[$30 CAD]{.num}
+[a month: a Claude Pro subscription]{.lbl}
 :::
 
-## The old way: days per map
-
-[[TBD: specific software dictated the output (ArcGIS for mapping, for example). Each version took days, so you made few versions.]]{.tbd}
-
-::: notes
-3–4. [TBD]
+::: {.stat}
+[1 laptop]{.num}
+[an ordinary consumer laptop; no high-performance computing]{.lbl}
 :::
 
-## The new way: minutes per map
-
-[[TBD, animated loop: ask → build → look → notice a problem → change → rebuild, with a clock reading days → minutes.]]{.tbd}
-
-::: notes
-4–5. [TBD]
+::: {.stat}
+[Mid-tier]{.num}
+[Claude Sonnet, not the largest model]{.lbl}
+:::
 :::
 
-## Visualization as method
+What I built from that starting point:
 
-[[TBD: one case where a visualization showed something unexpected, including a problem in the data. Before and after screenshots.]]{.tbd}
-
-::: notes
-5–6. [TBD]
+::: {.chips .jj-chips}
+[a Neo4j knowledge graph]{.hit} [25 interactive visualizations]{.hit} [two public websites]{.c} [entity extraction from 142 local histories]{.c} [6,061 people linked across court records]{.c}
 :::
 
-## One visualization, four versions
-
-[[TBD, animated: successive versions, each annotated with what prompted the change. Screenshots or a live link.]]{.tbd}
-
 ::: notes
-6–8. [TBD]
+2–3. This is the core of "skills flattening." Each of these used to need a programmer, a web developer or a data team.
+
+Sources: the working paper's "Computational Resources" section (Pro subscription, $20 USD / $30 CAD a month; Claude Sonnet, claude-sonnet-4-5 then claude-sonnet-4-6; a consumer laptop, no HPC). Counts: 25 HTML visualizations in `Sask_Railway_Visualizations`; the public sites are Sask_Railway_Visualizations and Sask_Community_Sources on jjax07.github.io; 142 books in `OCR_NER/README.md`; 6,061 people in `Summer_JP_Work/README.md` (`Stable_ID_Roster_v6.csv`).
+
+The mid-tier model mattered: Sonnet is more prone to easy but incorrect solutions, so I had to check outputs closely. Usage limits made me plan each session deliberately. That rigour became part of the method.
 :::
 
-## Testing at scale, as a grad student
+## The old way: days per map {#jessica-old}
 
-[[TBD: problems and outcomes can now be tested at a scale that used to need a funded team.]]{.tbd}
+> GIS software could map the data, but this software limited the kinds of questions I could ask.
 
-::: notes
-8–9. [TBD]
+::: {.cards}
+::: {.card .warn}
+[Constraint 1]{.kicker}
+
+#### Translation
+
+Three datasets in different formats, scales and purposes. Joining them needed a data engineer, or a lot of my time.
 :::
 
-## Try it, then bring it to the team
+::: {.card .warn}
+[Constraint 2]{.kicker}
 
-[[TBD: something you tried alone and then workshopped with the group, and what came of it.]]{.tbd}
+#### Scale
 
-::: notes
-9–10. [TBD]
+429 municipalities, half a province, 50 years, on an MA timeline. Case studies were possible; the bigger picture was not.
 :::
 
-## What still needed judgement
+::: {.card .warn}
+[Constraint 3]{.kicker}
 
-[[TBD: where a person had to decide, check, or say no.]]{.tbd}
+#### Code
+
+Learning to program mid-degree would have pulled my energy away from the historical problem and toward the technical one.
+:::
+:::
 
 ::: notes
-10–11. This sets up Jim's close. Hand over to Jacob.
+3–4. With desktop GIS such as ArcGIS, the software dictated the output. Each version of a map took days, so you made few versions and rarely tried an idea you weren't already sure of. The alternatives were pre-built tools designed for other purposes, or not asking the question at all.
+
+Quote and the three constraints: working paper, "The Constraints."
+:::
+
+## The new way: minutes per map {#jessica-loop .motion}
+
+```{=html}
+<div class="flow">
+  <div class="node rise" data-at="300"><b>Describe</b><span>a research question, in plain English</span></div>
+  <div class="arrow" data-at="900">→</div>
+  <div class="node blue rise" data-at="1200"><b>Generate</b><span>a visualization from the data</span></div>
+  <div class="arrow" data-at="1800">→</div>
+  <div class="node rise" data-at="2100"><b>React</b><span>what works, what's missing, what's unexpected</span></div>
+  <div class="arrow" data-at="2700">→</div>
+  <div class="node after rise" data-at="3000"><b>Next prompt</b><span>the reaction drives the next question</span></div>
+</div>
+<div class="loopback" data-at="3800">↺ again, and again: within one session, not across weeks</div>
+<p class="motion-caption rise" data-at="4800" style="font-size:1.1em;font-family:Georgia,serif;">Each version took <span class="jj-days">days</span> <span class="mk" data-at="5600">minutes</span></p>
+<blockquote class="rise" data-at="6600">Being able to test an idea within a session rather than across weeks changed which ideas were worth testing.</blockquote>
+```
+
+::: notes
+4–5. Animated, about 7 seconds. This cycle is the basic unit of the work. A question that might have been set aside as too ambitious or too uncertain became worth pursuing when the cost of trying it was an afternoon rather than a month.
+
+Loop wording and quote: working paper, abstract and "The Process."
+:::
+
+## Visualization as method {#jessica-corridor}
+
+:::: {.columns}
+::: {.column width="64%"}
+```{=html}
+<video class="jj-clip" data-autoplay muted playsinline controls poster="images/jessica/one-hour-corridor-poster.jpg">
+  <source src="images/jessica/one-hour-corridor.mp4" type="video/mp4">
+  <source src="images/jessica/one-hour-corridor.webm" type="video/webm">
+</video>
+```
+[One-Hour Railway Corridor from Saskatoon, 1890–1920. [Open it live](https://jjax07.github.io/Sask_Railway_Visualizations/one_hour_map.html)]{.caption}
+:::
+
+::: {.column width="36%"}
+::: {.jj-side}
+> I have lived in Saskatchewan my whole life and have experienced its distances, but seeing them in railway time rather than driving time shifted my thinking.
+
+The myth of the lone pioneer started to give way.
+
+[These places were not isolated. They were nodes in a network, and the network had a shape.]{.gold}
+:::
+:::
+::::
+
+::: notes
+5–6. The clip plays by itself: Saskatoon's one-hour reach by train, 1890 to 1920. Built within days of my first session, and the first thing I pushed to GitHub to share with Jim and colleagues.
+
+One hour means 40 km at 40 km/h, a proxy for branch-line speeds, which varied.
+
+[TBD: check before the talk. In the clip's sidebar, Osler shows "132.8 km by rail" and Dalmeny "127.5 km by rail," yet both count as within one hour. The Settlement Explorer filters by actual rail distance; this map may not.]
+
+Quote: working paper, "The Process." Clip recorded from the local `Sask_Railway_Visualizations` repository by `scripts/record_jessica_clips.py`.
+:::
+
+## What the network showed {#jessica-network}
+
+:::: {.columns}
+::: {.column width="64%"}
+```{=html}
+<video class="jj-clip" data-autoplay muted playsinline controls poster="images/jessica/network-graph-poster.jpg">
+  <source src="images/jessica/network-graph.mp4" type="video/mp4">
+  <source src="images/jessica/network-graph.webm" type="video/webm">
+</video>
+```
+[Railway Network Graph, 1920: geographic view, then network view. [Open it live](https://jjax07.github.io/Sask_Railway_Visualizations/network_graph.html)]{.caption}
+:::
+
+::: {.column width="36%"}
+::: {.jj-side}
+I couldn't find anything on how the railway shaped settlement density, so we built a view that **removes geography** and arranges settlements by their connections.
+
+Eight multi-railway junctions stood out: the cities, but also small places like **Nokomis** and **Biggar**.
+
+[The patterns became questions worth investigating because they became visible.]{.gold}
+:::
+:::
+::::
+
+::: notes
+6–7. The clip switches from the map to the force-directed network view, then zooms out. In the network view, settlements sit by how connected they are, not where they are.
+
+Junctions and quote: working paper, "What the Process Made Possible." Multi-railway junctions are listed in the `Sask_Railway_Visualizations` README (Saskatoon, Regina, Moose Jaw, Prince Albert, Yorkton, Weyburn, Nokomis, Biggar).
+:::
+
+## One question, four tries {#jessica-fails .motion}
+
+How were the 429 settlements spread across the four commercial tiers?
+
+```{=html}
+<div class="jj-fails">
+  <div class="jj-fail"><img src="images/jessica/failed-pie.png" alt="Pie chart of settlements by commercial tier"><div class="jj-name">Pie chart</div><div class="jj-x rise" data-at="1200">✕ no geography</div></div>
+  <div class="jj-fail"><img src="images/jessica/failed-waffle.png" alt="Waffle chart of settlements by commercial tier"><div class="jj-name">Waffle chart</div><div class="jj-x rise" data-at="2200">✕ no geography</div></div>
+  <div class="jj-fail"><img src="images/jessica/failed-treemap.png" alt="Treemap of settlements by commercial tier"><div class="jj-name">Treemap</div><div class="jj-x rise" data-at="3200">✕ no geography</div></div>
+</div>
+<p class="motion-caption rise" data-at="4300">Each did what I asked, and each reduced the data to proportions. My questions were <span class="mk" data-at="5000">where</span> settlements were, <span class="mk" data-at="5500">when</span> they were founded, and <span class="mk" data-at="6000">what was around them</span>.</p>
+<p class="motion-caption rise" data-at="7000"><span class="gold">Knowing that quickly was itself a research outcome.</span> The fourth try was a map.</p>
+```
+
+::: notes
+7–8. Animated, about 7 seconds. These are three real early attempts, shown in the working paper as Figures 6a–c. When the cost of trying something is low, the cost of failing is low too. Recognizing a failure takes historical judgement that the output can't supply.
+
+[TBD for Jessica: in the published paper, the pie and waffle image files are swapped, so Figures 6a and 6b carry each other's captions. They're labelled correctly here.]
+:::
+
+## The fourth try: a map {#jessica-hierarchy}
+
+:::: {.columns}
+::: {.column width="64%"}
+```{=html}
+<video class="jj-clip" data-autoplay muted playsinline controls poster="images/jessica/economic-hierarchy-poster.jpg">
+  <source src="images/jessica/economic-hierarchy.mp4" type="video/mp4">
+  <source src="images/jessica/economic-hierarchy.webm" type="video/webm">
+</video>
+```
+[Economic Hierarchy, Saskatchewan 1921: tiers switched on from cities down to elevator sidings. [Open it live](https://jjax07.github.io/Sask_Railway_Visualizations/economic_hierarchy.html)]{.caption}
+:::
+
+::: {.column width="36%"}
+::: {.jj-side}
+Were these "urban municipalities" really urban, or just farms with a post office? The census occupations answered it.
+
+::: {.stats}
+::: {.stat}
+[79%]{.num}
+[of working residents in **farm villages** held jobs with nothing to do with farming]{.lbl}
+:::
+:::
+
+Grain buyers, bank clerks, blacksmiths, station agents. The typology became a central framework of my thesis.
+:::
+:::
+::::
+
+::: notes
+8–9. The clip turns on each tier in turn: 7 cities, 39 regional hubs, 27 service towns and 356 farm villages from the 1921 census. Then come 435 grain hamlets and 69 elevator sidings from grain elevator licensing records (1911–1930). Tiers cluster in unexpected places, which pointed to forces beyond local settler demand.
+
+79%: 17,138 of 21,708 farm-village residents with a classifiable occupation (`KnowledgeGraph/analysis/NAMED_ROLES_SYNTHESIS.md`). "Agricultural" means a farming occupation title or a farming industry ("Own Farm," "Agriculture"). If someone asks about the "nine in ten" from the CHA talk: by job title alone it's nine in ten; counting farm labourers by the industry they worked in, it's four in five. Same as the Active History post, 14 October 2026.
+:::
+
+## Testing at scale, as a grad student {#jessica-scale}
+
+:::: {.columns}
+::: {.column width="64%"}
+```{=html}
+<video class="jj-clip" data-autoplay muted playsinline controls poster="images/jessica/railway-timeline-poster.jpg">
+  <source src="images/jessica/railway-timeline.mp4" type="video/mp4">
+  <source src="images/jessica/railway-timeline.webm" type="video/webm">
+</video>
+```
+[Railway Network Timeline, 1882–1920, by company. [Open it live](https://jjax07.github.io/Sask_Railway_Visualizations/railway_timeline.html)]{.caption}
+:::
+
+::: {.column width="36%"}
+::: {.jj-side .smaller}
+::: {.stats style="flex-wrap: wrap;"}
+::: {.stat style="flex-basis: 40%;"}
+[429]{.num}
+[settlements]{.lbl}
+:::
+
+::: {.stat style="flex-basis: 40%;"}
+[128]{.num}
+[First Nations reserves]{.lbl}
+:::
+
+::: {.stat style="flex-basis: 100%;"}
+[760,234]{.num}
+[1921 census records for Saskatchewan; 220,260 people in the 429 settlements]{.lbl}
+:::
+:::
+
+> Individual case studies were possible; the bigger picture was not.
+
+Now one grad student can hold the whole province in view.
+:::
+:::
+::::
+
+::: notes
+9–10. The clip animates the network year by year: CPR from 1882, then QLSRSC, CNoR and GTPR. Seeing it as a sequence of events, not a fixed fact, raised new questions. When did each company's expansion speed up? Where and when did the infill happen?
+
+Sources: 429 settlements and 128 reserves are nodes in the Neo4j knowledge graph. 760,234 rows are in `Census_Data/1921_Saskatchewan_Subset_no_names.csv`, and 220,260 Person nodes in Neo4j belong to the 429 settlements. Quote: working paper, "The Constraints."
+:::
+
+## Try it, then bring it to the team {#jessica-team}
+
+> Good AI-assisted historical research isn't a shortcut around other people's labour. It's a way of putting that labour into conversation.
+
+::: {.cards}
+::: {.card .accent}
+[August 2026]{.kicker}
+
+#### Back to ArcGIS, for colleagues
+
+My justice-of-the-peace map was code-built. I exported its layers so colleagues could rebuild and restyle it in ArcGIS.
+
+[10,890 appointments · 34,356 sentencing records]{.fact}
+:::
+
+::: {.card}
+[Many hands]{.kicker}
+
+#### Other people's work, joined
+
+Census enumerators, elevator inspectors, postal clerks, railway historians, and 600+ local history contributors.
+:::
+
+::: {.card}
+[2026]{.kicker}
+
+#### Written up together
+
+An Active History series with Chloë Farr and Jacob Polay; an OCR benchmark with Jim, Jacob, Mark Humphries and Lianne Leddy.
+:::
+:::
+
+::: notes
+10–11. I try things alone, fast, and then bring them to the group to workshop. The tools also cut the other way: they let me hand work back in whatever form colleagues use.
+
+Sources: `Summer_JP_Work/ArcGIS_Colleague_Package/README.md` (built 6 August 2026; 10,890 JP appointment rows, 34,356 sentencing rows). Quote and contributors: "Not Just Farming," Active History, 14 October 2026. Working paper series: *Working Papers in Critical Search* 004 (OCR benchmark).
+:::
+
+## Recognizing failure {#jessica-judgement}
+
+:::: {.columns}
+::: {.column width="58%"}
+```{=html}
+<video class="jj-clip" data-autoplay muted playsinline controls poster="images/jessica/time-warped-cartogram-poster.jpg">
+  <source src="images/jessica/time-warped-cartogram.mp4" type="video/mp4">
+  <source src="images/jessica/time-warped-cartogram.webm" type="video/webm">
+</video>
+```
+[A time-warped map: geography redrawn by rail travel time from Saskatoon.]{.caption}
+:::
+
+::: {.column width="42%"}
+```{=html}
+<img class="jj-img" src="images/jessica/failed-heatmap.png" alt="A 429 by 429 travel-time heatmap, too dense to read">
+```
+[Travel times between all 429 settlements.]{.caption}
+
+::: {.jj-side style="margin-top:0.5em;"}
+Both did exactly what I asked. One was disorienting; the other was unreadable at any size.
+
+[Legibility is a functional requirement for a research tool, not a design preference.]{.gold}
+:::
+:::
+::::
+
+::: notes
+11–12. The time-warped map distorted Saskatchewan so that places close by rail appeared close together. A compelling idea, but even I couldn't orient myself in it. The heatmap had readable cells only at a size that didn't fit on screen; at screen size the cells were invisible. I replaced it with a tool that looks at one connection at a time.
+
+Sources: working paper, "What the Failures Made Clear" (Figures 7 and 8). Cartogram clip recorded from `demo_cartogram.html`.
+:::
+
+## A pattern is a question, not a finding {#jessica-question}
+
+:::: {.columns}
+::: {.column width="46%"}
+```{=html}
+<img class="jj-img" src="images/jessica/reserve-surrender-overlay.jpg" alt="Map of settlements coloured by when they were founded relative to the nearest reserve surrender, with surrendered reserve land and railway lines">
+```
+[Settlements by timing relative to the nearest reserve surrender, with surrendered land and railway lines.]{.caption}
+:::
+
+::: {.column width="54%"}
+::: {.jj-side}
+The overlay showed surrendered parcels clustering near railway lines and within reach of the commercial network. That didn't make it a finding. It made it **a question worth testing**.
+
+::: {.stats}
+::: {.stat}
+[+77%]{.num}
+[higher **odds** of surrender for each extra 1,000 rural settlers within 25 km of a reserve (128 reserves)]{.lbl}
+:::
+:::
+
+> The skepticism and professional rigour that AI requires are not a caveat. They are the method.
+:::
+:::
+::::
+
+::: notes
+12–13. This is where judgement matters most. The visualization made the question visible enough to pursue. Then it had to be tested properly.
+
+The test: logistic regression on all 128 reserves, surrendered ~ rural population within 25 km (per 1,000). Odds ratio 1.77, 95% CI 1.44–2.17, p < 0.001, AUC 0.835 (`Reserves_Urban_Spaces/analysis/06b_LOGISTIC_REGRESSION_SYNTHESIS.md`, model M1). Say "odds," not "probability."
+
+Surrender data: Ashley Rabbitskin and Julian Rioux, Mapping Settler Colonialism (54 parcels, 42 reserves). Quote: working paper, Conclusion.
+
+Hand over to Jacob: "My knowledge graph started as a spreadsheet I didn't know was a knowledge graph. Jacob works with them at a much larger scale."
 :::

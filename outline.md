@@ -14,25 +14,24 @@ Thread through the whole talk: **coding agents make computational work cheap and
 3. **On the precipice?** ★ A path forks into **more** (more documents, more maps, more output) and **better** (better questions, better-checked evidence, better arguments). Leave the question open: "As a journal editor, I haven't nailed this down yet."
 4. **What's coming:** Jessica on getting started and visualization as method; Jacob on knowledge graphs and search; Jim back at the end on what "better" might mean.
 
-## 2. Jessica: getting started, and visualization as method (10–15 min, 10–15 slides)
+## 2. Jessica: getting started, and visualization as method (about 13 min, 14 slides)
 
-General and positive. The theme is skills flattening: no longer gated by other people's capacity.
+Drafted 2026-11-13 in `sections/_2-jessica.qmd`. Sources and checked figures are in `research/jessica-source-material.md`. 🎬 marks a recorded clip of one of Jessica's visualizations (`images/jessica/`, made by `scripts/record_jessica_clips.py`).
 
-1. **Divider:** Jessica, plus a one-line description of the project.
-2. **Where I started.** Had never used a command line.
-   *Needs:* project and research question.
-3. **How fast.** ★ A timeline: never used a command line → interactive visualizations on GitHub in **under a month** → [TBD: what was reached at **under six months**]. *Confirm the two milestones and their wording.*
-4. **What "skills flattening" means.** A `.def` box: the gap between knowing what a computer could do and being able to make it do it has narrowed. You are no longer waiting on someone else's time.
-5. **The old way.** Specific software dictated the output (ArcGIS for mapping, for example). Each version of a map took days, so you made few versions.
-6. **The new way.** ★ An iteration loop (ask → build → look → notice a problem → change → rebuild) cycles several times, with a clock beside it reading **days → minutes**.
-7. **Visualization as method.** The visualization is a way of finding things out, including problems in the data, not just the final figure.
-   *Needs:* one example where a visualization showed something unexpected, with a before/after screenshot.
-8. **A worked example.** ★ One visualization shown in 3–4 successive versions, each annotated with what prompted the change.
-   *Needs:* screenshots or a live link.
-9. **Testing at scale, as a grad student.** Problems and outcomes can now be tested at a scale that used to need a funded team.
-10. **Try it, then bring it to the team.** Experiment alone, then workshop it with the group. *Needs:* one example of something brought to the team and what came of it.
-11. **What still needed judgement.** Where did a human have to decide, check or say no? This sets up Jim's close.
-12. **Handoff to Jacob.**
+1. **Divider:** Jessica Jack.
+2. **Where I started.** The research question, the three datasets (knowledge graph, railway GIS, reserve surrenders), and the fact that Jessica had never written code before 9 January 2026.
+3. **How fast.** ★ Timeline from summer 2025 to the June 2026 working paper. Ten days from the first prompt to a public interactive map.
+4. **What is skills flattening?** A `.def` box. $30 CAD a month, one laptop, a mid-tier model, and what was built with them.
+5. **The old way: days per map.** GIS limited the questions; the three constraints (translation, scale, code).
+6. **The new way: minutes per map.** ★ Describe → generate → react → next prompt; days → minutes.
+7. **Visualization as method.** 🎬 One-Hour Railway Corridor, 1890–1920: "railway time rather than driving time."
+8. **What the network showed.** 🎬 Network graph, geographic → network view: junctions like Nokomis and Biggar.
+9. **One question, four tries.** ★ Pie, waffle and treemap rejected: no geography.
+10. **The fourth try: a map.** 🎬 Economic Hierarchy, tiers switched on in turn; 79% of farm-village workers not in farming.
+11. **Testing at scale, as a grad student.** 🎬 Railway timeline, 1882–1920; 429 settlements, 128 reserves, 760,234 census records.
+12. **Try it, then bring it to the team.** The ArcGIS package for colleagues, other people's labour joined, co-written work.
+13. **Recognizing failure.** 🎬 Time-warped cartogram, plus the unreadable heatmap.
+14. **A pattern is a question, not a finding.** The surrender overlay, then the test: +77% odds per 1,000 settlers. Hands over to Jacob in the notes.
 
 ## 3. Jacob: knowledge graphs, GraphRAG, and agentic search (15 min, 15 slides)
 

@@ -34,7 +34,7 @@ Last updated 2026-11-13, at the end of the second working session.
 
 ## Next: the new visual style
 
-1. **Jessica's template.** Jessica is making example slides in PowerPoint (16:9). They're filling one with the text of the Economic Hierarchy slide (`#jessica-hierarchy`). When it arrives, read the `.pptx` for its exact colours, fonts, sizes and spacing, and render it to an image. Don't commit the `.pptx` unless asked.
+1. **Jessica's template:** `Do Better, Not More Template.pptx` in the project root (not committed) is a work in progress. **Don't open or use it until Jessica says it's finished.** Jessica is making it in PowerPoint (16:9) with the text of the Economic Hierarchy slide (`#jessica-hierarchy`). When it's finished, read the `.pptx` for its exact colours, fonts, sizes and spacing, and render it to an image.
 2. **Sample slides on a Claude Design canvas** (1280×720 artboards): the template, plus real deck slides restyled to match (title, speaker divider, a definition slide, a pipeline slide, a visualization slide). Jessica tweaks them there.
 3. **A Claude Design System artifact** recording the chosen look (colours, type, spacing, components), as the shared spec for Jim's and Jacob's agents.
 4. **Copy it into `slides.scss` and the "Look" section of `CLAUDE.md`**, in their own commits, with a heads-up to Jim and Jacob.

@@ -6,15 +6,8 @@ Last updated 2026-11-13, at the end of the first working session.
 
 - **Section 2 is drafted:** `sections/_2-jessica.qmd`, 14 slides, about 13 minutes. The slide-by-slide plan is in `outline.md` (section 2).
 - **Checked in Chrome at 1280×720:** no slide overflows, and every clip autoplays and ends on its final frame.
-- **Jessica has not reviewed the slides yet.** They opened the preview at the end of the session but haven't given feedback yet.
-- **Not pushed.** These commits are on Jessica's machine only and need pushing once they approve:
-  - `Add clips and figures for Jessica's section`
-  - `Draft Jessica's section: from never coding to visualization as method`
-  - `Fit Jessica's section to the CLS audience`
-  - `Document the status of Jessica's section` (this file and the check scripts)
-  - `Set the talk title: Do Better Not More: Historians Working With LLMs`. This touches shared files (`slides.qmd`, `index.qmd`, `CLAUDE.md`, `outline.md`). The title was decided by the speakers on 13 November 2026. Tell Jim when pushing, because `docs/` shows the old title until he re-renders.
-
-  Check with `git log origin/main..HEAD --oneline`, then `git pull --rebase && git push`.
+- **Jessica hasn't given feedback on the slides yet.** They opened the preview at the end of the session but haven't given feedback yet.
+- **Pushed to GitHub on 2026-11-13** (up to `3b710cd`), including the commit that sets the talk title in the shared files. Jim needs to re-render `docs/` for the published deck to show the new title and section 2.
 - **`docs/` was not re-rendered in a commit.** Jim publishes the rendered deck. Local renders (Quarto 1.9.38 here) change library hashes in `docs/` and add a line to `.gitignore`, so restore both before committing: `git checkout -- docs .gitignore && git clean -fd docs`.
 
 ## What's in the repo for this section

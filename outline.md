@@ -8,7 +8,7 @@ Thread through the whole talk: **coding agents make computational work cheap and
 
 ## 1. Jim: opening (5 min, 3–4 slides)
 
-1. **Title**: *Do better, not more*, with three names and a QR code to the deck.
+1. **Title**: *Do Better Not More: Historians Working With LLMs*, with three names and a QR code to the deck.
 2. **Computational history's long minority.** It had a trajectory similar to computational physics but never took off the same way. Why? The skills barrier, the time cost, and the software we were stuck with.
    *Needs:* Jim's framing, and one or two concrete examples or citations. Use no numbers unless they are sourced.
 3. **On the precipice?** ★ A path forks into **more** (more documents, more maps, more output) and **better** (better questions, better-checked evidence, better arguments). Leave the question open: "As a journal editor, I haven't nailed this down yet."

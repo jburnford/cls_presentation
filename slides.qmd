@@ -1,6 +1,6 @@
 ---
-title: "Do better, not more"
-subtitle: "[TBD: subtitle]"
+title: "Do Better Not More"
+subtitle: "Historians Working With LLMs"
 author:
   - Jim Clifford
   - Jessica [TBD]
@@ -9,7 +9,7 @@ format:
   revealjs:
     theme: [default, slides.scss]
     slide-number: true
-    footer: "Do better, not more · CLS [TBD]"
+    footer: "Do Better Not More: Historians Working With LLMs · CLS [TBD]"
     width: 1280
     height: 720
     margin: 0.08

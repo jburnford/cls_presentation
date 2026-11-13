@@ -13,7 +13,7 @@ From `CLS Presentation Rough Notes.docx`. The slide-by-slide plan is in [outline
 
 | | |
 |---|---|
-| Working title | *Do better, not more* |
+| Title | *Do Better Not More: Historians Working With LLMs* (decided 13 November 2026). On the title slide, "Historians Working With LLMs" is the subtitle. |
 | Venue, date, time | Canadian Light Source (CLS), Saskatoon. **In person.** Date and room TBD |
 | Length | about 35–45 minutes, plus questions |
 | Speakers, in order | Jim opens (5 min) → Jessica, general (10–15 min, 10–15 slides) → Jacob, specific and technical (10–15 min, 10–15 slides) → Jim closes (10 min) |

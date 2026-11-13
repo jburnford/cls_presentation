@@ -15,4 +15,3 @@ Jim Clifford is a Professor of History at the University of Saskatchewan and co-
 - https://jimclifford.ca/
 - Imperial Careers atlas: https://jimclifford.ca/col_matching/
 - *Historical Methods*: https://www.tandfonline.com/journals/vhim20
-- *Working Papers in Critical Search*: https://working-papers-in-critical-search.github.io/home/

@@ -197,7 +197,7 @@ Measure every gap from the visible letters (top of the capitals to the baseline)
 
 - **Things that belong together sit closer than things that don't.** A label sits right next to what it labels.
 - **No floating text.** Every piece of text is visibly tied to what it relates to, by its wording (a lead-in ends with a colon), its position or its size. If it can't be tied to anything, cut it.
-- **Fixed header position.** On every slide except the title slide, section dividers and closing slide (and full-screen visuals A and B), the section label and title sit in the same place, so nothing jumps between slides: 128px from the left edge, label top at 92px, title 24px below it, top line or track at 36px.
+- **Fixed header position.** On every slide except the title and closing slides (and full-screen visuals A and B), the section label and title sit in the same place, so nothing jumps between slides: 128px from the left edge, label top at 92px, title 24px below it, top line or track at 36px.
 
 ### Slide types
 
@@ -214,9 +214,9 @@ Every slide uses one of these types. The type sets the lines, header and layout,
   - Visual-slide lines and header.
   - The four sections are stations on a light-blue line across the slide, like a divider's route. *Section 1* to *Section 4* sit in the section-label style an extra-small gap above the stations. Below each station, a small gap down, the section's subject in bold blue at body size, then the speaker in secondary text a small gap below that.
   - Subjects get about 220px each. If one needs two lines, set the break by hand where a reader would pause; never leave it to automatic wrapping. Two lines at most.
-- **Section divider.** Marks a new section, so it keeps its own layout instead of the fixed header position.
-  - Full track in yellow at about 118px.
-  - Label *Section N of 4* at about 236px, with the section's subject as the title (not the speaker's name).
+- **Section divider.** Marks a new section.
+  - Full track in yellow at the top, in the top line's usual place.
+  - Label *Section N of 4* and the title in the fixed header position. The title is the section's subject (not the speaker's name).
   - The speaker's name and role in secondary text, a medium gap below the title.
   - Near the bottom, the section's route: *In this section:*, then the section's labels (for example *Starting point · Method · Results · Checking*) as stops on a single light-blue line, each label an extra-small gap above its circle. Use the same labels above the titles in that section.
 - **Closing slide.** On screen through the questions, as a bookend to the title slide.

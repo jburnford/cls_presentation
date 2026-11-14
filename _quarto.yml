@@ -6,4 +6,5 @@ project:
     - slides.qmd
   resources:
     - images/
+    - fonts/
     - workshop.js

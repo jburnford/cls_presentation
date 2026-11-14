@@ -8,14 +8,16 @@ author:
 format:
   revealjs:
     theme: [default, slides.scss]
-    slide-number: true
-    footer: "Do Better Not More: Historians Working With LLMs · CLS [TBD]"
+    slide-number: c
+    menu: false
+    progress: false
     width: 1280
     height: 720
-    margin: 0.08
+    margin: 0
     link-external-newwindow: true
     transition: fade
     background-transition: fade
+    include-in-header: slides-head.html
     include-after-body: [workshop-responsive.html, slides-motion.html]
 ---
 

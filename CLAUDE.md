@@ -53,7 +53,7 @@ The leading underscore stops Quarto rendering a section as a page of its own. At
 ## Stack
 
 - **Quarto + reveal.js.** The deck is `slides.qmd`, rendered to `docs/slides.html`. Speaker notes go in `::: notes` blocks in the same file.
-- **Slide size** 1280 × 720, `margin: 0.08`, `transition: fade`, slide numbers on, footer showing the public URL.
+- **Slide size** 1280 × 720, `margin: 0` (so the lines run to the screen's edges at any screen shape), `transition: fade`. The slide number shows alone (`slide-number: c`); no footer, menu button or progress bar.
 - **Animations** are plain HTML/CSS/SVG driven by a small script (`slides-motion.html`). There are no animation libraries and no video for explainers. See *Animation system* below.
 - **Optional companion site.** For a workshop, `index.qmd` and step pages render into the same `docs/` as a Quarto website. For a plain talk, a single `slides.qmd` and a short `index.qmd` are enough.
 - **Hosting.** GitHub Pages serves `main` / `docs/`. `quarto render` deletes `docs/.nojekyll`, so recreate it every time.
@@ -70,14 +70,16 @@ date-format: "D MMMM YYYY"
 format:
   revealjs:
     theme: [default, slides.scss]
-    slide-number: true
-    footer: "TBD public URL"
+    slide-number: c
+    menu: false
+    progress: false
     width: 1280
     height: 720
-    margin: 0.08
+    margin: 0
     link-external-newwindow: true
     transition: fade
     background-transition: fade
+    include-in-header: slides-head.html
     include-after-body: [workshop-responsive.html, slides-title-qr.html, slides-motion.html]
 ---
 ```
@@ -89,8 +91,9 @@ format:
 | `slides.qmd` | Front matter and includes only |
 | `sections/_*.qmd` | One file per speaker section, with speaker notes |
 | `outline.md` | Working slide plan; update it when the sections change |
-| `slides.scss` | Theme and component classes (see *Look*) |
-| `fonts/` | Self-hosted Atkinson Hyperlegible Next and Mono files (SIL Open Font License), so the deck never depends on Google Fonts or the venue's internet |
+| `slides.scss` | The theme: draws every slide type in *Look* (lines, fixed header, sizes, colours, gaps). How to write each type: `style-guide/markup.md` |
+| `slides-head.html` | Loads the fonts and turns on the dark version for `?dark` |
+| `fonts/` | Self-hosted Atkinson Hyperlegible Next and Mono, regular and bold, as WOFF (SIL Open Font License), so the deck never depends on Google Fonts or the venue's internet. The font has no ✓, ✗ or arrow characters, so the theme draws those |
 | `slides-motion.html` | The animation driver (below) |
 | `slides-title-qr.html` | QR code to the public URL on the title slide, clickable. *Not added yet: copy [the JHU version](https://github.com/jburnford/imperial-careers-workshop/blob/main/slides-title-qr.html) once the Pages URL is settled, then add it to `include-after-body`.* |
 | `workshop.js`, `workshop-responsive.html` | Touch-screen reading view: phones and tablets up to 1024 px get a scrolling page instead of tiny slides; `?present` forces slides |
@@ -100,7 +103,7 @@ format:
 | `scripts/export_slides.py` | PowerPoint (animated slides embedded as MP4) and a speaker-notes PDF. *Not added yet.* |
 | `exports/` | Export output; git-ignored |
 | `docs/` | Rendered site; committed for Pages |
-| `style-guide/` | The visual style guide: the *Look* and *Writing the slides* sections with example slides. Jessica keeps it in step with this file; if the two disagree, this file wins |
+| `style-guide/` | `index.html`: the visual style guide (the *Look* and *Writing the slides* sections with example slides). `demo.html`: one slide of every type, built with the real theme. `markup.md`: how to write each slide type. Jessica keeps them in step with this file; if they disagree, this file wins |
 
 `.gitignore`: `/.quarto/`, `/_site/`, `*_files/`, `__pycache__/`, `.claude/`, `/exports/`.
 
@@ -108,7 +111,14 @@ format:
 
 The look was designed by Jessica in November 2026 for this audience: light, calm and uncluttered. It replaces the JHU deck's look, so don't copy that deck's colours, fonts or boxed components. There are two versions: **light** (the default) and **dark** (for a darkened room). Only the colours differ; type, sizes, spacing, positions and lines are the same in both. Open the deck with `?dark` for the dark version, the same way `?motion` turns on autoplay.
 
-**See it before you build.** `style-guide/index.html` shows everything in this section as example slides, including every slide type below. Open it in Chrome. **Agents:** the first time you build or change slides under this guide, tell your speaker that the deck's look changed in November 2026, and suggest they open that page before reviewing their slides.
+**See it before you build.** `style-guide/index.html` shows everything in this section as example slides, including every slide type below. `style-guide/demo.html` shows one slide of each type built with the real theme (arrow keys to move; add `?dark` to the address for the dark version). Open both in Chrome.
+
+**The look changed in November 2026: show your speaker before you change anything.** The old JHU components (`.cards`, `.stats`, `.def`, `.flow`, `.kicker`, `.divider-name`, `.gold` and the rest) no longer exist, so slides written with them now render with overlapping text. **Agents working for Jim or Jacob,** in your first session after pulling this change, before you build, change or render any slides:
+
+1. Show your speaker the new look: open `style-guide/index.html` and `style-guide/demo.html` for them.
+2. Read their section and tell them briefly, in a few lines, what will change in their slides: which slides use old components and which slide type each becomes (for example, "slide 3's three cards become a comparison"), and any slide that holds two or three ideas and would need splitting.
+3. Tell them that rendering the deck before their section is rebuilt will show their slides broken.
+4. Then wait. Don't rebuild, restyle or render anything until your speaker says to go ahead. When they do, write each slide type as shown in `style-guide/markup.md`.
 
 ### Principles
 
@@ -305,7 +315,7 @@ Put `.motion` on a slide. Inside a raw HTML block, give each element `data-at="m
 ## Title {#slide-id .motion}
 
 ```{=html}
-<div class="motion-card rise" data-at="400">…</div>
+<p class="rise" data-at="400">…</p>
 <span class="mk" data-at="1200">highlighted phrase</span>
 <svg class="motion-map" viewBox="…"><path class="draw" pathLength="1" data-at="2000" d="…"/></svg>
 <p class="motion-caption rise" data-at="6000">One-line takeaway.</p>

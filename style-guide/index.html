@@ -294,7 +294,7 @@
 <ul>
 <li><strong>Things that belong together sit closer than things that don’t.</strong> A label sits right next to what it labels.</li>
 <li><strong>No floating text.</strong> Every piece of text is visibly tied to what it relates to, by its wording (a lead-in ends with a colon), its position or its size. If it can’t be tied to anything, cut it.</li>
-<li><strong>Fixed header position.</strong> On every slide except the title slide, section dividers and closing slide (and full-screen visuals A and B), the section label and title sit in the same place, so nothing jumps between slides: 128px from the left edge, label top at 92px, title 24px below it, top line or track at 36px.</li>
+<li><strong>Fixed header position.</strong> On every slide except the title and closing slides (and full-screen visuals A and B), the section label and title sit in the same place, so nothing jumps between slides: 128px from the left edge, label top at 92px, title 24px below it, top line or track at 36px.</li>
 </ul>
 <div class="ex" data-ex="spacing"></div>
 <h3 id="slide-types">Slide types</h3>
@@ -314,10 +314,10 @@
 <li>The four sections are stations on a light-blue line across the slide, like a divider’s route. <em>Section 1</em> to <em>Section 4</em> sit in the section-label style an extra-small gap above the stations. Below each station, a small gap down, the section’s subject in bold blue at body size, then the speaker in secondary text a small gap below that.</li>
 <li>Subjects get about 220px each. If one needs two lines, set the break by hand where a reader would pause; never leave it to automatic wrapping. Two lines at most.</li>
 </ul></li>
-<li><strong>Section divider.</strong> Marks a new section, so it keeps its own layout instead of the fixed header position.
+<li><strong>Section divider.</strong> Marks a new section.
 <ul>
-<li>Full track in yellow at about 118px.</li>
-<li>Label <em>Section N of 4</em> at about 236px, with the section’s subject as the title (not the speaker’s name).</li>
+<li>Full track in yellow at the top, in the top line’s usual place.</li>
+<li>Label <em>Section N of 4</em> and the title in the fixed header position. The title is the section’s subject (not the speaker’s name).</li>
 <li>The speaker’s name and role in secondary text, a medium gap below the title.</li>
 <li>Near the bottom, the section’s route: <em>In this section:</em>, then the section’s labels (for example <em>Starting point · Method · Results · Checking</em>) as stops on a single light-blue line, each label an extra-small gap above its circle. Use the same labels above the titles in that section.</li>
 </ul></li>
@@ -492,8 +492,8 @@
   const arrow = `<svg width="60" height="24"><path d="M2 12 H54 M44 3 L56 12 L44 21" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   const S = {
-    divider: (t) => `${fullTrack(118, t.y)}
-      <div class="abs col" style="left:128px; top:236px">
+    divider: (t) => `${fullTrack(36, t.y)}
+      <div class="abs col" style="left:128px; top:92px">
         <div class="col" style="gap:24px"><p class="label">Section 2 of 4</p><h2 class="title">Placeholder section title</h2></div>
         <p class="second" style="margin-top:48px">Speaker name, role</p></div>
       <div class="abs col" style="left:128px; top:508px; gap:24px">
@@ -560,9 +560,9 @@
     spacing: () => `<p class="cap">Gaps shaded (shading is for this page only): orange = small, blue = medium, green = large.</p>
       <div class="gallery"><figure><img class="shot" src="guide-gaps-text.png" alt="Text slide with gaps shaded"><figcaption>Text slide</figcaption></figure>
       <figure><img class="shot" src="guide-gaps-visual.png" alt="Visual slide with gaps shaded"><figcaption>Visual slide</figcaption></figure></div>`,
-    slidetypes: () => `<p class="cap">The four slide types, light version.</p>
+    slidetypes: () => `<p class="cap">Four of the slide types drawn out: section divider, text slide, visual slide, and error and fix. Light version.</p>
       <div class="gallery">${fig("divider","light","Section divider")}${fig("text","light","Text slide")}${fig("visual","light","Visual slide")}${fig("fix","light","Error and fix")}</div>
-      <p class="cap" style="margin-top:24px">The same four, dark version.</p>
+      <p class="cap" style="margin-top:24px">The same four, dark version. The other slide types follow below as pictures.</p>
       <div class="gallery">${fig("divider","dark","Section divider")}${fig("text","dark","Text slide")}${fig("visual","dark","Visual slide")}${fig("fix","dark","Error and fix")}</div>`,
   };
   document.querySelectorAll(".ex").forEach(el => { el.innerHTML = EX[el.dataset.ex](); });

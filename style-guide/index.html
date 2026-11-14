@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLS deck style guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Atkinson+Hyperlegible+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#F4F2EC; color:#2a2d30; font-family:"Atkinson Hyperlegible Next", system-ui, sans-serif; font-size:18px; line-height:1.55; }
+  main { max-width:1340px; margin:0 auto; padding:40px 24px 120px; }
+  .doc { max-width:860px; }
+  header.top { border-bottom:3px solid #E3B505; padding-bottom:20px; margin-bottom:28px; }
+  header.top h1 { font-size:34px; margin:0 0 6px; color:#22272B; }
+  header.top p { margin:4px 0; color:#5C6166; }
+  h2 { font-size:28px; margin:48px 0 8px; color:#22272B; }
+  h3 { font-size:23px; margin:44px 0 8px; color:#22272B; padding-top:12px; border-top:1px solid #dcd7cb; }
+  code { font-family:"Atkinson Hyperlegible Mono", monospace; font-size:.88em; background:#e9e5da; padding:1px 5px; border-radius:3px; }
+  table { border-collapse:collapse; margin:12px 0 18px; background:#FDFCF9; }
+  th, td { text-align:left; padding:7px 14px; border-bottom:1px solid #e3dfd4; vertical-align:top; }
+  th { background:#ebe7dc; }
+  li { margin:4px 0; }
+  .chip { display:inline-block; width:15px; height:15px; border-radius:3px; vertical-align:-2px; margin-right:5px; border:1px solid #0002; }
+  .note { background:#FDFCF9; border-left:4px solid #7FA7D6; padding:12px 16px; margin:16px 0; }
+  .other li code { white-space:normal; display:block; padding:6px 8px; }
+
+  .ex { margin:20px 0 8px; }
+  .ex .cap { font-size:15px; color:#5C6166; margin:0 0 8px; }
+  .typegal { display:grid; grid-template-columns:repeat(auto-fill, minmax(560px, 1fr)); gap:24px; margin:20px 0 8px; }
+  .typegal .cap { grid-column:1 / -1; font-size:15px; color:#5C6166; margin:0; }
+  .typegal figure { margin:0; }
+  .typegal img { width:100%; display:block; border:1px solid #DDD8CC; }
+  .typegal figcaption { font-size:15px; color:#5C6166; margin-top:6px; }
+  .gallery { display:grid; grid-template-columns:repeat(2, 640px); gap:18px 20px; }
+  .gallery figure { margin:0; }
+  .gallery figcaption { font-size:14px; color:#5C6166; margin-top:4px; }
+  .half { zoom:.5; }
+  .shot { width:640px; border:1px solid #d6d1c5; }
+  @media (max-width: 1340px) { .gallery { grid-template-columns:640px; } }
+
+  /* ---------- slides ---------- */
+  .slide { position:relative; width:1280px; height:720px; background:var(--bg); overflow:hidden; font-family:"Atkinson Hyperlegible Next", sans-serif; line-height:normal; }
+  .slide * { margin:0; text-box: trim-both cap alphabetic; }
+  .slide .abs { position:absolute; }
+  .slide .col { display:flex; flex-direction:column; align-items:flex-start; }
+  .slide svg.line { position:absolute; left:0; width:1280px; }
+  .slide .label { font-size:22px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--second); }
+  .slide .title { font-size:54px; font-weight:700; color:var(--title); }
+  .slide .body { font-size:30px; line-height:1.4; color:var(--body); }
+  .slide .second { font-size:24px; line-height:1.4; color:var(--second); }
+  .slide .num { font-size:64px; font-weight:700; color:var(--em); }
+  .slide .head { color:var(--em); font-weight:700; }
+  .slide .item { position:relative; padding-left:1em; }
+  .slide .item::before { content:"•"; position:absolute; left:0; color:var(--second); }
+  .slide .pg { right:48px; bottom:20px; font-size:20px; color:var(--second); }
+  .slide .vis { background:var(--panel); display:grid; place-items:center; }
+  .slide .fx-head { font-size:30px; font-weight:700; display:flex; align-items:center; gap:12px; }
+  .slide .fx-val { font-size:44px; font-weight:700; }
+  .slide .struck { text-decoration:line-through; text-decoration-thickness:4px; }
+  .slide .q { border-left:3px solid var(--lb); padding-left:32px; display:flex; flex-direction:column; gap:24px; }
+  .slide .raw { font-family:"Atkinson Hyperlegible Mono", monospace; font-size:26px; line-height:1.5; color:var(--body); }
+  .strip { width:1280px; height:90px; position:relative; overflow:hidden; }
+  .strip svg.line { position:absolute; left:0; width:1280px; }
+  .ex { width:min(1300px, calc(100vw - 48px)); }
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+  <h1>CLS deck style guide</h1>
+  <p>The look for <strong>Do Better, Not More</strong>, designed by Jessica Jack in November 2026 for a room of scientists. The text below is the same as the Look and Writing the slides sections of <code>CLAUDE.md</code>; the slides are examples. If the two ever disagree, <code>CLAUDE.md</code> wins.</p>
+  <p>All slide wording is placeholder. Examples are shown at half size. Present the deck from Chrome.</p>
+</header>
+
+<div class="doc">
+<h2>Look</h2>
+
+<p>The look was designed by Jessica in November 2026 for this audience: light, calm and uncluttered. It replaces the JHU deck’s look, so don’t copy that deck’s colours, fonts or boxed components. There are two versions: <strong>light</strong> (the default) and <strong>dark</strong> (for a darkened room). Only the colours differ; type, sizes, spacing, positions and lines are the same in both. Open the deck with <code>?dark</code> for the dark version, the same way <code>?motion</code> turns on autoplay.</p>
+<h3 id="principles">Principles</h3>
+<ol type="1">
+<li><strong>Less clutter, more room.</strong> One idea per slide; detail goes in the speaker notes. Minimal is not bare: keep the claim, the figure and the concrete examples; cut repetition and decoration, not explanation.</li>
+<li><strong>Generous space</strong> between elements.</li>
+<li><strong>Visual character comes from railway-style lines</strong>, not boxes, cards or panels.</li>
+<li><strong>A light, neat background.</strong></li>
+<li><strong>Sans-serif type throughout</strong>, including headings and quotations (serif type is harder for many dyslexic readers).</li>
+<li><strong>On a visual slide, the visual gets most of the space.</strong> A recorded clip plays in full, app interface included; crop only static images.</li>
+</ol>
+<h3 id="colour">Colour</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Role</th>
+<th>Light</th>
+<th>Dark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Background</td>
+<td><code>#FDFCF9</code> warm off-white</td>
+<td><code>#1C1B19</code> warm charcoal</td>
+</tr>
+<tr>
+<td>Titles</td>
+<td><code>#22272B</code></td>
+<td><code>#E8DFCB</code> cream</td>
+</tr>
+<tr>
+<td>Body text</td>
+<td><code>#404040</code></td>
+<td><code>#C4C3C0</code></td>
+</tr>
+<tr>
+<td>Section labels, captions, number labels, slide numbers, bullets</td>
+<td><code>#5C6166</code></td>
+<td><code>#9A9790</code></td>
+</tr>
+<tr>
+<td>Emphasis: list headers, key phrases, big numbers</td>
+<td><code>#1F5F96</code></td>
+<td><code>#6699D3</code></td>
+</tr>
+<tr>
+<td>Error / before</td>
+<td><code>#B03A1E</code></td>
+<td><code>#DC7559</code></td>
+</tr>
+<tr>
+<td>Fixed / after</td>
+<td><code>#1B7360</code></td>
+<td><code>#4FAA90</code></td>
+</tr>
+<tr>
+<td>Lines (never text)</td>
+<td>yellow <code>#E3B505</code>, light blue <code>#7FA7D6</code></td>
+<td>gold <code>#9A7424</code>, blue <code>#4D719B</code></td>
+</tr>
+<tr>
+<td>Placeholder or empty visual area</td>
+<td><code>#EEEBE3</code></td>
+<td><code>#2B2A27</code></td>
+</tr>
+<tr>
+<td>Chart bars (all but the one the slide is about)</td>
+<td><code>#8C8880</code></td>
+<td><code>#77746D</code></td>
+</tr>
+<tr>
+<td>Chart baseline</td>
+<td><code>#B7B3AA</code></td>
+<td><code>#5E5B55</code></td>
+</tr>
+<tr>
+<td>Highlight on animated slides, main</td>
+<td><code>#F6E39A</code> pale yellow; text keeps its colour</td>
+<td><code>#6C5119</code> gold; highlighted text turns cream <code>#E8DFCB</code></td>
+</tr>
+<tr>
+<td>Highlight on animated slides, second</td>
+<td><code>#D9E5F3</code> pale blue</td>
+<td><code>#2C4058</code> blue</td>
+</tr>
+</tbody>
+</table>
+<p>Rules:</p>
+<ul>
+<li><strong>Colour never carries meaning on its own.</strong> Meaning comes from words and shapes: a label, a ✗ or ✓ icon, a strike-through, the words <em>Before</em> and <em>After</em>. Colour reinforces them. A wrong value gets the error colour <strong>and</strong> a ✗ or strike-through; a corrected one gets the fixed colour <strong>and</strong> a ✓ or <em>After</em>.</li>
+<li><strong>Line colours are never used for text or numbers.</strong> They are too faint to read. Lines are decoration only: a route-map stop always has a text label. The line colours also draw routes and arrows, and pale tints of them make the highlights on animated slides.</li>
+<li><strong>Emphasis is always bold or large as well as blue.</strong> Never use the emphasis colour alone inside a sentence.</li>
+<li><strong>The most important text has the strongest contrast:</strong> titles first, then body text, then labels and captions.</li>
+<li><strong>No pure white text in the dark version</strong> (it blurs for some readers).</li>
+<li>All text colours pass 4.5 : 1 against their background, and the error and fixed colours stay distinct for red-green colour blindness. Check any new colour against both before adding it.</li>
+</ul>
+<div class="ex" data-ex="colour"></div>
+<h3 id="type">Type</h3>
+<ul>
+<li><strong>Atkinson Hyperlegible Next</strong>, regular (400) and bold (700) only; no semibold or light weights. It was designed for low-vision readers and keeps confusable characters (I l 1, O 0) distinct.</li>
+<li><strong>Atkinson Hyperlegible Mono</strong> only for raw machine text: OCR output, data records, pipeline output.</li>
+<li>Both are self-hosted in <code>fonts/</code>.</li>
+<li><strong>No italics anywhere.</strong> Emphasis is bold only. Titles of works go in the source line as plain text.</li>
+<li>Left-aligned, ragged right; body line height 1.4. The one exception is the number column on a big-numbers slide (see <em>Slide types</em>).</li>
+</ul>
+<p>One fixed set of sizes for every slide (px at 1280 × 720). Nothing the audience reads is smaller than 22px.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Role</th>
+<th>Size</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>54</td>
+<td>bold</td>
+</tr>
+<tr>
+<td>Big number; the title on the title and closing slides; the sentence on a statement slide</td>
+<td>64</td>
+<td>bold (a quoted statement regular)</td>
+</tr>
+<tr>
+<td>Body text, list items, list headers</td>
+<td>30</td>
+<td>regular; list headers bold</td>
+</tr>
+<tr>
+<td>Raw machine text (Mono)</td>
+<td>26</td>
+<td>regular</td>
+</tr>
+<tr>
+<td>Secondary: captions, number labels, source lines, the speaker line on a divider</td>
+<td>24</td>
+<td>regular</td>
+</tr>
+<tr>
+<td>Section label (above the title)</td>
+<td>22</td>
+<td>bold, uppercase, letter-spaced 0.12em; one or two words</td>
+</tr>
+<tr>
+<td>Slide number</td>
+<td>20</td>
+<td>regular</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Quotations from printed sources:</strong> body text in quotation marks, indented beside a 3px vertical line in the light-blue line colour, with the source line (title, year, page) below it in secondary text. <strong>Raw machine text</strong> uses the same lined indent in Mono, with its file or record ID as the source line. No large decorative quotation marks.</p>
+<div class="ex" data-ex="type"></div>
+<h3 id="lines">Lines</h3>
+<p>Three variants, each 3px, running the full width of the slide:</p>
+<ul>
+<li><strong>Full track:</strong> dash-dot / solid / dash-dot, 10px apart.</li>
+<li><strong>Half track:</strong> dash-dot + solid, 10px apart.</li>
+<li><strong>Single line:</strong> solid.</li>
+</ul>
+<p>The dash-dot pattern is <code>stroke-dasharray: 22 9 3 9</code>. Which line goes where is set by the slide type (below), not chosen per slide, so the deck stays predictable. Lines are not a hierarchy and carry no meaning.</p>
+<ul>
+<li>When a slide has two half tracks, the bottom one is the mirror image of the top one.</li>
+<li>Never place two tracks close together, and never put a track behind or between lines of text. (Dense stripes can cause visual discomfort.)</li>
+<li>The bottom track appears only on sparse text slides and on the title and closing slides, never on visual slides.</li>
+</ul>
+<p><strong>Arrows.</strong> The deck has one arrow for “this came next”. It has a solid 3px shaft in the light-blue line colour with an open arrowhead (14px deep, 9px either side). A dash-dot line runs 10px above and below the shaft, one dash and one dot long, ending 12px clear of the arrowhead, like a short piece of full track. Use it between visuals in a sequence, between the steps of an error-and-fix slide, and between a source and its record. The return line of a cycle keeps a plain open arrowhead.</p>
+<div class="ex" data-ex="lines"></div>
+<h3 id="spacing-and-position">Spacing and position</h3>
+<p>Measure every gap from the visible letters (top of the capitals to the baseline), not from text boxes. In CSS, <code>text-box: trim-both cap alphabetic</code> makes boxes hug the letters. It works in Chrome and Safari, not Firefox, so <strong>present from Chrome</strong>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Size</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extra small</td>
+<td>12px</td>
+<td>Text attached to a mark: a route-map stop label above its circle, a word beside its icon</td>
+</tr>
+<tr>
+<td>Small</td>
+<td>24px</td>
+<td>Things that belong together: label and title, list header and its items, one list item and the next, a number and its label, a quotation and its source line, a lead-in and what it introduces</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>48px</td>
+<td>Separate groups: two list columns, a visual and its side column, two numbers in a side column, the title and the visual on a visual slide, a divider’s title and its speaker line</td>
+</tr>
+<tr>
+<td>Large</td>
+<td>96px</td>
+<td>Title to content on a text slide</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Things that belong together sit closer than things that don’t.</strong> A label sits right next to what it labels.</li>
+<li><strong>No floating text.</strong> Every piece of text is visibly tied to what it relates to, by its wording (a lead-in ends with a colon), its position or its size. If it can’t be tied to anything, cut it.</li>
+<li><strong>Fixed header position.</strong> On every slide except the title slide, section dividers and closing slide (and full-screen visuals A and B), the section label and title sit in the same place, so nothing jumps between slides: 128px from the left edge, label top at 92px, title 24px below it, top line or track at 36px.</li>
+</ul>
+<div class="ex" data-ex="spacing"></div>
+<h3 id="slide-types">Slide types</h3>
+<p>Every slide uses one of these types. The type sets the lines, header and layout, so the deck stays predictable. If a planned slide holds two or three ideas, split it instead of stretching a type to fit.</p>
+<p><strong>Opening and closing</strong></p>
+<ul>
+<li><strong>Title slide.</strong>
+<ul>
+<li>Full track in yellow at the top and full track in light blue at the bottom, each a large gap from the content (about 78px from the slide’s edges). The content is centred between them.</li>
+<li>Left, in a 704px column: <em>Canadian Light Source · date</em> in the section-label style; a small gap below, the title on one line at 64px bold; a small gap below, the subtitle in body text.</li>
+<li>A medium gap below the subtitle, the speakers stacked one per line in secondary text: <em>Dr. Jim Clifford</em>, <em>Jacob Polay, PhD Student</em>, <em>Jessica Jack, PhD Student</em>. A small gap below them, <em>University of Saskatchewan</em> in the section-label style.</li>
+<li>Right: the QR code to the deck, 240px, its top level with the label, with <em>Follow along:</em> a small gap above it and the short address a small gap below. In the dark version the code keeps a light square behind it, because some phone cameras can’t read a light-on-dark code.</li>
+</ul></li>
+<li><strong>Talk overview.</strong> Comes right after the title slide.
+<ul>
+<li>Visual-slide lines and header.</li>
+<li>The four sections are stations on a light-blue line across the slide, like a divider’s route. <em>Section 1</em> to <em>Section 4</em> sit in the section-label style an extra-small gap above the stations. Below each station, a small gap down, the section’s subject in bold blue at body size, then the speaker in secondary text a small gap below that.</li>
+<li>Subjects get about 220px each. If one needs two lines, set the break by hand where a reader would pause; never leave it to automatic wrapping. Two lines at most.</li>
+</ul></li>
+<li><strong>Section divider.</strong> Marks a new section, so it keeps its own layout instead of the fixed header position.
+<ul>
+<li>Full track in yellow at about 118px.</li>
+<li>Label <em>Section N of 4</em> at about 236px, with the section’s subject as the title (not the speaker’s name).</li>
+<li>The speaker’s name and role in secondary text, a medium gap below the title.</li>
+<li>Near the bottom, the section’s route: <em>In this section:</em>, then the section’s labels (for example <em>Starting point · Method · Results · Checking</em>) as stops on a single light-blue line, each label an extra-small gap above its circle. Use the same labels above the titles in that section.</li>
+</ul></li>
+<li><strong>Closing slide.</strong> On screen through the questions, as a bookend to the title slide.
+<ul>
+<li>The title slide’s tracks and QR code, in exactly the same places.</li>
+<li><em>Questions</em> at 64px bold. A medium gap below, one row per speaker in the title slide’s order: the name in bold blue at 24px in a 220px left column, and a medium gap to its right, their project links (24px, body colour, underlined), stacked a small gap apart. Speakers sit a medium gap apart.</li>
+<li>Links are bare titles with no type tags. They can be clicked in the deck; the QR code is how people in the room reach them.</li>
+</ul></li>
+</ul>
+<p><strong>Text</strong></p>
+<ul>
+<li><strong>Text slide.</strong>
+<ul>
+<li>Half track in yellow at the top, with the mirrored light-blue half track at about 628px.</li>
+<li>Label and title in the fixed position, then content a large gap below.</li>
+<li>Two lists sit in 452px columns with a medium gap between them. Each has a bold blue header the same size as its items, and bullet markers.</li>
+</ul></li>
+<li><strong>Statement.</strong> One sentence on its own slide: a claim, a quotation or a question for the room.
+<ul>
+<li>Text-slide lines. The section label stays in its fixed place; there is no title.</li>
+<li>The sentence at 64px bold in the title colour, left-aligned at 128px and centred vertically between the tracks. About three short lines at most, broken by hand where a reader would pause.</li>
+<li>A quotation keeps the lined indent and source line, at 64px regular, since they are someone else’s words.</li>
+</ul></li>
+<li><strong>Definition.</strong> Explains a term where it first comes up.
+<ul>
+<li>Text-slide lines and header.</li>
+<li>Dictionary layout: the term in bold blue at body size in a 260px left column. A medium gap to its right, the definition in body text (one or two plain sentences), and a small gap below that, <em>For example:</em> and one short concrete case in secondary text.</li>
+<li>Two terms stack as two rows a medium gap apart.</li>
+<li>Keep the term in its own column; don’t stack it above the definition. Its own position is what shows the reader it is the thing being defined.</li>
+</ul></li>
+<li><strong>Big numbers.</strong> Two to four headline figures, without a visual.
+<ul>
+<li>Text-slide lines and header.</li>
+<li>The numbers (64px bold, emphasis blue) stack in a 330px left column, right-aligned, each with its label in body text a small gap to its right, so each row reads as a sentence (<em>12,345 documents in the collection</em>). Rows sit a medium gap apart.</li>
+<li>The right-aligned number column is the one exception to left-aligned text.</li>
+</ul></li>
+<li><strong>Comparison.</strong> Two to four things side by side.
+<ul>
+<li>The text slide’s two lists: each item a bold blue header with bullets beneath, in 452px columns a medium gap apart. Four items make a two-by-two grid, each a header with one line of secondary text.</li>
+<li>A choice between two paths (the <em>more</em> or <em>better</em> fork) may instead use a fork, with visual-slide lines and header: a light-blue line enters from the left and splits, one branch to each option, each ending at a station with the option’s header and bullets an extra-small gap to its right.</li>
+<li>Returning to a comparison later in the talk: the same layout, with the side no longer argued for set in secondary grey (header too) and the other side given its new points. The section label changes.</li>
+</ul></li>
+<li><strong>Error and fix.</strong> Same lines and header as a text slide.
+<ul>
+<li>Three steps from left to right, joined by arrows (see <em>Arrows</em>):
+<ol type="1">
+<li>✗ <em>Before</em>: the wrong value, struck through, in the error colour.</li>
+<li><em>Checked</em>: what it was checked against.</li>
+<li>✓ <em>After</em>: the corrected value in the fixed colour.</li>
+</ol></li>
+<li>Each step has a one-line caption in secondary text.</li>
+</ul></li>
+</ul>
+<p><strong>Visuals</strong></p>
+<ul>
+<li><strong>Visual slide.</strong>
+<ul>
+<li>Single yellow line at the top; no bottom track.</li>
+<li>Label and title in the fixed position.</li>
+<li>The visual sits a medium gap below the title, 800 × 450 at 128px from the left. Show a recorded clip in full.</li>
+<li>An optional side column sits a medium gap to the right, for a claim, a big number and its label, or short examples.</li>
+</ul></li>
+<li><strong>Two or three visuals side by side.</strong> A before and after, a series of attempts, or two or three views of one thing.
+<ul>
+<li>Visual-slide lines and header. The visuals sit a medium gap below the title, filling 1024px, about 340px tall, with 84px between them when there are arrows and a medium gap when there aren’t.</li>
+<li>Each visual has a label a small gap above it and a one-line caption a small gap below. A failure gets a ✗ and the error colour; a fix or success gets a ✓ and the fixed colour; a neutral view is bold blue with no icon.</li>
+<li>When the visuals are a sequence, an arrow sits in each gap. Views that aren’t a sequence have no arrows.</li>
+</ul></li>
+<li><strong>Chart.</strong> For bar charts.
+<ul>
+<li>Visual-slide lines and header. The chart fills the 800 × 450 visual area, and the side column holds the claim as a big number and its label.</li>
+<li>Horizontal bars, sorted, 28px thick, with a 4px rounded tip and a square end at the baseline. Each bar’s name (24px, body colour) is right-aligned 12px left of a 2px baseline, and its value (24px, secondary) sits 12px past the tip. No axis ticks or gridlines.</li>
+<li>Ordinary bars are the chart grey. The bar the slide is about is emphasis blue <strong>and</strong> has its name and value in bold.</li>
+<li>A worse bar is the error colour, with a ✗, its value and the word <em>worse</em> in bold error colour, and its name in bold.</li>
+</ul></li>
+<li><strong>Source beside its record.</strong>
+<ul>
+<li>Visual-slide lines and header.</li>
+<li>Left, about 460px wide: the source, as OCR text in Mono with the lined indent and its file ID as the source line, or as a scan with its file ID below.</li>
+<li>An arrow in an 84px gap.</li>
+<li>Right: the record exactly as the pipeline wrote it, in Mono with the same lined indent and its record ID.</li>
+<li>On an animated slide, each phrase and the field made from it highlight together (see <em>Animation system</em>).</li>
+</ul></li>
+<li><strong>Full-screen visual.</strong> For a visual that needs every pixel, such as a recorded demo. This is the only type where the slide’s owner chooses the layout, because the kind of demo may decide it:
+<ul>
+<li><strong>A. Edge to edge:</strong> 1280 × 720, with no lines, label, title or slide number. The largest; the slide before it, or the speaker, has to say what it shows.</li>
+<li><strong>B. Section label only:</strong> the yellow line and the label in place, no title; the clip 988 × 556 a small gap below the label.</li>
+<li><strong>C. Usual header:</strong> the visual-slide header with no side column; the clip 832 × 468.</li>
+<li>Always show the clip whole at 16 : 9, never cropped. Record it at 1280 × 720 with the app or browser zoomed in so its text is large; that matters more for legibility than the slide size.</li>
+</ul></li>
+<li><strong>Process.</strong> A sequence of stages.
+<ul>
+<li>Visual-slide lines and header.</li>
+<li>The stages are stations on a light-blue line across the slide. Each stage name (bold blue, body size) sits a small gap above its station, and a short description (secondary) a small gap below.</li>
+<li>At most about five short stages; more means splitting the slide.</li>
+<li><strong>Cycle:</strong> after the last station the line turns down, runs back under the stations and up into the first station, ending in an open arrowhead, with <em>Repeat</em> in secondary text on the return line. Descriptions sit to the right of each station, clear of the return line. The main line still runs full width past the last station, because a cycle sits inside a larger research process.</li>
+<li><strong>Timeline:</strong> a date in place of each stage name, with the stations evenly spaced, so the spacing implies no time scale.</li>
+</ul></li>
+</ul>
+<div class="ex" data-ex="slidetypes"></div>
+<div class="typegal"><p class="cap">The new slide types, light version, as chosen (placeholder wording):</p><figure><img src="gallery/00.png" alt="Title slide"><figcaption>Title slide</figcaption></figure><figure><img src="gallery/01.png" alt="Talk overview"><figcaption>Talk overview</figcaption></figure><figure><img src="gallery/02.png" alt="Closing slide"><figcaption>Closing slide</figcaption></figure><figure><img src="gallery/03.png" alt="Statement"><figcaption>Statement</figcaption></figure><figure><img src="gallery/04.png" alt="Definition"><figcaption>Definition</figcaption></figure><figure><img src="gallery/05.png" alt="Big numbers"><figcaption>Big numbers</figcaption></figure><figure><img src="gallery/06.png" alt="Comparison"><figcaption>Comparison</figcaption></figure><figure><img src="gallery/07.png" alt="Comparison: the fork, for a choice between two paths"><figcaption>Comparison: the fork, for a choice between two paths</figcaption></figure><figure><img src="gallery/08.png" alt="Two or three visuals side by side, with arrows"><figcaption>Two or three visuals side by side, with arrows</figcaption></figure><figure><img src="gallery/09.png" alt="Chart"><figcaption>Chart</figcaption></figure><figure><img src="gallery/10.png" alt="Source beside its record"><figcaption>Source beside its record</figcaption></figure><figure><img src="gallery/11.png" alt="Full-screen visual, A: edge to edge"><figcaption>Full-screen visual, A: edge to edge</figcaption></figure><figure><img src="gallery/12.png" alt="Full-screen visual, B: section label only"><figcaption>Full-screen visual, B: section label only</figcaption></figure><figure><img src="gallery/13.png" alt="Full-screen visual, C: usual header"><figcaption>Full-screen visual, C: usual header</figcaption></figure><figure><img src="gallery/14.png" alt="Process"><figcaption>Process</figcaption></figure><figure><img src="gallery/15.png" alt="Process: cycle"><figcaption>Process: cycle</figcaption></figure><figure><img src="gallery/16.png" alt="Process: timeline"><figcaption>Process: timeline</figcaption></figure><figure><img src="gallery/17.png" alt="Animated slide: main and second highlight (final frame)"><figcaption>Animated slide: main and second highlight (final frame)</figcaption></figure><figure><img src="gallery/18.png" alt="Animated slide: target, rejected and chosen rows (final frame)"><figcaption>Animated slide: target, rejected and chosen rows (final frame)</figcaption></figure><figure><img src="gallery/19.png" alt="Animated slide: disagreement (final frame)"><figcaption>Animated slide: disagreement (final frame)</figcaption></figure></div>
+<h3 id="replacing-the-jhu-decks-boxed-components">Replacing the JHU deck’s boxed components</h3>
+<table>
+<thead>
+<tr>
+<th>JHU component</th>
+<th>Use instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.flow</code> pipeline</td>
+<td>Process</td>
+</tr>
+<tr>
+<td><code>.def</code> definition box</td>
+<td>Definition</td>
+</tr>
+<tr>
+<td><code>.cards</code></td>
+<td>Comparison</td>
+</tr>
+<tr>
+<td><code>.stats</code></td>
+<td>Big numbers</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Writing the slides</h2>
+<h2 id="writing-the-slides">Writing the slides</h2>
+<ul>
+<li><strong>Audience first.</strong> Gloss jargon where it first appears (a definition slide, under <em>Slide types</em>), and keep a glossary if there’s a companion site.</li>
+<li><strong>Titles name the subject, plainly and briefly.</strong> Someone who reads only the title should know what the slide is about. Keep titles short, and never repeat the slide’s body. No metaphors, idioms or <em>from X to Y</em> phrasing.</li>
+<li><strong>Lists look like lists.</strong> List items get bullet markers; never rely on colour and weight alone to separate items from their header.</li>
+<li><strong>Break lines where a reader would pause.</strong> End a line at a phrase boundary, start the next line with connecting words (<em>then</em>, <em>and</em>), and never leave one word stranded on its own line.</li>
+<li><strong>Every detail on the slide serves the point.</strong> Provenance such as a count date goes in the speaker notes unless the date matters to the argument.</li>
+<li><strong>Fill the slide with substance.</strong> Use a diagram, a real source excerpt or a worked example, not three lines of big text. Equally, one idea per slide; move detail to speaker notes or supporting pages.</li>
+<li><strong>Real material only.</strong> Use real scans, real OCR and real pipeline output. Cite the file or record ID in the notes. Never invent a number, date, name or identifier; every figure must trace to a file.</li>
+<li><strong>Honest rates.</strong> Say how a sample was selected, and never present a hand-picked set as a rate. Give measured cost and throughput (where it ran, how long it took, what it cost).</li>
+<li><strong>Errors are shown as completed corrections.</strong> Show the found error, the source check, the fix, the rebuilt result and the check across affected records. Label old screenshots as <em>before</em>.</li>
+<li><strong>Speaker notes on every slide.</strong> Start with the minute range (<code>4–5.</code>), then what to say, where each number comes from, and one question for the room if there is one.</li>
+<li><strong>Interaction.</strong> Use QR codes and clickable URLs for anything the audience opens. Keep at most one network-dependent demo, with a saved fallback.</li>
+<li><strong>Video.</strong> For a background video slide, use <code>&lt;video data-autoplay controls muted playsinline poster=…&gt;</code> with an MP4 and a WebM fallback and a direct link. Don’t also set the poster as a reveal background image.</li>
+</ul>
+
+
+</div>
+</main>
+
+<script>
+  const DD = "22 9 3 9";
+  const THEMES = {
+    light: { bg:"#FDFCF9", panel:"#EEEBE3", title:"#22272B", body:"#404040", second:"#5C6166", em:"#1F5F96", err:"#B03A1E", ok:"#1B7360", y:"#E3B505", lb:"#7FA7D6" },
+    dark:  { bg:"#1C1B19", panel:"#2B2A27", title:"#E8DFCB", body:"#C4C3C0", second:"#9A9790", em:"#6699D3", err:"#DC7559", ok:"#4FAA90", y:"#9A7424", lb:"#4D719B" },
+  };
+  const vars = (t) => Object.entries(t).map(([k,v]) => `--${k}:${v}`).join(";");
+  const halfTrack = (y, c, mirror) => `<svg class="line" style="top:${y}px" height="16">
+      <line x1="0" y1="${mirror?12:2}" x2="1280" y2="${mirror?12:2}" stroke="${c}" stroke-width="3" stroke-dasharray="${DD}"/>
+      <line x1="0" y1="${mirror?2:12}" x2="1280" y2="${mirror?2:12}" stroke="${c}" stroke-width="3"/></svg>`;
+  const fullTrack = (y, c) => `<svg class="line" style="top:${y}px" height="26">
+      <line x1="0" y1="2" x2="1280" y2="2" stroke="${c}" stroke-width="3" stroke-dasharray="${DD}"/>
+      <line x1="0" y1="12" x2="1280" y2="12" stroke="${c}" stroke-width="3"/>
+      <line x1="0" y1="22" x2="1280" y2="22" stroke="${c}" stroke-width="3" stroke-dasharray="${DD}"/></svg>`;
+  const single = (y, c) => `<svg class="line" style="top:${y}px" height="6"><line x1="0" y1="2" x2="1280" y2="2" stroke="${c}" stroke-width="3"/></svg>`;
+  const header = (lab) => `<div class="col" style="gap:24px"><p class="label">${lab}</p><h2 class="title">Placeholder title</h2></div>`;
+  const icon = (ok) => `<svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" fill="none" stroke="currentColor" stroke-width="3"/>${ok
+      ? '<path d="M9 15.5 L13.5 20 L21.5 10.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
+      : '<path d="M10 10 L20 20 M20 10 L10 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'}</svg>`;
+  const arrow = `<svg width="60" height="24"><path d="M2 12 H54 M44 3 L56 12 L44 21" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+  const S = {
+    divider: (t) => `${fullTrack(118, t.y)}
+      <div class="abs col" style="left:128px; top:236px">
+        <div class="col" style="gap:24px"><p class="label">Section 2 of 4</p><h2 class="title">Placeholder section title</h2></div>
+        <p class="second" style="margin-top:48px">Speaker name, role</p></div>
+      <div class="abs col" style="left:128px; top:508px; gap:24px">
+        <p class="second">In this section:</p>
+        <div style="position:relative; width:1152px; height:16px">
+          <p class="abs label" style="left:0">Starting point</p><p class="abs label" style="left:260px">Method</p>
+          <p class="abs label" style="left:520px">Results</p><p class="abs label" style="left:780px">Checking</p></div></div>
+      <svg class="line" style="top:572px" height="24"><line x1="0" y1="12" x2="1280" y2="12" stroke="${t.lb}" stroke-width="3"/>
+        <g fill="${t.bg}" stroke="${t.lb}" stroke-width="3">${[0,260,520,780].map(x=>`<circle cx="${140+x}" cy="12" r="9"/>`).join("")}</g></svg>
+      <p class="abs pg">6</p>`,
+    text: (t) => `${halfTrack(36, t.y, false)}
+      <div class="abs col" style="left:128px; top:92px; gap:96px">${header("Method")}
+        <div style="display:grid; grid-template-columns:452px 452px; column-gap:48px">
+          <div class="col body" style="gap:24px"><p class="head">List header</p><p class="item">First list item</p><p class="item">Second list item</p></div>
+          <div class="col body" style="gap:24px"><p class="head">List header</p><p class="item">First list item</p><p class="item">Second list item</p></div></div></div>
+      ${halfTrack(628, t.lb, true)}<p class="abs pg">7</p>`,
+    visual: (t) => `${single(36, t.y)}
+      <div class="abs col" style="left:128px; top:92px; gap:48px">${header("Results")}
+        <div style="display:flex; gap:48px; align-items:flex-start">
+          <div class="vis" style="width:800px; height:450px"><p class="second">Visual, 800 × 450</p></div>
+          <div class="col" style="gap:48px; padding-top:14px">
+            <div class="col" style="gap:24px"><p class="num">1,234</p><p class="second">first label</p></div>
+            <div class="col" style="gap:24px"><p class="num">5,678</p><p class="second">second label</p></div></div></div></div>
+      <p class="abs pg">12</p>`,
+    fix: (t) => `${halfTrack(36, t.y, false)}
+      <div class="abs col" style="left:128px; top:92px; gap:96px">${header("Checking")}
+        <div style="display:flex; gap:48px; align-items:flex-start">
+          <div class="col" style="gap:24px; width:300px"><p class="fx-head" style="color:var(--err)">${icon(false)}Before</p><p class="fx-val struck" style="color:var(--err)">Value A</p><p class="second">As first recorded</p></div>
+          <div style="color:var(--second); padding-top:62px">${arrow}</div>
+          <div class="col" style="gap:24px; width:260px"><p class="fx-head" style="color:var(--title)">Checked</p><p class="body">Against the<br>printed source</p></div>
+          <div style="color:var(--second); padding-top:62px">${arrow}</div>
+          <div class="col" style="gap:24px; width:300px"><p class="fx-head" style="color:var(--ok)">${icon(true)}After</p><p class="fx-val" style="color:var(--ok)">Value B</p><p class="second">Corrected</p></div>
+        </div></div>
+      ${halfTrack(628, t.lb, true)}<p class="abs pg">9</p>`,
+    quote: (t) => `${halfTrack(36, t.y, false)}
+      <div class="abs col" style="left:128px; top:92px; gap:96px">${header("Starting point")}
+        <div class="col" style="gap:48px">
+          <div class="q" style="width:900px"><p class="body">“Placeholder quotation from a printed source.”</p><p class="second">Source title, year, page</p></div>
+          <div class="q" style="width:900px"><p class="raw">Placeholder line of raw OCR output</p><p class="second">OCR output, file name</p></div>
+        </div></div>
+      ${halfTrack(628, t.lb, true)}<p class="abs pg">8</p>`,
+  };
+  const slide = (kind, theme) => `<div class="half"><section class="slide" style="${vars(THEMES[theme])}">${S[kind](THEMES[theme])}</section></div>`;
+  const fig = (kind, theme, cap) => `<figure>${slide(kind, theme)}<figcaption>${cap}</figcaption></figure>`;
+  const strip = (theme, draw, cap) => { const t = THEMES[theme];
+    return `<figure><div class="half"><div class="strip" style="background:${t.bg}">${draw(t)}</div></div><figcaption>${cap}</figcaption></figure>`; };
+
+  const EX = {
+    colour: () => `<p class="cap">Example: the same text slide in each version.</p>
+      <div class="gallery">${fig("text","light","Light (default)")}${fig("text","dark","Dark")}</div>`,
+    type: () => `<p class="cap">Example: a printed quotation and a line of raw machine text (light version).</p>
+      <div class="gallery">${fig("quote","light","Quotation (Next) and machine text (Mono)")}${fig("quote","dark","The same, dark version")}</div>`,
+    lines: () => `<p class="cap">The three line variants, each on its own (light, then dark).</p>
+      <div class="gallery">
+        ${strip("light", t => fullTrack(32, t.y), "Light: full track")}
+        ${strip("dark",  t => fullTrack(32, t.y), "Dark: full track")}
+        ${strip("light", t => halfTrack(37, t.y, false), "Light: half track")}
+        ${strip("dark",  t => halfTrack(37, t.y, false), "Dark: half track")}
+        ${strip("light", t => halfTrack(37, t.lb, true), "Light: half track, mirrored (bottom of a text slide)")}
+        ${strip("dark",  t => halfTrack(37, t.lb, true), "Dark: half track, mirrored (bottom of a text slide)")}
+        ${strip("light", t => single(42, t.y), "Light: single line")}
+        ${strip("dark",  t => single(42, t.y), "Dark: single line")}
+      </div>`,
+    spacing: () => `<p class="cap">Gaps shaded (shading is for this page only): orange = small, blue = medium, green = large.</p>
+      <div class="gallery"><figure><img class="shot" src="guide-gaps-text.png" alt="Text slide with gaps shaded"><figcaption>Text slide</figcaption></figure>
+      <figure><img class="shot" src="guide-gaps-visual.png" alt="Visual slide with gaps shaded"><figcaption>Visual slide</figcaption></figure></div>`,
+    slidetypes: () => `<p class="cap">The four slide types, light version.</p>
+      <div class="gallery">${fig("divider","light","Section divider")}${fig("text","light","Text slide")}${fig("visual","light","Visual slide")}${fig("fix","light","Error and fix")}</div>
+      <p class="cap" style="margin-top:24px">The same four, dark version.</p>
+      <div class="gallery">${fig("divider","dark","Section divider")}${fig("text","dark","Text slide")}${fig("visual","dark","Visual slide")}${fig("fix","dark","Error and fix")}</div>`,
+  };
+  document.querySelectorAll(".ex").forEach(el => { el.innerHTML = EX[el.dataset.ex](); });
+
+  // colour chips next to every hex code in the text
+  document.querySelectorAll(".doc code").forEach(c => {
+    const m = c.textContent.trim().match(/^#[0-9A-Fa-f]{6}$/);
+    if (m) c.insertAdjacentHTML("beforebegin", `<span class="chip" style="background:${m[0]}"></span>`);
+  });
+</script>
+</body>
+</html>

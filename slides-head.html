@@ -1,0 +1,12 @@
+<style>
+/* Self-hosted fonts (SIL Open Font License, see fonts/OFL-*.txt), so the deck
+   never depends on Google Fonts or the venue's internet. Regular and bold only. */
+@font-face { font-family: "Atkinson Hyperlegible Next"; font-weight: 400; font-style: normal; font-display: block; src: url("fonts/AtkinsonHyperlegibleNext-Regular.woff") format("woff"); }
+@font-face { font-family: "Atkinson Hyperlegible Next"; font-weight: 700; font-style: normal; font-display: block; src: url("fonts/AtkinsonHyperlegibleNext-Bold.woff") format("woff"); }
+@font-face { font-family: "Atkinson Hyperlegible Mono"; font-weight: 400; font-style: normal; font-display: block; src: url("fonts/AtkinsonHyperlegibleMono-Regular.woff") format("woff"); }
+@font-face { font-family: "Atkinson Hyperlegible Mono"; font-weight: 700; font-style: normal; font-display: block; src: url("fonts/AtkinsonHyperlegibleMono-Bold.woff") format("woff"); }
+</style>
+<script>
+// ?dark switches the deck to the dark version (for a darkened room).
+if (new URLSearchParams(location.search).has('dark')) document.documentElement.classList.add('dark');
+</script>
